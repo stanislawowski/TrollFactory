@@ -1,0 +1,15 @@
+[
+   {
+     "cities": [
+       {
+         "streets": ["Siedliczan"],
+         "districts": [],
+         "lat": "51.03923",
+         "postcode": "55-040",
+         "lon": "16.97184",
+         "name": "Bielany Wroc\u0142awskie"
+       }
+     ],
+     "region_name": "Dolno\u015bl\u0105skie"
+   }
+]

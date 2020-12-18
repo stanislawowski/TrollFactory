@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" integrity="sha256-Ww++W3rXBfapN8SZitAvc9jw2Xb+Ixt0rvDsmWmQyTo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="/style.css"/>
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+  <title>TrollFactory</title>
+</head>
+<body>
+  <div class="skewed"></div>
+  <div class="text-center my-5">
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+      <label class="custom-control-label" for="darkSwitch"></label>
+    </div>
+    <h1><a href="/" class="a-dark">TrollFactory</a></h1>
+    <h5>Made with ❤ by <a href="https://stanislawowski.pl" class="a-purple">SRD</a></h5>
+  </div>
+  <div class="d-flex flex-row flex-wrap justify-content-center">
+    {% for i in generated %}
+      {% if 'Prop name' in i %}
+        <div class="card m-2">
+          <div class="card-header">
+            <h4 class="card-title my-auto">{{ i[11:] }}</h4>
+          </div>
+          <div class="card-body">
+      {% elif 'End prop' in i %}
+          </div>
+        </div>
+      {% else %}
+        {% if 'email' in i %}
+          <b>{{ i.split(': ')[0] }}: </b>{{ i.split(': ')[1] }}<br>
+          <a class="a-pink" href="http://niepodam.pl/users/{{ i.replace('    email: ', '').replace('@niepodam.pl', '') }}">receive email</a><br>
+        {% elif 'receive_sms' in i %}
+          <a class="a-pink" href="https://freephonenum.com/receive-sms/random">receive sms</a><br>
+        {% elif 'send_sms' in i %}
+          <a class="a-pink" href="https://sms.priv.pl/">send sms</a><br>
+        {% elif 'phone_call' in i %}
+          <a class="a-pink" href="https://freephonenum.com/phone-call">phone call</a><br>
+        {% elif 'user_agent' in i %}
+          <b>user_agent: </b>
+          {% for j in i.replace('user_agent: ', '').split(') ') %}
+            {% if '(' in j %} {{ j }}) {% else %} {{ j }} {% endif %}<br>
+          {% endfor %}
+        {% else %}
+          <b>{{ i.split(': ')[0] }}: </b>{{ i.split(': ')[1] }}<br>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div><br>
+  <script src="https://cdn.jsdelivr.net/npm/dark-mode-switch@1.0.0/dark-mode-switch.min.js" integrity="sha256-CK2SN9r2AeJiBIg6AD+ntOEX8Q7d9Q8NfetZzjnjcag=" crossorigin="anonymous"></script>
+</body>
