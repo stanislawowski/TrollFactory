@@ -22,7 +22,7 @@
     {% for prop in generated %}
       <div class="card m-2">
         <div class="card-header">
-          <h4 class="card-title my-auto">{{ prop }}</h4>
+          <h4 class="card-title my-auto">{{ generated[prop]['prop_title'] }}</h4>
         </div>
         <div class="card-body">
           {% for key in generated[prop] %}
@@ -30,7 +30,7 @@
               <a class="a-pink" href="{{ generated[prop][key] }}"><b>{{ key }}</b></a><br>
             {% elif key == 'user_agent' %}
               <b>{{ key }}:</b>{% for i in generated[prop][key] %} {{ i }}<br> {% endfor %}
-            {% else %}
+            {% elif key == 'prop_title' %}{% else %}
               <b>{{ key }}:</b> {{ generated[prop][key] }}<br>
             {% endif %}
           {% endfor %}

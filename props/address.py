@@ -16,6 +16,7 @@ class Address:
             city_street = city['name']
 
         return {
+            'prop_title': 'Address',
             'country_code': properties['language']['country_code'],
             'country_state': country_state,
             'country_city': city['name'],
