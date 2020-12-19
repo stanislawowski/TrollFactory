@@ -21,10 +21,10 @@ def load_props(props = None):
 
 def print_properties(properties):
     properties['online']['user_agent'] = ("\n"+38*" ").join(properties['online']['user_agent'])
-    for property in properties:
-        output('Prop name: ' + property)
-        for key in properties[property]:
-            output('    ' + key + ': ' + str(properties[property][key]))
+    for prop in properties:
+        output('Prop name: ' + prop)
+        for key in properties[prop]:
+            output('    ' + key + ': ' + str(properties[prop][key]))
 
 def generate(language, sex):
     properties = load_props()
