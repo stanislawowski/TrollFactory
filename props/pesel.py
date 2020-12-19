@@ -22,5 +22,6 @@ class Pesel:
         pesel.append(checksum)
 
         return {
+            'prop_title': 'PESEL',
             'pesel': ''.join(map(str, pesel)),
         }

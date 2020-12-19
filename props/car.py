@@ -5,7 +5,7 @@ class Car:
     dependencies = ['address', 'birthdate']
     def generate(properties):
         if properties['birthdate']['age'] < 14:
-            return {'car': None}
+            return {'prop_title': 'Car', 'car': None}
 
         data = load(open('langs/' + properties['language']['language'] + '/car-list.json'))
 
@@ -43,6 +43,7 @@ class Car:
         plate_number = prefix + "".join(x)
 
         return {
+            'prop_title': 'Car',
             'plate_number': plate_number,
             'brand': brand,
             'model': model

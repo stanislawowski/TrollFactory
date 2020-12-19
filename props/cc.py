@@ -4,7 +4,7 @@ class Cc:
     dependencies = ['language', 'birthdate']
     def generate(properties):
         if properties['language']['country_code'] == 'PL' and properties['birthdate']['age'] < 13:
-            return {'cc': None}
+            return {'prop_title': 'CC', 'cc': None}
 
         def mastercard():
             initial, rem = [5, randint(1,5)], 16 - 2
@@ -67,6 +67,7 @@ class Cc:
             return("".join(map(str,final)))
 
         return {
+            'prop_title': 'CC',
             'mastercard': mastercard(),
             'visa13': visa13(),
             'visa16': visa16(),
