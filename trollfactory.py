@@ -20,6 +20,7 @@ def load_props(props = None):
     return __all__
 
 def print_properties(properties):
+    properties['online']['user_agent'] = ("\n"+38*" ").join(properties['online']['user_agent'])
     for property in properties:
         output('Prop name: ' + property)
         for key in properties[property]:
