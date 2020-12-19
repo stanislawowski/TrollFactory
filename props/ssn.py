@@ -1,7 +1,7 @@
 from random import randint
 from datetime import datetime
 
-class Pesel:
+class Ssn:
     dependencies = ['birthdate']
 
     def generate(properties):
@@ -22,6 +22,6 @@ class Pesel:
         pesel.append(checksum)
 
         return {
-            'prop_title': 'PESEL',
+            'prop_title': 'SSN',
             'pesel': ''.join(map(str, pesel)),
         }
