@@ -4,7 +4,7 @@ from random import choice
 class Name:
     def generate(properties):
         names = load(open('langs/' + properties['language']['language'] + '/names.json'))
-        surname = choice(load(open('langs/' + properties['language']['language'] + '/surnames.json'))['surnames'])
+        surname = choice(load(open('langs/' + properties['language']['language'] + '/surnames.json')))
 
         if properties['sex']['sex'] == 'male':
             if surname[-1] == 'a':
