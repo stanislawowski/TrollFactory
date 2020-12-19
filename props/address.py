@@ -14,7 +14,7 @@ class Address:
 
         try:
             city_street = choice(city['streets'])
-        except:
+        except (IndexError, KeyError):
             city_street = city['name']
 
         return {

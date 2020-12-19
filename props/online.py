@@ -1,5 +1,5 @@
 from random import choice, randint
-import random, string
+from string import ascii_uppercase, ascii_lowercase, digits
 
 class Online:
     dependencies = ['name']
@@ -16,7 +16,7 @@ class Online:
         return {
             'email': properties['name']['name'].lower() + properties['name']['surname'].lower() + '@niepodam.pl',
             'domain': properties['name']['name'].lower() + properties['name']['surname'].lower() + choice(['.pl', '.com', '.net', '.biz', '.me']),
-            'password': ''.join(choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16)),
+            'password': ''.join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(16)),
             'os': setup['os'],
             'browser': setup['browser'],
             'user_agent': setup['user_agent'],
