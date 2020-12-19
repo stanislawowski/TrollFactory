@@ -9,8 +9,6 @@ class Address:
 
         country_state = region['region_name']
         city = choice(region['cities'])
-        country_city = city['name']
-        city_postcode = city['postcode']
 
         try:
             city_street = choice(city['streets'])
@@ -20,8 +18,10 @@ class Address:
         return {
             'country_code': properties['language']['country_code'],
             'country_state': country_state,
-            'country_city': country_city,
-            'city_postcode': city_postcode,
+            'country_city': city['name'],
+            'city_postcode': city['postcode'],
             'city_street': city_street,
+            'city_latitude': city['lat'],
+            'city_longitude': city['lon'],
             'street_number': randint(1, 1000)
         }
