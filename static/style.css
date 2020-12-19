@@ -80,23 +80,23 @@ a:hover {
 }
 
 .card {
-  border: 0px;
+  border: 0;
   color: #fcebf6;
   transition: 0.5s transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
 }
 
-.card:hover{
+.card:hover {
   transform: scale(1.02);
 }
 
 /* DARK THEME */
 
 [data-theme="dark"] {
-  background-color: #333 !important;
+  background-color: #333;
 }
 
 [data-theme="dark"] .skewed {
-  background: linear-gradient(90deg, rgba(204, 167, 236, 1) 0%, rgba(123, 121, 199, 1) 50%, rgba(149, 125, 173, 1) 100%) !important;
+  background: linear-gradient(90deg, rgba(204, 167, 236, 1) 0%, rgba(123, 121, 199, 1) 50%, rgba(149, 125, 173, 1) 100%);
 }
 
 [data-theme="dark"] h5,
