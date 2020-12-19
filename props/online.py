@@ -14,6 +14,7 @@ class Online:
         setup = choice(setups)
 
         return {
+            'prop_title': 'Online',
             'email': properties['name']['name'].lower() + properties['name']['surname'].lower() + '@niepodam.pl',
             'domain': properties['name']['name'].lower() + properties['name']['surname'].lower() + choice(['.pl', '.com', '.net', '.biz', '.me']),
             'password': ''.join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(16)),

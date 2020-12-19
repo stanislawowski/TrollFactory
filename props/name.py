@@ -12,6 +12,7 @@ class Name:
         elif surname[-1] == 'i': surname = surname[:-1] + 'a'
 
         return {
+            'prop_title': 'Name',
             'name': choice(names[properties['sex']['sex']]),
             'surname': surname,
         }

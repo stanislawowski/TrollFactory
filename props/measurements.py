@@ -36,6 +36,7 @@ class Measurements:
             height = randint(156, 205)
 
         return {
+            'prop_title': 'Measurements',
             'weight': weight,
             'height': height,
             'bmi': "{:.2f}".format(weight / ((height/100) * (height/100)))

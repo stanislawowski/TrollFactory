@@ -8,6 +8,7 @@ class Phone:
         phone = choice(data)
 
         return {
+            'prop_title': 'Phone',
             'brand': phone['brand'],
             'model': phone['model'],
             'receive_sms': 'https://freephonenum.com/receive-sms/random',

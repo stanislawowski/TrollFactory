@@ -39,6 +39,7 @@ class Birthdate:
                 zodiac = 'Unknown'
 
         return {
+            'prop_title': 'Birthdate',
             'birth_year': birth_year,
             'birth_month': birth_month,
             'birth_day': birth_day,
