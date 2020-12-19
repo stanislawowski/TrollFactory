@@ -15,6 +15,7 @@ class Online:
 
         return {
             'prop_title': 'Online',
+            'username': properties['name']['name'].lower()[0] + '_' + properties['name']['surname'].lower(),
             'email': properties['name']['name'].lower() + properties['name']['surname'].lower() + '@niepodam.pl',
             'domain': properties['name']['name'].lower() + properties['name']['surname'].lower() + choice(['.pl', '.com', '.net', '.biz', '.me']),
             'password': ''.join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(16)),
