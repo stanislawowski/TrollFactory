@@ -7,6 +7,7 @@ from json import dumps, loads
 parser = ArgumentParser(description='Fake identities generator.')
 parser.add_argument('--amount', dest='amount', type=int, default=1)
 parser.add_argument('--sex', dest='sex', type=str, default='male')
+parser.add_argument('--lang', dest='lang', type=str, default='polish')
 args = parser.parse_args()
 sex = args.sex
 
@@ -28,7 +29,7 @@ def print_properties(properties):
 
 def generate(language, sex):
     properties = load_props()
-    country_code = {'polish': 'PL'}[language]
+    country_code = {'polish': 'PL', 'english': 'US'}[language]
     properties_static = {'language': {'language': language, 'country_code': country_code}, 'sex': {'sex': sex}}
 
     while len(properties) > 0:
@@ -50,4 +51,4 @@ if __name__ == '__main__':
     output('Starting TrollFactory..\n')
     for _ in range(args.amount):
         properties = load_props()
-        print_properties(loads(generate('polish', sex)))
+        print_properties(loads(generate(lang, sex)))

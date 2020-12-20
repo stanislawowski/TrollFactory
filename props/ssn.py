@@ -2,9 +2,11 @@ from random import randint
 from datetime import datetime
 
 class Ssn:
-    dependencies = ['birthdate']
+    dependencies = ['birthdate', 'language']
 
     def generate(properties):
+        if properties['language']['language'] == 'english':
+            return {'prop_title': 'SSN', 'ssn': 'Not available in English yet!'}
         sex = properties['sex']['sex']
         birth_year = properties['birthdate']['birth_year']
         birth_month = properties['birthdate']['birth_month']
@@ -23,5 +25,5 @@ class Ssn:
 
         return {
             'prop_title': 'SSN',
-            'pesel': ''.join(map(str, pesel)),
+            'ssn': ''.join(map(str, pesel)),
         }
