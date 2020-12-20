@@ -29,7 +29,8 @@ body {
 h1,
 h5,
 .card-title,
-.btn {
+.btn,
+select {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -63,7 +64,8 @@ a:hover {
   color: #ece3fc;
 }
 
-.btn-pink {
+.btn-pink,
+.fc-sel {
   background-color: #fcebf6;
 }
 
@@ -71,7 +73,8 @@ a:hover {
   background-color: #ece3fc;
 }
 
-.btn-blue {
+.btn-blue,
+.fc-text {
   background-color: #ddf2fd;
 }
 
@@ -92,11 +95,11 @@ a:hover {
 .card {
   border: 0;
   color: #fcebf6;
-  transition: 0.5s transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
 }
 
-.card:hover {
-  transform: scale(1.02);
+.fc-text,
+.fc-sel {
+  border-radius: 0;
 }
 
 /* DARK THEME */
