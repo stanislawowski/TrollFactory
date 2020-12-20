@@ -4,7 +4,7 @@ class Document_id:
     dependencies = ['language']
     def generate(properties):
       if properties['language']['language'] == 'english':
-          return {'prop_title': 'Document - ID', 'document_id': 'Not available in English yet!'}
+          return {'prop_title': 'N/A'}
       id_number = []
       while len(id_number) < 3: id_number.append(chr(randint(65, 90)))
       while len(id_number) < 9: id_number.append(randint(0, 9))
