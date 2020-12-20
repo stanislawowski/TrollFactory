@@ -25,7 +25,7 @@
         </div>
         <div class="card-body">
           {% for key in generated[prop] %}
-            {% if (generated[prop][key]|string).startswith('https') %}
+            {% if (generated[prop][key]|string).startswith('http') %}
               <a class="a-pink" href="{{ generated[prop][key] }}"><b>{{ key }}</b></a><br>
             {% elif key == 'user_agent' %}
               <b>{{ key }}:</b>{% for i in generated[prop][key] %} {{ i }}<br> {% endfor %}
