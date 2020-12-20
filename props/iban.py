@@ -2,8 +2,10 @@ from random import randint
 from schwifty import IBAN
 
 class Iban:
-    dependencies = ['birthdate']
+    dependencies = ['birthdate', 'language']
     def generate(properties):
+        if properties['language']['language'] == 'english':
+            return {'prop_title': 'IBAN', 'iban': 'Not available in English yet!'}
         if properties['birthdate']['age'] < 13:
             return {'prop_title': 'IBAN', 'iban': None}
         return {
