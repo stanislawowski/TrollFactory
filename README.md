@@ -9,4 +9,4 @@ The fake personalities generator.
 `python3 trollfactory.py --sex female --amount 10 --lang polish`
 
 ## Notes
-   - The Polish dataset in this repo is incomplete and only included to show correct syntax.
+   - The datasets in this repo are incomplete and only included to show correct syntax.
