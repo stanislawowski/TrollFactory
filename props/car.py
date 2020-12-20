@@ -2,8 +2,10 @@ from random import choice
 from json import load
 
 class Car:
-    dependencies = ['address', 'birthdate']
+    dependencies = ['address', 'birthdate', 'language']
     def generate(properties):
+        if properties['language']['language'] == 'english':
+            return {'prop_title': 'Car', 'car': 'Not available in English yet!'}
         if properties['birthdate']['age'] < 14:
             return {'prop_title': 'Car', 'car': None}
 

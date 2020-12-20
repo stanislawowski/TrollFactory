@@ -2,7 +2,7 @@ from random import choice, randint
 from string import ascii_uppercase, ascii_lowercase, digits
 
 class Online:
-    dependencies = ['name']
+    dependencies = ['name', 'language']
     def generate(properties):
         setups = [
             {'os': 'Windows 10', 'browser': 'Microsoft Edge', 'user_agent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'AppleWebKit/537.36 (KHTML, like Gecko)', 'Chrome/42.0.2311.135 Safari/537.36 Edge/12.246']},
@@ -12,11 +12,16 @@ class Online:
             {'os': 'Ubuntu GNU+Linux', 'browser': 'Mozilla Firefox', 'user_agent': ['Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:15.0)', 'Gecko/20100101 Firefox/15.0.1']}
         ]
         setup = choice(setups)
+        email_provider = {
+            'polish': '@niepodam.pl',
+            'english': choice(['@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com', '@gustr.com', '@jourrapide.com', '@rhyta.com', '@superrito.com', '@teleworm.us'])
+        }[properties['language']['language']]
+        if ', ' in properties['name']['name']: properties['name']['name'] = choice(properties['name']['name'].split(', '))
 
         return {
             'prop_title': 'Online',
             'username': properties['name']['name'].lower()[0] + '_' + properties['name']['surname'].lower(),
-            'email': properties['name']['name'].lower() + properties['name']['surname'].lower() + '@niepodam.pl',
+            'email': properties['name']['name'].lower() + properties['name']['surname'].lower() + email_provider,
             'domain': properties['name']['name'].lower() + properties['name']['surname'].lower() + choice(['.pl', '.com', '.net', '.biz', '.me']),
             'password': ''.join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(16)),
             'os': setup['os'],
