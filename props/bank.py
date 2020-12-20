@@ -5,7 +5,7 @@ class Bank:
     dependencies = ['birthdate', 'language']
     def generate(properties):
         if properties['language']['language'] == 'english':
-            return {'prop_title': 'Bank', 'bank': 'Not available in English yet!'}
+            return {'prop_title': 'Bank', 'bank': 'Not available in US yet!'}
         if properties['birthdate']['age'] < 13:
             return {'prop_title': 'Bank', 'iban': None}
         return {
