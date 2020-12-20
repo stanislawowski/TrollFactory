@@ -6,7 +6,7 @@ class Address:
 
     def generate(properties):
         if properties['language']['language'] == 'english':
-            return {'prop_title': 'Address', 'address': 'Not available in English yet!'}
+            return {'prop_title': 'Address', 'address': 'Not available in US yet!'}
         region = choice(load(open('langs/' + properties['language']['language'] + '/cities.json')))
 
         country_state = region['region_name']
