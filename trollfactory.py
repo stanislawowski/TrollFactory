@@ -10,6 +10,7 @@ parser.add_argument('--sex', dest='sex', type=str, default='male')
 parser.add_argument('--lang', dest='lang', type=str, default='polish')
 args = parser.parse_args()
 sex = args.sex
+lang = args.lang
 
 def output(text):
     print('[{}] {}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), text))

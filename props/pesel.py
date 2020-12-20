@@ -1,4 +1,4 @@
-from random import randint, choice
+from random import randint
 from datetime import datetime
 
 class Pesel:
