@@ -97,9 +97,9 @@ a:hover {
   color: #fcebf6;
 }
 
-.fc-text,
-.fc-sel {
-  border-radius: 0;
+.fc-text {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /* DARK THEME */
