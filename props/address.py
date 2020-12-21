@@ -5,7 +5,7 @@ class Address:
     depedencies = ["language"]
 
     def generate(properties):
-        if properties['language']['language'] == 'english':
+        if properties['language']['language'] == 'english_us':
             return {'prop_title': 'Address', 'address': 'Not available in US yet!'}
         region = choice(load(open('langs/' + properties['language']['language'] + '/cities.json')))
 
