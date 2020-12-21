@@ -2,7 +2,7 @@ from random import choice, randint
 from string import ascii_uppercase, ascii_lowercase, digits
 
 class Online:
-    dependencies = ['name']
+    dependencies = ['name', 'language']
     def generate(properties):
         setups = [
             {'os': 'Windows 10', 'browser': 'Microsoft Edge', 'user_agent': ['Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'AppleWebKit/537.36 (KHTML, like Gecko)', 'Chrome/42.0.2311.135 Safari/537.36 Edge/12.246']},
@@ -13,9 +13,30 @@ class Online:
         ]
         setup = choice(setups)
 
+        email_provider = {
+            'polish': '@niepodam.pl',
+            'english_us': choice(['@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com', '@gustr.com', '@jourrapide.com', '@rhyta.com', '@superrito.com', '@teleworm.us'])
+        }[properties['language']['language']]
+        if ', ' in properties['name']['name']: properties['name']['name'] = choice(properties['name']['name'].split(', '))
+
+        email_url = {
+            '@niepodam.pl': 'http://niepodam.pl/users/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@armyspy.com' : 'http://www.fakemailgenerator.com/#/armyspy.com/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@cuvox.de' : 'http://www.fakemailgenerator.com/#/cuvox.de/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@dayrep.com' : 'http://www.fakemailgenerator.com/#/dayrep.com/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@einrot.com' : 'http://www.fakemailgenerator.com/#/einrot.com/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@gustr.com' : 'http://www.fakemailgenerator.com/#/gustr.com/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@jourrapide.com' : 'http://www.fakemailgenerator.com/#/jourrapide.com/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@rhyta.com' : 'http://www.fakemailgenerator.com/#/rhyta.com/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@superrito.com' : 'http://www.fakemailgenerator.com/#/superrito.com/' + properties['name']['name'].lower() + properties['name']['surname'].lower(),
+            '@teleworm.us' : 'http://www.fakemailgenerator.com/#/teleworm.us/' + properties['name']['name'].lower() + properties['name']['surname'].lower()
+        }[email_provider]
+
         return {
             'prop_title': 'Online',
-            'email': properties['name']['name'].lower() + properties['name']['surname'].lower() + '@niepodam.pl',
+            'username': properties['name']['name'].lower()[0] + '_' + properties['name']['surname'].lower(),
+            'email': properties['name']['name'].lower() + properties['name']['surname'].lower() + email_provider,
+            'receive_email': email_url,
             'domain': properties['name']['name'].lower() + properties['name']['surname'].lower() + choice(['.pl', '.com', '.net', '.biz', '.me']),
             'password': ''.join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(16)),
             'os': setup['os'],
