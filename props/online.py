@@ -15,7 +15,7 @@ class Online:
 
         email_provider = {
             'polish': '@niepodam.pl',
-            'english': choice(['@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com', '@gustr.com', '@jourrapide.com', '@rhyta.com', '@superrito.com', '@teleworm.us'])
+            'english_us': choice(['@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com', '@gustr.com', '@jourrapide.com', '@rhyta.com', '@superrito.com', '@teleworm.us'])
         }[properties['language']['language']]
         if ', ' in properties['name']['name']: properties['name']['name'] = choice(properties['name']['name'].split(', '))
 

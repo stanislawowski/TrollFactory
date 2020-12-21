@@ -30,7 +30,7 @@ def print_properties(properties):
 
 def generate(language, sex):
     properties = load_props()
-    country_code = {'polish': 'PL', 'english': 'US'}[language]
+    country_code = {'polish': 'PL', 'english_us': 'US'}[language]
     properties_static = {'language': {'language': language, 'country_code': country_code}, 'sex': {'sex': sex}}
 
     while len(properties) > 0:
