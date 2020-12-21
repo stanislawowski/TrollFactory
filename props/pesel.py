@@ -24,7 +24,7 @@ class Pesel:
 
             return {
                 'prop_title': 'PESEL',
-                'ssn': ''.join(map(str, pesel))
+                'pesel': ''.join(map(str, pesel))
             }
         else:
             return { 'prop_title': 'N/A' }

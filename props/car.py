@@ -42,7 +42,7 @@ class Car:
             if len(prefix) == 2: x = "".join([choice(chars) for i in range(5)])
             elif len(prefix) == 3: x = "".join([choice(chars) for i in range(4)])
             plate_number = prefix + "".join(x)
-        elif properties['language']['language'] == 'english':
+        elif properties['language']['language'] == 'english_us':
             plate_number = 'Not available in US yet!'
 
         return {
