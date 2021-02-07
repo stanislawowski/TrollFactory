@@ -92,7 +92,7 @@ class Car:
             #    plate_resource += choice(numbers[1:])
             #    plate_resource += "".join([choice(letters) for i in range(2)])
 
-        plate_number = prefix + plate_resource
+        plate_number = prefix + ' ' + plate_resource
 
         return plate_number
 
