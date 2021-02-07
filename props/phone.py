@@ -1,6 +1,6 @@
 from uuid import uuid4
 from json import load
-from random import choice
+from random import choice, randint
 
 class Phone:
     def generate(properties):
@@ -20,7 +20,7 @@ class Phone:
         }
 
         phone_operator, phone_prefixes = choice(list(prefixes.items()))
-        phone_number = '+48' + choice(phone_prefixes) + "".join([choice("0123456789") for i in range(6)])
+        phone_number = '+48' + choice(phone_prefixes) + "".join([str(randint(0, 9)) for i in range(6)])
 
 
         return {
