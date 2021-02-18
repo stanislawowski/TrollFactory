@@ -4,4 +4,16 @@
 }, {
     "brand": "Alfa Romeo",
     "models": ["4C"]
+},
+{
+    "brand": "Ligier",
+    "models": ["altul", "Ambra", "Be-Two", "Be-Up", "IXO", "JS49", "JS50", "JS50L", "JS RC", "Nova", "Optima", "X-Too", "X-Too Max", "X-Too R", "X-Too RS", "X-Too S"]
+},
+{
+    "brand": "Chatenet",
+    "models": ["CH26", "CH30", "CH32", "CH40", "Speedino"]
+},
+{
+    "brand": "Microcar",
+    "models": ["Cargo", "DUE", "DUE First", "Flex", "Highland X", "Ligier", "M.Cross", "M.GO", "MC", "Virgo"]
 }]
