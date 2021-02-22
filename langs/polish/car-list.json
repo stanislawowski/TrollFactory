@@ -1,19 +1,281 @@
 [{
-    "brand": "Aixam",
-    "models": ["A721"]
+    "brand_name": "Aixam",
+    "brand_weight": 0.061316464492657353,
+    "models": [{
+        "name": "A721",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }, {
+        "name": "A741",
+        "products": 4,
+        "weight": 0.002043882149755245
+    }, {
+        "name": "City",
+        "products": 48,
+        "weight": 0.024526585797062943
+    }, {
+        "name": "Coupe",
+        "products": 13,
+        "weight": 0.006642616986704547
+    }, {
+        "name": "Crossline",
+        "products": 18,
+        "weight": 0.009197469673898603
+    }, {
+        "name": "Crossover",
+        "products": 12,
+        "weight": 0.006131646449265736
+    }, {
+        "name": "GTO",
+        "products": 5,
+        "weight": 0.0025548526871940563
+    }, {
+        "name": "Inny",
+        "products": 16,
+        "weight": 0.00817552859902098
+    }, {
+        "name": "Roadline",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }, {
+        "name": "Scouty R",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }]
 }, {
-    "brand": "Alfa Romeo",
-    "models": ["4C"]
-},
-{
-    "brand": "Ligier",
-    "models": ["altul", "Ambra", "Be-Two", "Be-Up", "IXO", "JS49", "JS50", "JS50L", "JS RC", "Nova", "Optima", "X-Too", "X-Too Max", "X-Too R", "X-Too RS", "X-Too S"]
-},
-{
-    "brand": "Chatenet",
-    "models": ["CH26", "CH30", "CH32", "CH40", "Speedino"]
-},
-{
-    "brand": "Microcar",
-    "models": ["Cargo", "DUE", "DUE First", "Flex", "Highland X", "Ligier", "M.Cross", "M.GO", "MC", "Virgo"]
+    "brand_name": "Chatenet",
+    "brand_weight": 0.0051097053743881125,
+    "models": [{
+        "name": "CH26",
+        "products": 9,
+        "weight": 0.004598734836949302
+    }, {
+        "name": "CH30",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "Inny",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }]
+}, {
+    "brand_name": "Ligier",
+    "brand_weight": 0.012774263435970282,
+    "models": [{
+        "name": "Ambra",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "Inny",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }, {
+        "name": "IXO",
+        "products": 3,
+        "weight": 0.001532911612316434
+    }, {
+        "name": "JS50",
+        "products": 3,
+        "weight": 0.001532911612316434
+    }, {
+        "name": "JS50L",
+        "products": 5,
+        "weight": 0.0025548526871940563
+    }, {
+        "name": "JS RC",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }, {
+        "name": "X-Too",
+        "products": 7,
+        "weight": 0.003576793762071679
+    }, {
+        "name": "X-Too Max",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "X-Too RS",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }]
+}, {
+    "brand_name": "Microcar",
+    "brand_weight": 0.029125320634012245,
+    "models": [{
+        "name": "DUE",
+        "products": 5,
+        "weight": 0.0025548526871940563
+    }, {
+        "name": "DUE First",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "Flex",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "Highland X",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }, {
+        "name": "Inny",
+        "products": 7,
+        "weight": 0.003576793762071679
+    }, {
+        "name": "Ligier",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "M.GO",
+        "products": 29,
+        "weight": 0.014818145585725527
+    }, {
+        "name": "MC",
+        "products": 8,
+        "weight": 0.00408776429951049
+    }, {
+        "name": "Virgo",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }]
+}, {
+    "brand_name": "Renault",
+    "brand_weight": 5.292121856253768,
+    "models": [{
+        "name": "5",
+        "products": 7,
+        "weight": 0.003576793762071679
+    }, {
+        "name": "11",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "18",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "19",
+        "products": 3,
+        "weight": 0.001532911612316434
+    }, {
+        "name": "Avantime",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "Captur",
+        "products": 604,
+        "weight": 0.308626204613042
+    }, {
+        "name": "Clio",
+        "products": 1900,
+        "weight": 0.9708440211337415
+    }, {
+        "name": "Coupe",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "Espace",
+        "products": 367,
+        "weight": 0.18752618724004372
+    }, {
+        "name": "Fluence",
+        "products": 94,
+        "weight": 0.048031230519248264
+    }, {
+        "name": "Fuego",
+        "products": 1,
+        "weight": 0.0005109705374388113
+    }, {
+        "name": "Grand Espace",
+        "products": 118,
+        "weight": 0.06029452341777973
+    }, {
+        "name": "Grand Scenic",
+        "products": 507,
+        "weight": 0.25906206248147734
+    }, {
+        "name": "Inny",
+        "products": 6,
+        "weight": 0.003065823224632868
+    }, {
+        "name": "Kadjar",
+        "products": 492,
+        "weight": 0.25139750441989517
+    }, {
+        "name": "Kangoo",
+        "products": 234,
+        "weight": 0.11956710576068183
+    }, {
+        "name": "Koleos",
+        "products": 208,
+        "weight": 0.10628187178727275
+    }, {
+        "name": "Laguna",
+        "products": 853,
+        "weight": 0.43585786843530605
+    }, {
+        "name": "Latitude",
+        "products": 8,
+        "weight": 0.00408776429951049
+    }, {
+        "name": "Master",
+        "products": 69,
+        "weight": 0.03525696708327798
+    }, {
+        "name": "Megane",
+        "products": 2436,
+        "weight": 1.2447242292009444
+    }, {
+        "name": "Modus",
+        "products": 231,
+        "weight": 0.1180341941483654
+    }, {
+        "name": "Safrane",
+        "products": 3,
+        "weight": 0.001532911612316434
+    }, {
+        "name": "Scenic",
+        "products": 1057,
+        "weight": 0.5400958580728236
+    }, {
+        "name": "Scenic Conquest",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }, {
+        "name": "Scenic RX4",
+        "products": 6,
+        "weight": 0.003065823224632868
+    }, {
+        "name": "Talisman",
+        "products": 318,
+        "weight": 0.16248863090554197
+    }, {
+        "name": "Thalia",
+        "products": 60,
+        "weight": 0.030658232246328677
+    }, {
+        "name": "Trafic",
+        "products": 421,
+        "weight": 0.21511859626173954
+    }, {
+        "name": "Twingo",
+        "products": 259,
+        "weight": 0.13234136919665213
+    }, {
+        "name": "Twizy",
+        "products": 2,
+        "weight": 0.0010219410748776225
+    }, {
+        "name": "Vel Satis",
+        "products": 8,
+        "weight": 0.00408776429951049
+    }, {
+        "name": "Wind",
+        "products": 3,
+        "weight": 0.001532911612316434
+    }, {
+        "name": "Zoe",
+        "products": 88,
+        "weight": 0.044965407294615393
+    }]
 }]
