@@ -1,6 +1,6 @@
 from calendar import monthrange
 from random import choice, randint
-from datetime import datetime
+from datetime import datetime, date
 
 class Birthdate:
     def generate(properties):
@@ -11,7 +11,7 @@ class Birthdate:
         birth_day = choice(monthrange(birth_year, birth_month))
         if birth_day == 0: birth_day = 1
 
-        today = datetime.today()
+        today = date.today()
 
         zodiac_signs = [
             {'name': 'Aries', 'day_s': 18, 'month_s': 4, 'day_e': 13, 'month_e': 5},
