@@ -1,4 +1,4 @@
-from random import choice, randint
+from random import choice, choices, randint
 from json import load
 
 class Car:
@@ -105,11 +105,19 @@ class Car:
 
         if properties['birthdate']['age'] in range(14, 17):
             brand = choice(['Aixam', 'Ligier', 'Microcar', 'Chatenet'])
-            model = choice([i for i in data if i['brand'] == brand][0]['models'])
+            model = choice([i for i in data if i['brand_name'] == brand][0]['models'])
         else:
-            brand = choice(data)
-            model = choice(brand['models'])
-            brand = brand['brand']
+            brandNames = [i for i in data]
+            brandWeights = [i['brand_weight'] for i in data]
+
+            brand = choices(brandNames, brandWeights)[0]
+           
+            brandModels = brand['models']
+            modelsWeights = [i['weight'] for i in brandModels]
+
+            model = choices(brandModels, modelsWeights)[0]['name']
+
+            brand = brand['brand_name']
 
         if properties['language']['language'] == 'polish':
             plate_number = Car.generate_plate(properties)
