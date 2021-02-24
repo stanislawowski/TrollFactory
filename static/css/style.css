@@ -106,6 +106,15 @@ a:hover {
   border-radius: 20px;
 }
 
+.modal {
+  max-width: 60%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: 20%;
+  transform: translate(-50%, -50%);
+}
+
 /* DARK THEME */
 
 [data-theme="dark"] {
