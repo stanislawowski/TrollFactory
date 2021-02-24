@@ -8,11 +8,24 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/style.css"/>
   <link rel="icon" type="image/png" href="/favicon.png"/>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
   <title>TrollFactory</title>
 </head>
 <body>
   <div class="skewed"></div>
   <div class="my-5 py-5 text-center">
+    <div class="modal rounded" id="contact">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="text-light">
+            If you have business inquiries or want to contact us for any other purpose, write to the email:<br>
+            <a href="mailto:srdltd@protonmail.com" class="a-pink">srdltd@protonmail.com</a>
+          </h5>
+          <button type="button" class="btn btn-pink mt-2" data-dismiss="modal">CLOSE</button>
+        </div>
+      </div>
+    </div>
     <div class="custom-control custom-switch">
       <input type="checkbox" class="custom-control-input" id="darkSwitch" />
       <label class="custom-control-label" for="darkSwitch"></label>
@@ -59,7 +72,7 @@
       <div class="card mx-auto rounded">
         <div class="card-body rounded">
           <a href="/api" class="btn btn-blue">API</a>
-          <a href="" class="btn btn-pink">CONTACT</a>
+          <a class="btn btn-pink" data-toggle="modal" data-target="#contact">CONTACT</a>
         </div>
       </div>
     </div>
