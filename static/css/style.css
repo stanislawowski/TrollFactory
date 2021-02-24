@@ -102,6 +102,10 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 
+.rounded {
+  border-radius: 20px;
+}
+
 /* DARK THEME */
 
 [data-theme="dark"] {
