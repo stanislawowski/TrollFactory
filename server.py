@@ -16,5 +16,9 @@ def output():
     else:
         return render_template('/output.html', generated=loads(generate(lang, sex)))
 
+@app.route('/api', methods=['GET'])
+def api():
+    return render_template('/api.html')
+
 if __name__ == '__main__':
     app.run(port=2137)
