@@ -1,4 +1,4 @@
 {
-    "male": ["Abraham"],
-    "female": ["Agatha"]
+    "male": [["Abraham", 100]],
+    "female": [["Agatha", 100]]
 }
