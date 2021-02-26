@@ -1,5 +1,5 @@
 {
-  "male": ["Adam"],
+  "male": [["Adam", 100]],
 
-  "female": ["Ada"]
+  "female": [["Ada", 100]]
 }
