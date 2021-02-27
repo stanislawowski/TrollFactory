@@ -7,3 +7,16 @@ The fake personalities generator.
 
 ## Usage
 `python3 trollfactory.py --sex female --amount 10 --lang polish`
+
+## Updating submodule
+```
+git clone git@github.com:stanislawowski/TrollFactory.git -b production
+cd TrollFactory
+git submodule update --init
+cd langs
+git fetch
+git log --oneline origin/main -3
+```
+After executing the last command you'll see the latest commits.<br>
+Then execute: `git checkout -q <checksum>`, replacing the `<checksum>` with the latest commit's SHA.<br>
+At the end, run `git add .` and commit changes.
