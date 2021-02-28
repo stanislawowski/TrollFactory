@@ -105,7 +105,7 @@ class Car:
 
         if properties['birthdate']['age'] in range(14, 17):
             brand = choice(['Aixam', 'Ligier', 'Microcar', 'Chatenet'])
-            model = choice([i for i in data if i['brand_name'] == brand][0]['models'])
+            model = choice([i for i in data if i['brand_name'] == brand][0]['models'])['name']
         else:
             brandNames = [i for i in data]
             brandWeights = [i['brand_weight'] for i in data]
