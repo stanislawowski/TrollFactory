@@ -6,8 +6,8 @@ from json import dumps, loads
 
 parser = ArgumentParser(description='Fake identities generator.')
 parser.add_argument('--amount', dest='amount', type=int, default=1)
-parser.add_argument('--sex', dest='sex', type=str, default='male')
-parser.add_argument('--lang', dest='lang', type=str, default='polish')
+parser.add_argument('--sex', dest='sex', type=str)
+parser.add_argument('--lang', dest='lang', type=str)
 args = parser.parse_args()
 sex = args.sex
 lang = args.lang
@@ -30,22 +30,34 @@ def print_properties(properties):
 
 def generate(language, sex):
     properties = load_props()
-    country_code = {'polish': 'PL', 'english_us': 'US'}[language]
-    properties_static = {'language': {'language': language, 'country_code': country_code}, 'sex': {'sex': sex}}
+    properties_static = {}
+
+    if (sex):
+        properties_static['sex'] = {'sex': sex}
+
+    if (lang):
+        country_code = {'polish': 'PL', 'english_us': 'US'}[lang]
+        properties_static['language'] = {'language': lang, 'country_code': country_code}
 
     while len(properties) > 0:
         for prop_name in properties:
+            
             prop = __import__('props.'+prop_name)
             prop_class = getattr(getattr(prop, prop_name), prop_name.capitalize())
+
             missing_dependencies = False
+            
             if hasattr(prop_class, 'dependencies'):
                 for dependency in prop_class.dependencies:
                     if not dependency.lower() in properties_static.keys():
                         missing_dependencies = True
             if (missing_dependencies): continue
+            
             prop_attrs = prop_class.generate(properties_static)
+            
             properties_static[prop_name] = prop_attrs
             properties.remove(prop_name)
+    
     return(dumps(properties_static))
 
 if __name__ == '__main__':
