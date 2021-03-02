@@ -115,9 +115,18 @@ class Car:
             brandModels = brand['models']
             modelsWeights = [i['weight'] for i in brandModels]
 
-            model = choices(brandModels, modelsWeights)[0]['name']
+            model = choices(brandModels, modelsWeights)[0]
 
             brand = brand['brand_name']
+
+            if 'generations' in model:
+                generationWeights = [i['generation_weight'] for i in model['generations']]
+
+                generation = choices(model['generations'], generationWeights)[0]
+
+                generationName = generation['generation_name']
+            else:
+                generationName = None
 
         if properties['language']['language'] == 'polish':
             plate_number = Car.generate_plate(properties)
@@ -128,5 +137,6 @@ class Car:
             'prop_title': 'Car',
             'plate_number': plate_number,
             'brand': brand,
-            'model': model
+            'model': model['name'],
+            'generation': generationName
         }

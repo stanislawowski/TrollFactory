@@ -26,7 +26,8 @@ def print_properties(properties):
     for prop in properties:
         output('Prop name: ' + prop)
         for key in properties[prop]:
-            output('    ' + key + ': ' + str(properties[prop][key]))
+            if (properties[prop][key] != None):
+                output('    ' + key + ': ' + str(properties[prop][key]))
 
 def generate(language, sex):
     properties = load_props()
