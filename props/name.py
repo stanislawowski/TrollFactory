@@ -3,7 +3,7 @@ from random import choice, choices
 
 class Name:
     dependencies = ['sex']
-    
+
     def generate(properties):
         names_file = load(open('langs/' + properties['language']['language'] + '/names.json'))
         surname = choice(load(open('langs/' + properties['language']['language'] + '/surnames.json')))

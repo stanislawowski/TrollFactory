@@ -42,7 +42,7 @@ def generate(language, sex):
 
     while len(properties) > 0:
         for prop_name in properties:
-            
+
             prop = __import__('props.'+prop_name)
             prop_class = getattr(getattr(prop, prop_name), prop_name.capitalize())
 
