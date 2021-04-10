@@ -1,5 +1,5 @@
-from random import choice 
-from glob import glob 
+from random import choice
+from glob import glob
 
 class Language:
 	def generate(properties):

@@ -29,10 +29,10 @@ class Car:
         numbers = '0123456789'
 
         # generate prefix corresponding to the city
-        if properties['address']['country_state'] in Car.plate_prefixes: 
+        if properties['address']['country_state'] in Car.plate_prefixes:
             prefix = choice(Car.plate_prefixes[properties['address']['country_state']])
 
-        if len(prefix) == 2: 
+        if len(prefix) == 2:
             resource = randint(1, 5)
             if (resource == 1):
                 plate_resource = "".join([choice(numbers) for i in range(5)])
@@ -111,7 +111,7 @@ class Car:
             brandWeights = [i['brand_weight'] for i in data]
 
             brand = choices(brandNames, brandWeights)[0]
-           
+
             brandModels = brand['models']
             modelsWeights = [i['weight'] for i in brandModels]
 
