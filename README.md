@@ -1,6 +1,6 @@
 # TrollFactory
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/803cfecee34f4a28a402fca70da1ed6a)](https://app.codacy.com/gh/stanislawowski/TrollFactory?utm_source=github.com&utm_medium=referral&utm_content=stanislawowski/TrollFactory&utm_campaign=Badge_Grade_Settings)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/be2f935c44f04d4c94b97ea5cfc8e44f)](https://www.codacy.com/gh/stanislawowski/TrollFactory/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stanislawowski/TrollFactory&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/github/license/stanislawowski/TrollFactory.svg)](https://github.com/stanislawowski/TrollFactory)
 
 The fake personalities generator.
