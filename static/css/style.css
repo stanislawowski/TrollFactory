@@ -20,7 +20,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(183, 209, 248, 1) 0%, rgba(223, 210, 244, 1) 33%, rgba(255, 203, 208, 1) 66%, rgba(172, 197, 232, 1) 100%);
+  background: linear-gradient(90deg, rgba(204, 167, 236, 1) 0%, rgba(123, 121, 199, 1) 50%, rgba(149, 125, 173, 1) 100%);
   z-index: -1;
   transform: skewY(-10deg);
   transform-origin: top left;
@@ -44,16 +44,20 @@ h5,
   color: #333;
 }
 
+h5 {
+  color: #fcebf6;
+}
+
 a:hover {
   text-decoration: none;
 }
 
 .a-purple {
-  color: #7f3e97;
+  color: #fcebf6;
 }
 
 .a-purple:hover {
-  color: #bd3f78;
+  color: #7f3e97;
 }
 
 .a-pink {
@@ -119,17 +123,4 @@ a:hover {
 
 [data-theme="dark"] {
   background-color: #333;
-}
-
-[data-theme="dark"] .skewed {
-  background: linear-gradient(90deg, rgba(204, 167, 236, 1) 0%, rgba(123, 121, 199, 1) 50%, rgba(149, 125, 173, 1) 100%);
-}
-
-[data-theme="dark"] h5,
-[data-theme="dark"] .a-purple {
-  color: #fcebf6;
-}
-
-[data-theme="dark"] .a-purple:hover {
-  color: #7f3e97;
 }
