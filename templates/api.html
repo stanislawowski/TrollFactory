@@ -13,10 +13,6 @@
 <body>
   <div class="skewed"></div>
   <div class="my-5 py-5 text-center">
-    <div class="custom-control custom-switch">
-      <input type="checkbox" class="custom-control-input" id="darkSwitch" />
-      <label class="custom-control-label" for="darkSwitch"></label>
-    </div>
     <h1><a href="/" class="a-dark">TrollFactory</a></h1>
     <h5>Made with ❤ by <a href="https://stanislawowski.pl" class="a-purple">SRD</a></h5>
     <div class="row mx-auto py-5">
@@ -48,7 +44,6 @@
       </div>
     </div>
   </div>
-  <script src="/js/dark-mode-switch.min.js"></script>
   <script>function write(generated){var textarea=document.getElementById("request");textarea.value=generated}function details(){var lang=document.getElementById("lang").value;var sex=document.getElementById("sex").value;return{lang:lang,sex:sex}}function curl(){info=details();request="curl \"https://trollfactory.tk/output?lang="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}function fetch(){info=details();request="fetch('https://trollfactory.tk/output?lang="+info["lang"]+"&sex="+info["sex"]+"&output=json')";write(request)}function powershell(){info=details();request="Invoke-WebRequest -Uri \"https://trollfactory.tk/output?lang="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}</script>
 </body>
 
