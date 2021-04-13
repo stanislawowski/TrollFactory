@@ -6,8 +6,8 @@ from json import dumps, loads
 
 parser = ArgumentParser(description='Fake identities generator.')
 parser.add_argument('--amount', dest='amount', type=int, default=1)
-parser.add_argument('--sex', dest='sex', type=str)
-parser.add_argument('--lang', dest='lang', type=str)
+parser.add_argument('--sex', dest='sex', type=str, default='male')
+parser.add_argument('--lang', dest='lang', type=str, default='polish')
 args = parser.parse_args()
 sex = args.sex
 lang = args.lang
@@ -31,14 +31,8 @@ def print_properties(properties):
 
 def generate(language, sex):
     properties = load_props()
-    properties_static = {}
-
-    if (sex):
-        properties_static['sex'] = {'sex': sex}
-
-    if (lang):
-        country_code = {'polish': 'PL', 'english_us': 'US'}[lang]
-        properties_static['language'] = {'language': lang, 'country_code': country_code}
+    country_code = {'polish': 'PL', 'english_us': 'US'}[language]
+    properties_static = {'language': {'language': language, 'country_code': country_code}, 'sex': {'sex': sex}}
 
     while len(properties) > 0:
         for prop_name in properties:
