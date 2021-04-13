@@ -8,29 +8,16 @@
   <link rel="stylesheet" href="/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="/css/style.css"/>
   <link rel="icon" type="image/png" href="/favicon.png"/>
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
   <title>TrollFactory</title>
 </head>
 <body>
   <div class="skewed"></div>
   <div class="my-5 py-5 text-center">
-    <div class="modal rounded" id="contact">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="text-light">
-            If you have business inquiries or want to contact us for any other purpose, write to the email:<br>
-            <a href="mailto:office@stanislawowski.pl" class="a-pink">office@stanislawowski.pl</a>
-          </h5>
-          <button type="button" class="btn btn-pink mt-2" data-dismiss="modal">CLOSE</button>
-        </div>
-      </div>
-    </div>
-    <h1>TrollFactory</h1>
-    <h5>Made with ❤ by <a href="https://stanislawowski.pl" class="a-purple">SRD</a></h5>
+    <a href="/"><h1>TrollFactory</h1></a>
+    <a href="https://stanislawowski.pl"><h5>Made with ❤ by SRD</h5></a>
     <div class="row mx-auto py-5">
-      <div class="card mx-auto rounded">
-        <div class="card-body rounded">
+      <div class="card mx-auto">
+        <div class="card-body">
           <form method="GET" action="/output">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -65,10 +52,19 @@
       </div>
     </div>
     <div class="row mx-auto py-5">
-      <div class="card mx-auto rounded">
-        <div class="card-body rounded">
-          <a href="/api" class="btn btn-blue">API</a>
-          <a class="btn btn-pink" data-toggle="modal" data-target="#contact">CONTACT</a>
+      <div class="card mx-auto">
+        <div class="card-body">
+          <h5 class="text-light">
+            CREATED BY
+            <a class="a-l-blue" href="https://github.com/dante383">Dante383</a> &
+            <a class="a-l-pink" href="https://github.com/0xA7404A">Aurora</a><br>
+            LICENSED UNDER <a class="a-l-blue" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL V3</a><br>
+            OPEN-SOURCE ON <a class="a-l-blue" href="https://github.com/stanislawowski/TrollFactory/">GITHUB</a><br>
+          </h5>
+          <div class="btn-group mt-2">
+            <a href="/api" class="btn btn-blue">FOR DEVELOPERS</a>
+            <a href="mailto:office@stanislawowski.pl" class="btn btn-pink">E-MAIL</a>
+          </div>
         </div>
       </div>
     </div>
