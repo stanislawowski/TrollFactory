@@ -5,18 +5,24 @@ from os.path import basename, isfile, join
 from datetime import datetime
 from glob import glob
 from argparse import ArgumentParser
-from json import loads
+from json import loads, dumps
 
 parser = ArgumentParser(description='Fake identities generator.')
 parser.add_argument('--amount', dest='amount', type=int, default=1)
 parser.add_argument('--sex', dest='sex', type=str, default='male')
 parser.add_argument('--dataset', dest='dataset', type=str, default='polish')
+parser.add_argument('-o', '--output', dest='file', type=str)
+parser.add_argument('--no-stdout', dest='stdout', action='store_false')
 args = parser.parse_args()
 sex = args.sex
 dataset = args.dataset
 
 def output(text):
     print('[{}] {}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), text))
+
+def save_to_file(properties, file):
+    with open(file, 'a') as f:
+        f.write(dumps(properties))
 
 def load_props(props = None):
     if (not props):
@@ -62,4 +68,9 @@ if __name__ == '__main__':
     output('Starting TrollFactory..\n')
     for _ in range(args.amount):
         properties = load_props()
-        print_properties(generate(dataset, sex))
+        generated = generate(dataset, sex)
+
+        if args.stdout:
+            print_properties(generated)
+        if args.file:
+            save_to_file(generated, args.file)
