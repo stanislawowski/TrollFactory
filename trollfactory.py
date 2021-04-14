@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+
 from os.path import basename, isfile, join
 from datetime import datetime
 from glob import glob
@@ -59,4 +62,4 @@ if __name__ == '__main__':
     output('Starting TrollFactory..\n')
     for _ in range(args.amount):
         properties = load_props()
-        print_properties(loads(generate(dataset, sex)))
+        print_properties(generate(dataset, sex))
