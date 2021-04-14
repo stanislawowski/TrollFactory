@@ -14,6 +14,10 @@ body {
   color: #fcebf6;
 }
 
+.flex-wrap .card .card-body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 .skewed {
   position: absolute;
   top: -40%;
