@@ -48,6 +48,7 @@ a:hover {
   color: #f6a8a6;
 }
 
+h5:hover,
 .a-pink:hover {
   color: #ece3fc;
 }
@@ -62,6 +63,10 @@ a:hover {
 
 .a-l-blue {
   color: #ddf2fd;
+}
+
+.a-l-blue:hover {
+  color: #a5c8e4;
 }
 
 .btn-pink,
