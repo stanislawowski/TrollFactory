@@ -29,10 +29,10 @@ class Car:
         numbers = '0123456789'
 
         # generate prefix corresponding to the city
-        if properties['address']['country_state'] in Car.plate_prefixes: 
+        if properties['address']['country_state'] in Car.plate_prefixes:
             prefix = choice(Car.plate_prefixes[properties['address']['country_state']])
 
-        if len(prefix) == 2: 
+        if len(prefix) == 2:
             resource = randint(1, 5)
             if (resource == 1):
                 plate_resource = "".join([choice(numbers) for i in range(5)])
@@ -105,19 +105,28 @@ class Car:
 
         if properties['birthdate']['age'] in range(14, 17):
             brand = choice(['Aixam', 'Ligier', 'Microcar', 'Chatenet'])
-            model = choice([i for i in data if i['brand_name'] == brand][0]['models'])
+            model = choice([i for i in data if i['brand_name'] == brand][0]['models'])['name']
         else:
             brandNames = [i for i in data]
             brandWeights = [i['brand_weight'] for i in data]
 
             brand = choices(brandNames, brandWeights)[0]
-           
+
             brandModels = brand['models']
             modelsWeights = [i['weight'] for i in brandModels]
 
-            model = choices(brandModels, modelsWeights)[0]['name']
+            model = choices(brandModels, modelsWeights)[0]
 
             brand = brand['brand_name']
+
+            if 'generations' in model:
+                generationWeights = [i['generation_weight'] for i in model['generations']]
+
+                generation = choices(model['generations'], generationWeights)[0]
+
+                generationName = generation['generation_name']
+            else:
+                generationName = None
 
         if properties['language']['language'] == 'polish':
             plate_number = Car.generate_plate(properties)
@@ -128,5 +137,6 @@ class Car:
             'prop_title': 'Car',
             'plate_number': plate_number,
             'brand': brand,
-            'model': model
+            'model': model['name'],
+            'generation': generationName
         }

@@ -1,19 +1,31 @@
+#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+
 from os.path import basename, isfile, join
 from datetime import datetime
 from glob import glob
 from argparse import ArgumentParser
-from json import dumps, loads
+from json import loads, dumps
+
+TROLLFACTORY_VERSION = "1.1.0"
 
 parser = ArgumentParser(description='Fake identities generator.')
 parser.add_argument('--amount', dest='amount', type=int, default=1)
 parser.add_argument('--sex', dest='sex', type=str, default='male')
-parser.add_argument('--lang', dest='lang', type=str, default='polish')
+parser.add_argument('--dataset', dest='dataset', type=str, default='polish')
+parser.add_argument('-o', '--output', dest='file', type=str)
+parser.add_argument('--no-stdout', dest='stdout', action='store_false')
+parser.add_argument('-v', '--version', action='store_true')
 args = parser.parse_args()
 sex = args.sex
-lang = args.lang
+dataset = args.dataset
 
 def output(text):
     print('[{}] {}'.format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'), text))
+
+def save_to_file(properties, file):
+    with open(file, 'a') as f:
+        f.write(dumps(properties))
 
 def load_props(props = None):
     if (not props):
@@ -26,30 +38,45 @@ def print_properties(properties):
     for prop in properties:
         output('Prop name: ' + prop)
         for key in properties[prop]:
-            output('    ' + key + ': ' + str(properties[prop][key]))
+            if (properties[prop][key] != None):
+                output('    ' + key + ': ' + str(properties[prop][key]))
 
-def generate(language, sex):
+def generate(dataset, sex):
     properties = load_props()
-    country_code = {'polish': 'PL', 'english_us': 'US'}[language]
-    properties_static = {'language': {'language': language, 'country_code': country_code}, 'sex': {'sex': sex}}
+    country_code = {'polish': 'PL', 'english_us': 'US'}[dataset]
+    properties_static = {'language': {'language': dataset, 'country_code': country_code}, 'sex': {'sex': sex}}
 
     while len(properties) > 0:
         for prop_name in properties:
+
             prop = __import__('props.'+prop_name)
             prop_class = getattr(getattr(prop, prop_name), prop_name.capitalize())
+
             missing_dependencies = False
+            
             if hasattr(prop_class, 'dependencies'):
                 for dependency in prop_class.dependencies:
                     if not dependency.lower() in properties_static.keys():
                         missing_dependencies = True
             if (missing_dependencies): continue
+            
             prop_attrs = prop_class.generate(properties_static)
+            
             properties_static[prop_name] = prop_attrs
             properties.remove(prop_name)
-    return(dumps(properties_static))
+    
+    return properties_static
 
 if __name__ == '__main__':
+    if args.version:
+        print('TrollFactory v{}'.format(TROLLFACTORY_VERSION))
+        exit()
     output('Starting TrollFactory..\n')
     for _ in range(args.amount):
         properties = load_props()
-        print_properties(loads(generate(lang, sex)))
+        generated = generate(dataset, sex)
+
+        if args.stdout:
+            print_properties(generated)
+        if args.file:
+            save_to_file(generated, args.file)

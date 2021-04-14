@@ -9,12 +9,8 @@
 <body>
   <div class="skewed"></div>
   <div class="text-center my-5">
-    <div class="custom-control custom-switch">
-      <input type="checkbox" class="custom-control-input" id="darkSwitch" />
-      <label class="custom-control-label" for="darkSwitch"></label>
-    </div>
-    <h1><a href="/" class="a-dark">TrollFactory</a></h1>
-    <h5>Made with ❤ by <a href="https://stanislawowski.pl" class="a-purple">SRD</a></h5>
+    <a href="/"><h1>TrollFactory</h1></a>
+    <a href="https://stanislawowski.pl"><h5>Made with ❤ by SRD</h5></a>
   </div>
   <div class="d-flex flex-row flex-wrap justify-content-center">
     {% for prop in generated %}
@@ -38,5 +34,4 @@
       {% endif %}
     {% endfor %}
   </div><br>
-  <script src="/js/dark-mode-switch.min.js"></script>
 </body>

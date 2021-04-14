@@ -16,10 +16,10 @@ class Document_id:
 
       today = date.today()
 
-      try:
-        expiry_date = today.replace(year = d.year + randint(1,9))
-      except:
-        expiry_date = today + (date(today.year + randint(1,9), 1, 1) - date(today.year, 1, 1))
+      #try:
+      #  expiry_date = today.replace(year = d.year + randint(1,9))
+      #except:
+      expiry_date = today + (date(today.year + randint(1,9), 1, 1) - date(today.year, 1, 1))
 
       return {
           'prop_title': 'Document - ID',

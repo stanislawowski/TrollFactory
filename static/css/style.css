@@ -10,6 +10,12 @@
 
 body {
   overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: #fcebf6;
+}
+
+.flex-wrap .card .card-body {
+  font-family: 'Noto Sans', sans-serif;
 }
 
 .skewed {
@@ -20,48 +26,51 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(183, 209, 248, 1) 0%, rgba(223, 210, 244, 1) 33%, rgba(255, 203, 208, 1) 66%, rgba(172, 197, 232, 1) 100%);
+  background: linear-gradient(90deg, rgba(204, 167, 236, 1) 0%, rgba(123, 121, 199, 1) 50%, rgba(149, 125, 173, 1) 100%);
   z-index: -1;
   transform: skewY(-10deg);
   transform-origin: top left;
 }
 
-h1,
-h5,
-.card-title,
-.btn,
-select {
-  font-family: 'Poppins', sans-serif;
-}
-
-h1,
-.a-dark {
+h1 {
   color: #090909;
 }
 
-h5,
-.a-dark:hover {
+h1:hover {
   color: #333;
+}
+
+h5 {
+  color: #fcebf6;
 }
 
 a:hover {
   text-decoration: none;
 }
 
-.a-purple {
-  color: #7f3e97;
-}
-
-.a-purple:hover {
-  color: #bd3f78;
-}
-
 .a-pink {
   color: #f6a8a6;
 }
 
+h5:hover,
 .a-pink:hover {
   color: #ece3fc;
+}
+
+.a-l-pink {
+  color: #fedae8;
+}
+
+.a-l-pink:hover {
+  color: #f9b8d4;
+}
+
+.a-l-blue {
+  color: #ddf2fd;
+}
+
+.a-l-blue:hover {
+  color: #a5c8e4;
 }
 
 .btn-pink,
@@ -70,7 +79,7 @@ a:hover {
 }
 
 .btn-pink:hover {
-  background-color: #ece3fc;
+  background-color: #f9b8d4;
 }
 
 .btn-blue,
@@ -82,19 +91,10 @@ a:hover {
   background-color: #a5c8e4;
 }
 
-.btn-gender {
-  width: 100px;
-}
-
 .card-header,
 .card-body,
 .card {
   background-color: rgba(9, 9, 9, 0.6);
-}
-
-.card {
-  border: 0;
-  color: #fcebf6;
 }
 
 .fc-text {
@@ -102,34 +102,8 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 
-.rounded {
-  border-radius: 20px;
-}
-
-.modal {
-  max-width: 60%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin-top: 20%;
-  transform: translate(-50%, -50%);
-}
-
-/* DARK THEME */
-
-[data-theme="dark"] {
-  background-color: #333;
-}
-
-[data-theme="dark"] .skewed {
-  background: linear-gradient(90deg, rgba(204, 167, 236, 1) 0%, rgba(123, 121, 199, 1) 50%, rgba(149, 125, 173, 1) 100%);
-}
-
-[data-theme="dark"] h5,
-[data-theme="dark"] .a-purple {
-  color: #fcebf6;
-}
-
-[data-theme="dark"] .a-purple:hover {
-  color: #7f3e97;
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1d2429;
+  }
 }

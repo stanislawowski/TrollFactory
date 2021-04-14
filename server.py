@@ -1,20 +1,19 @@
 from flask import Flask, render_template, jsonify, request
-from trollfactory import generate
-from json import loads
+from trollfactory import generate, TROLLFACTORY_VERSION
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', tf_version=TROLLFACTORY_VERSION)
 
 @app.route('/output', methods=['GET'])
 def output():
     sex = request.args.get('sex')
-    lang = request.args.get('lang')
+    dataset = request.args.get('ds')
     if request.args.get('output') == 'json':
-        return jsonify(generate(lang, sex))
+        return jsonify(generate(dataset, sex))
     else:
-        return render_template('/output.html', generated=loads(generate(lang, sex)))
+        return render_template('/output.html', generated=generate(dataset, sex))
 
 @app.route('/api', methods=['GET'])
 def api():
