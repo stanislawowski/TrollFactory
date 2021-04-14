@@ -7,12 +7,15 @@ from glob import glob
 from argparse import ArgumentParser
 from json import loads, dumps
 
+TROLLFACTORY_VERSION = "1.0.0"
+
 parser = ArgumentParser(description='Fake identities generator.')
 parser.add_argument('--amount', dest='amount', type=int, default=1)
 parser.add_argument('--sex', dest='sex', type=str, default='male')
 parser.add_argument('--dataset', dest='dataset', type=str, default='polish')
 parser.add_argument('-o', '--output', dest='file', type=str)
 parser.add_argument('--no-stdout', dest='stdout', action='store_false')
+parser.add_argument('-v', '--version', action='store_true')
 args = parser.parse_args()
 sex = args.sex
 dataset = args.dataset
@@ -65,6 +68,9 @@ def generate(dataset, sex):
     return properties_static
 
 if __name__ == '__main__':
+    if args.version:
+        print('TrollFactory v{}'.format(TROLLFACTORY_VERSION))
+        exit()
     output('Starting TrollFactory..\n')
     for _ in range(args.amount):
         properties = load_props()
