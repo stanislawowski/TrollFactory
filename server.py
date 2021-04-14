@@ -1,10 +1,10 @@
 from flask import Flask, render_template, jsonify, request
-from trollfactory import generate
+from trollfactory import generate, TROLLFACTORY_VERSION
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', tf_version=TROLLFACTORY_VERSION)
 
 @app.route('/output', methods=['GET'])
 def output():
