@@ -1,0 +1,11 @@
+server {
+    server_name trollfactory.tk www.trollfactory.tk;
+    charset     utf-8;
+    client_max_body_size 75M;
+
+    location / { try_files $uri @application; }
+    location @application {
+        include uwsgi_params;
+        uwsgi_pass unix:/var/www/html/trollfactory.tk/trollfactory_uwsgi.sock;
+    }
+}
