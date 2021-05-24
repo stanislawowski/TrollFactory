@@ -1,2 +1,2 @@
 Flask==2.0.1
-schwifty==2021.5.0
+schwifty==2021.5.2
