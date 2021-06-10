@@ -40,4 +40,9 @@
       {% endif %}
     {% endfor %}
   </div><br>
+  <form action="/del/{{ id }}" method="post">
+    <button type="submit" class="btn btn-danger m-4">
+      Delete personality
+    </button>
+  </form>
 </body>
