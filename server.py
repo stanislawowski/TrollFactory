@@ -26,7 +26,8 @@ def output_uuid(person_uuid):
     file_path = ''.join(['personalities/', str(person_uuid), '.json'])
     if isfile(file_path):
         return render_template('/output.html', 
-                               generated = loads(open(file_path).read()))
+                               generated = loads(open(file_path).read()),
+                               id = person_uuid)
     else:
         return redirect('/')
 
