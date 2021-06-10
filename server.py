@@ -3,6 +3,7 @@ from trollfactory import generate, TROLLFACTORY_VERSION
 from json import loads, dumps
 from os.path import isfile
 from uuid import uuid4
+from subprocess import run
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route('/', methods=['GET'])
@@ -30,6 +31,13 @@ def output_uuid(person_uuid):
                                id = person_uuid)
     else:
         return redirect('/')
+
+@app.route('/del/<uuid:person_uuid>', methods=['POST'])
+def delete_personality(person_uuid):
+    file_path = ''.join(['personalities/', str(person_uuid), '.json'])
+    if isfile(file_path):
+        run(['shred', '-fuz', file_path])
+    return redirect('/')
 
 @app.route('/api', methods=['GET'])
 def api():
