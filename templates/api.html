@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-  <script>function write(generated){var textarea=document.getElementById("request");textarea.value=generated}function details(){var lang=document.getElementById("lang").value;var sex=document.getElementById("sex").value;return{lang:lang,sex:sex}}function curl(){info=details();request="curl \"https://trollfactory.tk/output?lang="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}function fetch(){info=details();request="fetch('https://trollfactory.tk/output?lang="+info["lang"]+"&sex="+info["sex"]+"&output=json')";write(request)}function powershell(){info=details();request="Invoke-WebRequest -Uri \"https://trollfactory.tk/output?lang="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}</script>
+  <script>function write(generated){var textarea=document.getElementById("request");textarea.value=generated}function details(){var lang=document.getElementById("lang").value;var sex=document.getElementById("sex").value;return{lang:lang,sex:sex}}function curl(){info=details();request="curl \"https://trollfactory.tk/output?ds="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}function fetch(){info=details();request="fetch('https://trollfactory.tk/output?ds="+info["lang"]+"&sex="+info["sex"]+"&output=json')";write(request)}function powershell(){info=details();request="Invoke-WebRequest -Uri \"https://trollfactory.tk/output?ds="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}</script>
 </body>
 
 </html>

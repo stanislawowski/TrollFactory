@@ -12,6 +12,12 @@
     <a href="/"><h1>TrollFactory</h1></a>
     <a href="https://stanislawowski.pl"><h5>Made with ❤ by SRD</h5></a>
   </div>
+  <div class="card mb-5 mx-5 text-center pt-2">
+    <p class="card-title mx-auto">Use this link to access the personality.</h4><br>
+    <a href="" class="text-light">
+      https://trollfactory.tk/{{id}}
+    </a>
+  </div>
   <div class="d-flex flex-row flex-wrap justify-content-center">
     {% for prop in generated %}
       {% if generated[prop]['prop_title'] != 'N/A' %}
@@ -34,4 +40,9 @@
       {% endif %}
     {% endfor %}
   </div><br>
+  <form action="/del/{{ id }}" method="post">
+    <button type="submit" class="btn btn-danger m-4">
+      Delete personality
+    </button>
+  </form>
 </body>
