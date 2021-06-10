@@ -1,5 +1,8 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect
 from trollfactory import generate, TROLLFACTORY_VERSION
+from json import loads, dumps
+from os.path import isfile
+from uuid import uuid4
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route('/', methods=['GET'])
@@ -13,7 +16,19 @@ def output():
     if request.args.get('output') == 'json':
         return jsonify(generate(dataset, sex))
     else:
-        return render_template('/output.html', generated=generate(dataset, sex))
+        person_uuid = str(uuid4())
+        with open(''.join(['personalities/', person_uuid, '.json']), 'w') as file:
+            file.write(dumps(generate(dataset, sex)))
+        return redirect(f'/{person_uuid}')
+
+@app.route('/<uuid:person_uuid>', methods=['GET'])
+def output_uuid(person_uuid):
+    file_path = ''.join(['personalities/', str(person_uuid), '.json'])
+    if isfile(file_path):
+        return render_template('/output.html', 
+                               generated = loads(open(file_path).read()))
+    else:
+        return redirect('/')
 
 @app.route('/api', methods=['GET'])
 def api():
