@@ -14,12 +14,19 @@ def index():
 def output():
     sex = request.args.get('sex')
     dataset = request.args.get('ds')
+    while True:
+        try:
+            generated_person = generate(dataset, sex)
+        except:
+            pass
+        if generated_person:
+            break
     if request.args.get('output') == 'json':
-        return jsonify(generate(dataset, sex))
+        return jsonify(generated_person)
     else:
         person_uuid = str(uuid4())
         with open(''.join(['personalities/', person_uuid, '.json']), 'w') as file:
-            file.write(dumps(generate(dataset, sex)))
+            file.write(dumps(generated_person))
         return redirect(f'/{person_uuid}')
 
 @app.route('/<uuid:person_uuid>', methods=['GET'])
