@@ -102,6 +102,10 @@ h5:hover,
   border-bottom-right-radius: 0;
 }
 
+.card-personality-link {
+  overflow-x: auto;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #1d2429;
