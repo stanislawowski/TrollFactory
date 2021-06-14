@@ -39,6 +39,14 @@ def delete_personality(person_uuid):
         run(['shred', '-fuz', file_path])
     return redirect('/')
 
+@app.route('/dl/<uuid:person_uuid>', methods=['GET'])
+def download_personality(person_uuid):
+    file_path = ''.join(['personalities/', str(person_uuid), '.json'])
+    if isfile(file_path):
+        with open(file_path) as file:
+            return jsonify(file.read())
+    return redirect('/')
+
 @app.route('/api', methods=['GET'])
 def api():
     return render_template('/api.html')
