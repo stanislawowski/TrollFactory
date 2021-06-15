@@ -42,9 +42,13 @@ def output_uuid(person_uuid):
 
 @app.route('/del/<uuid:person_uuid>', methods=['POST'])
 def delete_personality(person_uuid):
-    file_path = ''.join(['personalities/', str(person_uuid), '.json'])
+    file_paths = [
+        ''.join(['personalities/', str(person_uuid), '.json']),
+        ''.join(['personalities/', str(person_uuid), '.pdf'])
+    ]
     if isfile(file_path):
-        run(['shred', '-fuz', file_path])
+        for file_path in file_paths:
+            run(['shred', '-fuz', file_path])
     return redirect('/')
 
 @app.route('/dl/<uuid:person_uuid>', methods=['GET'])
