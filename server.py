@@ -1,4 +1,5 @@
-from flask import Flask, render_template, jsonify, request, redirect
+from flask import Flask, render_template, jsonify, request, redirect, \
+                  send_from_directory
 from trollfactory import generate, TROLLFACTORY_VERSION
 from json import loads, dumps
 from os.path import isfile
@@ -50,8 +51,9 @@ def delete_personality(person_uuid):
 def download_personality(person_uuid):
     file_path = ''.join(['personalities/', str(person_uuid), '.json'])
     if isfile(file_path):
-        with open(file_path) as file:
-            return jsonify(file.read())
+        return send_from_directory('personalities/',
+                                    str(person_uuid) + '.json',
+                                    as_attachment=True)
     return redirect('/')
 
 @app.route('/api', methods=['GET'])
