@@ -21,9 +21,13 @@
     <a href="/output?ds={{ generated['language']['language'] }}&sex={{ generated['sex']['sex'] }}" class="btn btn-warning mr-2">
       Generate new
     </a>
-    <a href="/dl/{{ id }}" class="btn btn-dark">
-      Download JSON
-    </a>
+    <div class="btn-group">
+      <button class="btn btn-dark">
+        Download
+      </button>
+      <a href="/dl/{{ id }}" class="btn btn-light">JSON</a>
+      <a href="/dl/{{ id }}?type=pdf" class="btn btn-light">PDF</a>
+    </div>
   </div>
   <div class="card mb-5 mx-5 text-center pt-2 card-personality-link">
     <p class="card-title mx-auto">Use this link to access the personality.</h4><br>
