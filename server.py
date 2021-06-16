@@ -5,6 +5,7 @@ from json import loads, dumps
 from os.path import isfile
 from uuid import uuid4
 from subprocess import run
+from pdf import generate_pdf
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route('/', methods=['GET'])
@@ -53,11 +54,18 @@ def delete_personality(person_uuid):
 
 @app.route('/dl/<uuid:person_uuid>', methods=['GET'])
 def download_personality(person_uuid):
+    file_type = request.args.get('type')
     file_path = ''.join(['personalities/', str(person_uuid), '.json'])
     if isfile(file_path):
-        return send_from_directory('personalities/',
-                                    str(person_uuid) + '.json',
-                                    as_attachment=True)
+        if file_type == 'pdf':
+            generate_pdf(loads(open(file_path).read()), person_uuid)
+            return send_from_directory('personalities/',
+                                       str(person_uuid) + '.pdf',
+                                       as_attachment=True)
+        else:
+            return send_from_directory('personalities/',
+                                       str(person_uuid) + '.json',
+                                       as_attachment=True)
     return redirect('/')
 
 @app.route('/api', methods=['GET'])
