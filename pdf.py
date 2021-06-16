@@ -15,7 +15,7 @@ def generate_pdf(personality, id):
     pdf.set_font('PTSans', 'B', 12)
     pdf.cell(60, 25, 'https://trollfactory.tk/' + str(id), 0, 1, '')
     
-    for i in range(30):
+    for i in range(10):
         pdf.image('static/img/dna_strand.png', 180, 0+i*31.8, 13)
 
     for prop_name in personality.keys():
@@ -25,8 +25,9 @@ def generate_pdf(personality, id):
         pdf.set_font('PTSans', '', 12)
         for prop_entry in personality[prop_name].keys():
             if prop_entry == 'user_agent':
+                pdf.cell(0, 6, 'User-agent:', 0, 1)
                 for part in personality[prop_name][prop_entry]:
-                    pdf.cell(0, 6, str(part), 0, 1)
+                    pdf.cell(0, 6, str(' '*20+part), 0, 1)
             elif prop_entry != 'prop_title':
                 line = fix_title(prop_entry)+': '+str(personality[prop_name][prop_entry])
                 pdf.cell(0, 6, line, 0, 1)
