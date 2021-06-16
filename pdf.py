@@ -15,6 +15,9 @@ def generate_pdf(personality, id):
     pdf.set_font('PTSans', 'B', 12)
     pdf.cell(60, 25, 'https://trollfactory.tk/' + str(id), 0, 1, '')
     
+    for i in range(30):
+        pdf.image('static/img/dna_strand.png', 180, 0+i*31.8, 13)
+
     for prop_name in personality.keys():
         pdf.set_font('PTSans', 'B', 12)
         pdf.cell(60, 6, personality[prop_name]['prop_title'], 0, 1, 'C')
