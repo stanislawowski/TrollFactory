@@ -5,7 +5,7 @@ from json import loads, dumps
 from os.path import isfile
 from uuid import uuid4
 from subprocess import run
-from helpers import generate_pdf, generate_csv
+from helpers import generate_pdf, generate_csv, generate_xlsx
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route('/', methods=['GET'])
@@ -68,6 +68,11 @@ def download_personality(person_uuid):
             generate_csv(loads(open(file_path).read()), person_uuid)
             return send_from_directory('personalities/',
                                        str(person_uuid) + '.csv',
+                                       as_attachment=True)
+        elif file_type == 'xlsx':
+            generate_xlsx(loads(open(file_path).read()), person_uuid)
+            return send_from_directory('personalities/',
+                                       str(person_uuid) + '.xlsx',
                                        as_attachment=True)
         else:
             return send_from_directory('personalities/',
