@@ -46,10 +46,11 @@ def generate_csv(personality, id):
 
         for prop_name in personality.keys():
             for prop_entry in personality[prop_name].keys():
-                if prop_entry == 'user_agent':
-                    personality[prop_name][prop_entry] = ' '.join(personality[prop_name][prop_entry])
-                out_keys.append(prop_entry)
-                out_data.append(str(personality[prop_name][prop_entry]))
+                if prop_entry != 'prop_title':
+                    if prop_entry == 'user_agent':
+                        personality[prop_name][prop_entry] = ' '.join(personality[prop_name][prop_entry])
+                    out_keys.append(prop_name + '__' + prop_entry)
+                    out_data.append(str(personality[prop_name][prop_entry]))
 
         wtr.writerow(out_keys)
         wtr.writerow(out_data)
