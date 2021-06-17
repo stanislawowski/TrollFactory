@@ -47,8 +47,8 @@ def delete_personality(person_uuid):
         ''.join(['personalities/', str(person_uuid), '.json']),
         ''.join(['personalities/', str(person_uuid), '.pdf'])
     ]
-    if isfile(file_path):
-        for file_path in file_paths:
+    for file_path in file_paths:
+        if isfile(file_path):
             run(['shred', '-fuz', file_path])
     return redirect('/')
 
