@@ -46,7 +46,8 @@ def delete_personality(person_uuid):
     file_paths = [
         ''.join(['personalities/', str(person_uuid), '.json']),
         ''.join(['personalities/', str(person_uuid), '.pdf']),
-        ''.join(['personalities/', str(person_uuid), '.csv'])
+        ''.join(['personalities/', str(person_uuid), '.csv']),
+        ''.join(['personalities/', str(person_uuid), '.xlsx'])
     ]
     for file_path in file_paths:
         if isfile(file_path):
