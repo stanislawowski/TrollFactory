@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 from fpdf import FPDF
+from csv import writer
 
 def fix_title(s):
     return s.replace('_', ' ').capitalize()
@@ -35,3 +36,20 @@ def generate_pdf(personality, id):
         pdf.ln(4)
     
     pdf.output(''.join(['personalities/', str(id), '.pdf']), 'F')
+
+def generate_csv(personality, id):
+    path = ''.join(['personalities/', str(id), '.csv'])
+    with open(path, 'w', encoding='utf-8') as file:
+        wtr = writer(file)
+        out_keys = []
+        out_data = []
+
+        for prop_name in personality.keys():
+            for prop_entry in personality[prop_name].keys():
+                if prop_entry == 'user_agent':
+                    personality[prop_name][prop_entry] = ' '.join(personality[prop_name][prop_entry])
+                out_keys.append(prop_entry)
+                out_data.append(str(personality[prop_name][prop_entry]))
+
+        wtr.writerow(out_keys)
+        wtr.writerow(out_data)
