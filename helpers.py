@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 from fpdf import FPDF
 from csv import writer
+from openpyxl import Workbook
 
 def fix_title(s):
     return s.replace('_', ' ').capitalize()
@@ -54,3 +55,22 @@ def generate_csv(personality, id):
 
         wtr.writerow(out_keys)
         wtr.writerow(out_data)
+
+def generate_xlsx(personality, id):
+    xlsx = Workbook()
+    xlsx.remove(xlsx.active)
+
+    for prop_name in personality.keys():
+        data = [[], []]
+        sheet = xlsx.create_sheet(title = personality[prop_name]['prop_title'])
+
+        for prop_entry in personality[prop_name].keys():
+            if prop_entry == 'user_agent':
+                personality[prop_name][prop_entry] = ' '.join(personality[prop_name][prop_entry])
+            data[0].append(fix_title(prop_entry))
+            data[1].append(str(personality[prop_name][prop_entry]))
+
+        for row in data:
+            sheet.append(row)
+
+    xlsx.save(''.join(['personalities/', str(id), '.xlsx']))

@@ -141,3 +141,4 @@ cython_debug/
 personalities/*.json
 personalities/*.pdf
 personalities/*.csv
+personalities/*.xlsx
