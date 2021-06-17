@@ -140,3 +140,4 @@ cython_debug/
 # TrollFactory personalities
 personalities/*.json
 personalities/*.pdf
+personalities/*.csv
