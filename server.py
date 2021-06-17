@@ -5,7 +5,7 @@ from json import loads, dumps
 from os.path import isfile
 from uuid import uuid4
 from subprocess import run
-from pdf import generate_pdf
+from helpers import generate_pdf, generate_csv
 app = Flask(__name__, static_url_path='', static_folder='static')
 
 @app.route('/', methods=['GET'])
@@ -45,7 +45,8 @@ def output_uuid(person_uuid):
 def delete_personality(person_uuid):
     file_paths = [
         ''.join(['personalities/', str(person_uuid), '.json']),
-        ''.join(['personalities/', str(person_uuid), '.pdf'])
+        ''.join(['personalities/', str(person_uuid), '.pdf']),
+        ''.join(['personalities/', str(person_uuid), '.csv'])
     ]
     for file_path in file_paths:
         if isfile(file_path):
@@ -61,6 +62,11 @@ def download_personality(person_uuid):
             generate_pdf(loads(open(file_path).read()), person_uuid)
             return send_from_directory('personalities/',
                                        str(person_uuid) + '.pdf',
+                                       as_attachment=True)
+        elif file_type == 'csv':
+            generate_csv(loads(open(file_path).read()), person_uuid)
+            return send_from_directory('personalities/',
+                                       str(person_uuid) + '.csv',
                                        as_attachment=True)
         else:
             return send_from_directory('personalities/',
