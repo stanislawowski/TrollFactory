@@ -15,36 +15,8 @@
   <div class="my-5 py-5 text-center">
     <a href="/"><h1>TrollFactory</h1></a>
     <a href="https://stanislawowski.pl"><h5>Made with ❤ by SRD</h5></a>
-    <div class="row mx-auto py-5">
-      <div class="card mx-auto">
-        <div class="card-body">
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <h5 class="text-dark my-auto form-control fc-text">LANG</h5>
-            </div>
-            <select class="form-control fc-sel" id="lang">
-              <option value="polish">POLISH</option>
-              <option value="english_us">ENGLISH/US</option>
-            </select>
-          </div>
-          <div class="input-group my-1">
-            <div class="input-group-prepend">
-              <h5 class="text-dark my-auto form-control fc-text">SEX</h5>
-            </div>
-            <select class="form-control fc-sel" id="sex">
-              <option value="male">MALE</option>
-              <option value="female">FEMALE</option>
-            </select>
-          </div>
-          <button type="submit" class="mt-3 mx-0 btn btn-sm btn-blue" onclick="powershell()">PowerShell</button>
-          <button type="submit" class="mt-3 btn btn-sm btn-pink" onclick="fetch()">fetch</button>
-          <button type="submit" class="mt-3 btn btn-sm btn-blue" onclick="curl()">cURL</button>
-          <textarea class="form-control form-control-sm mt-3" rows="3" placeholder="Generated request" id="request"></textarea>
-        </div>
-      </div>
-    </div>
+    <h4 class="mt-5">API documentation is currently TODO.</h4>
   </div>
-  <script>function write(generated){var textarea=document.getElementById("request");textarea.value=generated}function details(){var lang=document.getElementById("lang").value;var sex=document.getElementById("sex").value;return{lang:lang,sex:sex}}function curl(){info=details();request="curl \"https://trollfactory.tk/output?ds="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}function fetch(){info=details();request="fetch('https://trollfactory.tk/output?ds="+info["lang"]+"&sex="+info["sex"]+"&output=json')";write(request)}function powershell(){info=details();request="Invoke-WebRequest -Uri \"https://trollfactory.tk/output?ds="+info["lang"]+"&sex="+info["sex"]+"&output=json\"";write(request)}</script>
 </body>
 
 </html>
