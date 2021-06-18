@@ -84,5 +84,9 @@ def download_personality(person_uuid):
 def api():
     return render_template('/api.html')
 
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('/error.html', error=e)
+
 if __name__ == '__main__':
     app.run(port=2137)
