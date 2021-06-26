@@ -1,4 +1,4 @@
 fpdf==1.7.2
 Flask==2.0.1
-schwifty==2021.6.0
+schwifty==2021.6.1
 openpyxl==3.0.7
