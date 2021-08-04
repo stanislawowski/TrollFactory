@@ -7,7 +7,7 @@ from glob import glob
 from argparse import ArgumentParser
 from json import loads, dumps
 
-TROLLFACTORY_VERSION = "1.1.0"
+TROLLFACTORY_VERSION = "2.0.0"
 
 parser = ArgumentParser(description='Fake identities generator.')
 parser.add_argument('--amount', dest='amount', type=int, default=1)
