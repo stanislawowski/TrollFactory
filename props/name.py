@@ -6,13 +6,13 @@ class Name:
         names_file = load(open('langs/' + properties['language']['language'] + '/names.json'))
         surname = choice(load(open('langs/' + properties['language']['language'] + '/surnames.json')))
 
-        if properties['sex']['sex'] == 'male':
+        if properties['gender']['gender'] == 'male':
             if surname[-1] == 'a':
                 surname = surname[:-1] + 'i'
         elif surname[-1] == 'i': surname = surname[:-1] + 'a'
 
-        names = [i[0] for i in names_file[properties['sex']['sex']]]
-        names_weights = [i[1] for i in names_file[properties['sex']['sex']]]
+        names = [i[0] for i in names_file[properties['gender']['gender']]]
+        names_weights = [i[1] for i in names_file[properties['gender']['gender']]]
 
         name = choices(names, weights=names_weights)[0]
 

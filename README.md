@@ -8,7 +8,7 @@
 The fake personalities generator.
 
 ## Usage
-`python3 trollfactory.py --sex female --amount 10 --lang polish`
+`python3 trollfactory.py --gender female --amount 10 --lang polish`
 
 ## Notes
    - The datasets in this repo are incomplete and only included to show correct syntax.
