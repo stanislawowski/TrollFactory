@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/stanislawowski/TrollFactory)
 ![GitHub last commit](https://img.shields.io/github/last-commit/stanislawowski/TrollFactory)
 
-The fake personalities generator.
+**Fake personality generator for the 21st century!**
 
 ## Usage
 `python3 trollfactory.py --gender female --amount 10 --lang polish`
