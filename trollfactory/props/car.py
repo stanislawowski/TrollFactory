@@ -1,5 +1,6 @@
 from random import choice, choices, randint
-from json import load
+from json import loads
+from pkgutil import get_data
 
 class Car:
     dependencies = ['address', 'birthdate', 'language']
@@ -101,7 +102,10 @@ class Car:
         if properties['birthdate']['age'] < 14:
             return {'prop_title': 'Car', 'car': None}
 
-        data = load(open('langs/' + properties['language']['language'] + '/car-list.json'))
+        data = loads(get_data(
+            __package__,
+            'langs/' + properties['language']['language'] + '/car-list.json'
+        ))
 
         if properties['birthdate']['age'] in range(14, 17):
             brand = choice(['Aixam', 'Ligier', 'Microcar', 'Chatenet'])

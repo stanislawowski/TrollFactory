@@ -1,9 +1,9 @@
 from random import randint
 
 class Cc:
-    dependencies = ['language', 'birthdate']
+    dependencies = ['address', 'birthdate']
     def generate(properties):
-        if properties['language']['country_code'] == 'PL' and properties['birthdate']['age'] < 13:
+        if properties['address']['country_code'] == 'PL' and properties['birthdate']['age'] < 13:
             return {'prop_title': 'CC', 'cc': None}
 
         def mastercard():

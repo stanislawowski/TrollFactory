@@ -1,10 +1,14 @@
 from uuid import uuid4
-from json import load
+from json import loads
 from random import choice, randint
+from pkgutil import get_data
 
 class Phone:
     def generate(properties):
-        data = load(open('langs/' + properties['language']['language'] + '/phones.json'))
+        data = loads(get_data(
+            __package__,
+            'langs/' + properties['language']['language'] + '/phones.json'
+        ))
         phone = choice(data)
 
         # generate phone number. todo: support for usa phone numbers
