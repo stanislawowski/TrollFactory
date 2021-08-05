@@ -1,5 +1,11 @@
 from random import choice, randint
-from json import load
+from json import loads
+from pkgutil import get_data
+
+COUNTRY_CODES = {
+    'polish': 'PL',
+    'english_us': 'US'
+}
 
 class Address:
     depedencies = ["language"]
@@ -7,7 +13,11 @@ class Address:
     def generate(properties):
         if properties['language']['language'] == 'english_us':
             return {'prop_title': 'Address', 'address': 'Not available in US yet!'}
-        region = choice(load(open('langs/' + properties['language']['language'] + '/cities.json')))
+
+        region = choice(loads(get_data(
+            __package__,
+            'langs/' + properties['language']['language'] + '/cities.json'
+        )))
 
         country_state = region['region_name']
         city = choice(region['cities'])
@@ -19,7 +29,7 @@ class Address:
 
         return {
             'prop_title': 'Address',
-            'country_code': properties['language']['country_code'],
+            'country_code': COUNTRY_CODES[properties['language']['language']],
             'country_state': country_state,
             'country_city': city['name'],
             'city_postcode': city['postcode'],

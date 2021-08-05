@@ -1,10 +1,17 @@
-from json import load
+from json import loads
 from random import choice, choices
+from pkgutil import get_data
 
 class Name:
     def generate(properties):
-        names_file = load(open('langs/' + properties['language']['language'] + '/names.json'))
-        surname = choice(load(open('langs/' + properties['language']['language'] + '/surnames.json')))
+        names_file = loads(get_data(
+            __package__,
+            'langs/' + properties['language']['language'] + '/names.json'
+        ))
+        surname = choice(loads(get_data(
+            __package__,
+            'langs/' + properties['language']['language'] + '/surnames.json'
+        )))
 
         if properties['gender']['gender'] == 'male':
             if surname[-1] == 'a':
