@@ -3,4 +3,3 @@
 Author: Stanisławowski Research & Development <office@stanislawowski.pl>
 License: GPL-3.0
 """
-from trollfactory.functions import generate_personality
