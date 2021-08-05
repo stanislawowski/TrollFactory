@@ -1,0 +1,3 @@
+include trollfactory/props/*
+include trollfactory/props/langs/*
+include trollfactory/props/langs/*/*
