@@ -2,4 +2,4 @@
 Author: Stanisławowski Research & Development <office@stanislawowski.pl>
 License: GPL-3.0
 """
-from .functions import *
+from trollfactory.functions import generate_personality

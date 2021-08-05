@@ -15,5 +15,3 @@ __all__ = [
     'pesel',
     'phone'
 ]
-
-from . import __all__

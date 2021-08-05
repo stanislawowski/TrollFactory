@@ -41,7 +41,7 @@ class Online:
             'password': ''.join(choice(ascii_uppercase + ascii_lowercase + digits) for _ in range(16)),
             'os': setup['os'],
             'browser': setup['browser'],
-            'user_agent': setup['user_agent'],
+            'user_agent': ' '.join(setup['user_agent']),
             'ipv4': ".".join(str(randint(0, 255)) for _ in range(4)),
             'ipv6': ':'.join('{:x}'.format(randint(0, 2**16 - 1)) for i in range(8)),
             'mac': ("02:00:00:%02x:%02x:%02x" % (randint(0, 255), randint(0, 255), randint(0, 255))).upper()

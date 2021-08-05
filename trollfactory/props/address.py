@@ -12,7 +12,11 @@ class Address:
 
     def generate(properties):
         if properties['language']['language'] == 'english_us':
-            return {'prop_title': 'Address', 'address': 'Not available in US yet!'}
+            return {
+                'prop_title': 'Address',
+                'country_code': 'US',
+                'address': 'Not available in US yet!'
+            }
 
         region = choice(loads(get_data(
             __package__,
