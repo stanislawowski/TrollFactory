@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/github/license/stanislawowski/TrollFactory.svg)](https://github.com/stanislawowski/TrollFactory)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/stanislawowski/TrollFactory)
 ![GitHub last commit](https://img.shields.io/github/last-commit/stanislawowski/TrollFactory)
+[![PyPI version](https://badge.fury.io/py/trollfactory.svg)](https://badge.fury.io/py/trollfactory)
 
 **Fake personality generator for the 21st century!**
 
