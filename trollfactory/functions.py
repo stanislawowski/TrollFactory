@@ -12,7 +12,7 @@ def generate_personality(p_dataset = 'polish', p_gender = 'female'):
         }
     }
 
-    properties = props.__all__
+    properties = [i for i in props.__all__]
 
     while len(properties) > 0:
         for prop_name in properties:
