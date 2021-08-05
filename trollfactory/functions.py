@@ -1,5 +1,5 @@
-from . import props
-from .props import *
+from trollfactory import props
+from trollfactory.props import *
 from sys import modules
 
 def generate_personality(p_dataset = 'polish', p_gender = 'female'):
