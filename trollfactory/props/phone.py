@@ -4,6 +4,8 @@ from random import choice, randint
 from pkgutil import get_data
 
 class Phone:
+    depedencies = ['address']
+
     def generate(properties):
         data = loads(get_data(
             __package__,
@@ -11,21 +13,23 @@ class Phone:
         ))
         phone = choice(data)
 
-        # generate phone number. todo: support for usa phone numbers
+        if properties['language']['language'] == 'polish':
+            prefixes = loads(get_data(
+                __package__,
+                'langs/polish/phone-prefixes.json'
+            ))
 
-        # these are just the 4 most popular operators. the list isnt very accurate because there are 4-digit prefixes registered
-        # which i didnt include but that shouldnt matter since you can move your phone number to a different operator anyway.
-        prefixes = {
-            "Orange": ['500', '501', '502', '503', '504', '505', '506', '507', '508', '509', '510', '511', '512', '513', '514', '515', '516',
-                        '517', '518', '519', '571', '572', '5730', '573', '690'],
-            "Play": ['530', '531', '533', '534', '535', '536', '537', '570', '574', '575', '576', '577', '578', '666', '690'],
-            "T-Mobile": ['532', '538', '539', '600', '602', '604', '606', '608', '660', '662', '664', '668', '692', '694', '696'],
-            "Plus": ['601', '603', '605', '607', '609', '661', '663', '665', '667', '669', '691', '693', '695', '697']
-        }
-
-        phone_operator, phone_prefixes = choice(list(prefixes.items()))
-        phone_number = '+48' + choice(phone_prefixes) + "".join([str(randint(0, 9)) for i in range(6)])
-
+            phone_operator, phone_prefixes = choice(list(prefixes.items()))
+            phone_number = (
+                '+48' +
+                choice(phone_prefixes) +
+                "".join([str(randint(0, 9)) for i in range(6)])
+            )
+        elif properties['language']['language'] == 'english_us':
+            phone_operator = choice([
+                'AT&T', 'T-Mobile', 'Verizon', 'Mint Mobile'
+            ])
+            phone_number = 'Not available in US yet!'
 
         return {
             'prop_title': 'Phone',
