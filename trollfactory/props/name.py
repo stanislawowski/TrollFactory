@@ -4,27 +4,29 @@ from pkgutil import get_data
 
 class Name:
     def generate(properties):
-        names_file = loads(get_data(
+        names = loads(get_data(
             __package__,
             'langs/' + properties['language']['language'] + '/names.json'
-        ))
+        ))[properties['gender']['gender']]
+
         surname = choice(loads(get_data(
             __package__,
             'langs/' + properties['language']['language'] + '/surnames.json'
         )))
 
-        if properties['gender']['gender'] == 'male':
-            if surname[-1] == 'a':
-                surname = surname[:-1] + 'i'
-        elif surname[-1] == 'i': surname = surname[:-1] + 'a'
+        if properties['language']['language'] == 'polish':
+            if properties['gender']['gender'] == 'male':
+                if surname[-1] == 'a':
+                    surname = surname[:-1] + 'i'
+            elif surname[-1] == 'i': surname = surname[:-1] + 'a'
 
-        names = [i[0] for i in names_file[properties['gender']['gender']]]
-        names_weights = [i[1] for i in names_file[properties['gender']['gender']]]
-
-        name = choices(names, weights=names_weights)[0]
+        name = choices(
+            [i[0] for i in names],
+            weights = [i[1] for i in names]
+        )[0]
 
         return {
             'prop_title': 'Name',
             'name': name,
-            'surname': surname,
+            'surname': surname
         }

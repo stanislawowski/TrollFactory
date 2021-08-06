@@ -12,6 +12,6 @@ __all__ = [
     'measurements',
     'name',
     'online',
-    'pesel',
+    'ssn',
     'phone'
 ]
