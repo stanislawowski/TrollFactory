@@ -1,10 +1,13 @@
 from random import randint
 
 class Cc:
-    dependencies = ['address', 'birthdate']
+    dependencies = ['birthdate']
     def generate(properties):
-        if properties['address']['country_code'] == 'PL' and properties['birthdate']['age'] < 13:
-            return {'prop_title': 'CC', 'cc': None}
+        if properties['birthdate']['age'] < 13:
+            return {
+                'prop_title': 'CC',
+                'cc': None
+            }
 
         def generate_card(card_type):
             if card_type == 'mastercard':

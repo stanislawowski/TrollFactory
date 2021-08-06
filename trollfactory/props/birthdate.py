@@ -6,11 +6,10 @@ class Birthdate:
     def generate(properties):
         current_year = datetime.now().year
 
-        birth_year = randint(current_year-80, current_year)
-        birth_month = randint(1,12)
+        birth_year = randint(current_year - 80, current_year)
+        birth_month = randint(1, 12)
         birth_day = choice(monthrange(birth_year, birth_month))
-        if birth_day == 0: birth_day = 1
-
+        birth_day = 1 if birth_day == 0 else birth_day
         today = date.today()
 
         zodiac_signs = [
@@ -28,6 +27,7 @@ class Birthdate:
             {'name': 'Pisces', 'day_s': 11, 'month_s': 3, 'day_e': 18, 'month_e': 4}
         ]
 
+        zodiac = 'Unknown'
         for sign in zodiac_signs:
             if birth_month == sign['month_s'] and birth_day > sign['day_s']:
                 zodiac = sign['name']
@@ -35,8 +35,6 @@ class Birthdate:
             elif birth_month == sign['month_e'] and birth_day < sign['day_e']:
                 zodiac = sign['name']
                 break
-            else:
-                zodiac = 'Unknown'
 
         return {
             'prop_title': 'Birthdate',
