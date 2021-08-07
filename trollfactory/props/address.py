@@ -24,12 +24,14 @@ class Address:
         )))
 
         country_state = region['region_name']
-        city = choice(region['cities'])
 
-        try:
-            city_street = choice(city['streets'])
-        except (IndexError, KeyError):
-            city_street = city['name']
+        for i in range(10):
+            city = choice(region['cities'])
+            try:
+                city_street = choice(city['streets'])
+                break
+            except (IndexError, KeyError):
+                city_street = city['name']
 
         return {
             'prop_title': 'Address',
