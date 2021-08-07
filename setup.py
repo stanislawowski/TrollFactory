@@ -1,7 +1,10 @@
 from setuptools import setup
 
-VERSION = '2.0.2'
+VERSION = '2.0.3'
 DESCRIPTION = 'Fake personality generator for the 21st century!'
+
+with open('README.md', encoding = 'utf-8') as file:
+    LONG_DESCRIPTION = file.read()
 
 setup(
     name = 'trollfactory',
@@ -9,7 +12,8 @@ setup(
     author = 'Stanisławowski Research & Development',
     author_email = '<office@stanislawowski.pl>',
     description = DESCRIPTION,
-    long_description = DESCRIPTION,
+    long_description = LONG_DESCRIPTION,
+    long_description_content_type = 'text/markdown',
     packages = ['trollfactory'],
     install_requires = ['schwifty'],
     keywords = ['fake', 'personality', 'personalities', 'generator'],
