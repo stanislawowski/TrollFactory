@@ -20,11 +20,13 @@ AVERAGES = {
     16: (44, 82, 153, 189),
     17: (45, 87, 154, 190),
     18: (47, 88, 155, 190),
-    19: (50, 120, 156, 205)
+    19: (50, 120, 156, 205),
 }
+
 
 class Measurements:
     dependencies = ["birthdate"]
+
     def generate(properties):
         age = properties['birthdate']['age']
 
@@ -39,5 +41,5 @@ class Measurements:
             'prop_title': 'Measurements',
             'weight': weight,
             'height': height,
-            'bmi': "{:.2f}".format(weight / ((height/100) * (height/100)))
+            'bmi': "{:.2f}".format(weight / ((height / 100) * (height / 100))),
         }

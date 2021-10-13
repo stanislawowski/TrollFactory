@@ -5,7 +5,7 @@ from json import loads
 
 EMAIL_PROVIDERS = {
     'polish': [
-        '@niepodam.pl'
+        '@niepodam.pl',
     ],
     'english_us': [
         '@armyspy.com',
@@ -16,11 +16,12 @@ EMAIL_PROVIDERS = {
         '@jourrapide.com',
         '@rhyta.com',
         '@superrito.com',
-        '@teleworm.us'
+        '@teleworm.us',
     ]
 }
 
 TLDS = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
+
 
 class Online:
     dependencies = ['name', 'language']
@@ -38,11 +39,11 @@ class Online:
 
         setup = choice(loads(get_data(
             __package__,
-            'langs/' + properties['language']['language'] + '/setups.json'
+            'langs/' + properties['language']['language'] + '/setups.json',
         )))
 
         email_provider = choice(
-            EMAIL_PROVIDERS[properties['language']['language']]
+            EMAIL_PROVIDERS[properties['language']['language']],
         )
 
         password = ''.join(choice(
@@ -51,15 +52,15 @@ class Online:
 
         email_url = {
             '@niepodam.pl': 'http://niepodam.pl/users/',
-            '@armyspy.com' : 'http://www.fakemailgenerator.com/#/armyspy.com/',
-            '@cuvox.de' : 'http://www.fakemailgenerator.com/#/cuvox.de/',
-            '@dayrep.com' : 'http://www.fakemailgenerator.com/#/dayrep.com/',
-            '@einrot.com' : 'http://www.fakemailgenerator.com/#/einrot.com/',
-            '@gustr.com' : 'http://www.fakemailgenerator.com/#/gustr.com/',
-            '@jourrapide.com' : 'http://www.fakemailgenerator.com/#/jourrapide.com/',
-            '@rhyta.com' : 'http://www.fakemailgenerator.com/#/rhyta.com/',
-            '@superrito.com' : 'http://www.fakemailgenerator.com/#/superrito.com/',
-            '@teleworm.us' : 'http://www.fakemailgenerator.com/#/teleworm.us/'
+            '@armyspy.com': 'http://www.fakemailgenerator.com/#/armyspy.com/',
+            '@cuvox.de': 'http://www.fakemailgenerator.com/#/cuvox.de/',
+            '@dayrep.com': 'http://www.fakemailgenerator.com/#/dayrep.com/',
+            '@einrot.com': 'http://www.fakemailgenerator.com/#/einrot.com/',
+            '@gustr.com': 'http://www.fakemailgenerator.com/#/gustr.com/',
+            '@jourrapide.com': 'http://www.fakemailgenerator.com/#/jourrapide.com/',
+            '@rhyta.com': 'http://www.fakemailgenerator.com/#/rhyta.com/',
+            '@superrito.com': 'http://www.fakemailgenerator.com/#/superrito.com/',
+            '@teleworm.us': 'http://www.fakemailgenerator.com/#/teleworm.us/',
         }[email_provider] + username
 
         ipv6 = ':'.join(
@@ -70,7 +71,7 @@ class Online:
             "02:00:00:%02x:%02x:%02x" % (
                 randint(0, 255),
                 randint(0, 255),
-                randint(0, 255)
+                randint(0, 255),
             )
         ).upper()
 
@@ -86,5 +87,5 @@ class Online:
             'user_agent': ' '.join(setup['user_agent']),
             'ipv4': ".".join(str(randint(0, 255)) for _ in range(4)),
             'ipv6': ipv6,
-            'mac': mac
+            'mac': mac,
         }

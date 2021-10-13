@@ -2,14 +2,18 @@ from random import choice, choices, randint
 from json import loads
 from pkgutil import get_data
 
+
 class Car:
     dependencies = ['address', 'birthdate', 'language']
 
     def generate_plate(properties):
-        plate_prefixes = loads(get_data(
-            __package__,
-            'langs/' + properties['language']['language'] + '/car-plate-prefixes.json'
-        ))
+        plate_prefixes = loads(
+            get_data(
+                __package__,
+                'langs/' +
+                properties['language']['language'] +
+                '/car-plate-prefixes.json',
+            ))
 
         letters = 'ACEFGHJKLMNPRSTUWXY'
         numbers = '0123456789'
@@ -66,11 +70,11 @@ class Car:
                 plate_resource += "".join([choice(letters) for i in range(2)])
             # resource 10 and 11 are just for motorcycles. we dont support them yet,
             # so im just gonna comment it out
-            #elif (resource == 10):
+            # elif (resource == 10):
             #    plate_resource = choice(letters)
             #    plate_resource += "".join([choice(numbers) for i in range(2)])
             #    plate_resource += choice(letters)
-            #elif (resource == 11):
+            # elif (resource == 11):
             #    plate_resource = choice(letters)
             #    plate_resource += choice(numbers[1:])
             #    plate_resource += "".join([choice(letters) for i in range(2)])
@@ -78,39 +82,39 @@ class Car:
         plate_number = prefix + ' ' + plate_resource
         return plate_number
 
-
     def generate(properties):
         data = loads(get_data(
             __package__,
-            'langs/' + properties['language']['language'] + '/car-list.json'
+            'langs/' + properties['language']['language'] + '/car-list.json',
         ))
 
         if properties['birthdate']['age'] < 14:
             return {
                 'prop_title': 'Car',
-                'car': None
+                'car': None,
             }
         elif properties['birthdate']['age'] in range(14, 17):
             brand_name = choice(['Aixam', 'Ligier', 'Microcar', 'Chatenet'])
-            model = choice([i for i in data if i['brand_name'] == brand_name][0]['models'])
+            model = choice([i for i in data if i['brand_name']
+                           == brand_name][0]['models'])
             generation = None
         else:
             brand = choices(
                 [i for i in data],
-                [i['brand_weight'] for i in data]
+                [i['brand_weight'] for i in data],
             )[0]
 
             brand_name = brand['brand_name']
 
             model = choices(
                 brand['models'],
-                [i['weight'] for i in brand['models']]
+                [i['weight'] for i in brand['models']],
             )[0]
 
             if 'generations' in model:
                 generation = choices(
                     model['generations'],
-                    [i['generation_weight'] for i in model['generations']]
+                    [i['generation_weight'] for i in model['generations']],
                 )[0]['generation_name']
             else:
                 generation = None
@@ -125,5 +129,5 @@ class Car:
             'plate_number': plate_number,
             'brand': brand_name,
             'model': model['name'],
-            'generation': generation
+            'generation': generation,
         }
