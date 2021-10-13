@@ -27,9 +27,9 @@ def generate_personality(p_dataset = 'polish', p_gender = 'female', exclude_prop
 
             if hasattr(prop_class, 'dependencies'):
                 for dependency in prop_class.dependencies:
-                    if not dependency.lower() in properties_static.keys():
+                    if not dependency in properties_static.keys():
                         missing_dependencies = True
-                    if dependency not in properties:
+                    if dependency not in props.__all__:
                         raise UnmetDependenciesException(
                             'Unmet dependency: ' + dependency
                         )
