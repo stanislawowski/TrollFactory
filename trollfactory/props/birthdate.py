@@ -2,6 +2,7 @@ from calendar import monthrange
 from random import choice, randint
 from datetime import datetime, date
 
+
 class Birthdate:
     def generate(properties):
         current_year = datetime.now().year
@@ -24,7 +25,7 @@ class Birthdate:
             {'name': 'Sagittarius', 'day_s': 17, 'month_s': 12, 'day_e': 20, 'month_e': 1},
             {'name': 'Capricorn', 'day_s': 20, 'month_s': 1, 'day_e': 16, 'month_e': 2},
             {'name': 'Aquarius', 'day_s': 16, 'month_s': 2, 'day_e': 11, 'month_e': 3},
-            {'name': 'Pisces', 'day_s': 11, 'month_s': 3, 'day_e': 18, 'month_e': 4}
+            {'name': 'Pisces', 'day_s': 11, 'month_s': 3, 'day_e': 18, 'month_e': 4},
         ]
 
         zodiac = 'Unknown'
@@ -42,5 +43,5 @@ class Birthdate:
             'birth_month': birth_month,
             'birth_day': birth_day,
             'age': today.year - birth_year - ((today.month, today.day) < (birth_month, birth_day)),
-            'zodiac': zodiac
+            'zodiac': zodiac,
         }

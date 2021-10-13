@@ -3,20 +3,21 @@ from json import loads
 from random import choice, randint
 from pkgutil import get_data
 
+
 class Phone:
     depedencies = ['address']
 
     def generate(properties):
         data = loads(get_data(
             __package__,
-            'langs/' + properties['language']['language'] + '/phones.json'
+            'langs/' + properties['language']['language'] + '/phones.json',
         ))
         phone = choice(data)
 
         if properties['language']['language'] == 'polish':
             prefixes = loads(get_data(
                 __package__,
-                'langs/polish/phone-prefixes.json'
+                'langs/polish/phone-prefixes.json',
             ))
 
             phone_operator, phone_prefixes = choice(list(prefixes.items()))
@@ -27,7 +28,7 @@ class Phone:
             )
         elif properties['language']['language'] == 'english_us':
             phone_operator = choice([
-                'AT&T', 'T-Mobile', 'Verizon', 'Mint Mobile'
+                'AT&T', 'T-Mobile', 'Verizon', 'Mint Mobile',
             ])
             phone_number = 'Not available in US yet!'
 
@@ -41,5 +42,5 @@ class Phone:
             'send_sms': 'https://sms.priv.pl/',
             'phone_call': 'https://freephonenum.com/phone-call',
             'os': phone['os'],
-            'uuid': str(uuid4())
+            'uuid': str(uuid4()),
         }
