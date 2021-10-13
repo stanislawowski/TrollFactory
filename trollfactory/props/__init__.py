@@ -13,5 +13,5 @@ __all__ = [
     'name',
     'online',
     'ssn',
-    'phone'
+    'phone',
 ]

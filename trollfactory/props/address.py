@@ -4,8 +4,9 @@ from pkgutil import get_data
 
 COUNTRY_CODES = {
     'polish': 'PL',
-    'english_us': 'US'
+    'english_us': 'US',
 }
+
 
 class Address:
     depedencies = ["language"]
@@ -15,12 +16,12 @@ class Address:
             return {
                 'prop_title': 'Address',
                 'country_code': 'US',
-                'address': 'Not available in US yet!'
+                'address': 'Not available in US yet!',
             }
 
         region = choice(loads(get_data(
             __package__,
-            'langs/' + properties['language']['language'] + '/cities.json'
+            'langs/' + properties['language']['language'] + '/cities.json',
         )))
 
         country_state = region['region_name']
@@ -42,5 +43,5 @@ class Address:
             'city_street': city_street,
             'city_latitude': city['lat'],
             'city_longitude': city['lon'],
-            'street_number': randint(1, 1000)
+            'street_number': randint(1, 1000),
         }

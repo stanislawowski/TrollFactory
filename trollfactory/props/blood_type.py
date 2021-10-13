@@ -1,5 +1,6 @@
 from random import choices
 
+
 class Blood_type:
     def generate(properties):
         blood_types = ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-']
@@ -7,5 +8,5 @@ class Blood_type:
 
         return {
             'prop_title': 'Blood type',
-            'blood_type': choices(blood_types, weights = blood_weights)[0]
+            'blood_type': choices(blood_types, weights=blood_weights)[0],
         }

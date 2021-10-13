@@ -14,14 +14,14 @@ COLORS = {
         'purple',
         'yellow',
         'green',
-        'orange'
+        'orange',
     ],
     'hair': [
         'blonde',
         'brown',
         'black',
         'auburn',
-        'red'
+        'red',
     ],
     'eyes': [
         'amber',
@@ -29,9 +29,10 @@ COLORS = {
         'brown',
         'gray',
         'green',
-        'hazel'
+        'hazel',
     ]
 }
+
 
 class Colors:
     def generate(properties):
@@ -39,5 +40,5 @@ class Colors:
             'prop_title': 'Colors',
             'favourite': choice(COLORS['favourite']),
             'hair': choice(COLORS['hair']),
-            'eyes': choice(COLORS['eyes'])
+            'eyes': choice(COLORS['eyes']),
         }
