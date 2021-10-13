@@ -1,6 +1,7 @@
 from random import randint
 from datetime import datetime
 
+
 class Ssn:
     dependencies = ['birthdate', 'language']
 
@@ -8,7 +9,7 @@ class Ssn:
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'SSN',
-                'ssn': 'Not available in US yet!'
+                'ssn': 'Not available in US yet!',
             }
         elif properties['language']['language'] == 'polish':
             gender = properties['gender']['gender']
@@ -16,7 +17,7 @@ class Ssn:
             date = list(map(int, str(int(datetime(
                 properties['birthdate']['birth_year'],
                 properties['birthdate']['birth_month'],
-                properties['birthdate']['birth_day']
+                properties['birthdate']['birth_day'],
             ).strftime('%Y%m%d')))))
 
             date[4] += 2 if int(date[0]) == 2 else 0
@@ -44,5 +45,5 @@ class Ssn:
 
             return {
                 'prop_title': 'SSN',
-                'pesel': ''.join(map(str, pesel))
+                'pesel': ''.join(map(str, pesel)),
             }
