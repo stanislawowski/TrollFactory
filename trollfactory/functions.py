@@ -1,6 +1,9 @@
 from trollfactory import props
 from trollfactory.props import *
-from trollfactory.exceptions import UnmetDependenciesException
+from trollfactory.props import langs
+from trollfactory.exceptions import UnmetDependenciesException, \
+                                    InvalidGenderException, \
+                                    UnsupportedDatasetException
 from sys import modules
 
 
@@ -8,6 +11,17 @@ def generate_personality(
         p_dataset='polish',
         p_gender='female',
         exclude_props=[]):
+
+    if p_gender not in ['female', 'male']:
+        raise InvalidGenderException(
+            str(p_gender) + ' gender is not supported by TrollFactory yet',
+        )
+
+    if p_dataset not in langs.__all__:
+        raise UnsupportedDatasetException(
+            str(p_dataset) + ' dataset is not supported by TrollFactory yet',
+        )
+
     properties_static = {
         'language': {
             'language': p_dataset
@@ -35,7 +49,7 @@ def generate_personality(
                         missing_dependencies = True
                     if dependency not in props.__all__:
                         raise UnmetDependenciesException(
-                            'Unmet dependency: ' + dependency
+                            'Unmet dependency: ' + dependency,
                         )
             if (missing_dependencies):
                 continue
