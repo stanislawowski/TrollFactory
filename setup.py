@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = '2.0.4'
+VERSION = '2.0.5'
 DESCRIPTION = 'Fake personality generator for the 21st century!'
 
 with open('README.md', encoding='utf-8') as file:
