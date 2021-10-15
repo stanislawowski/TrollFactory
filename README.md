@@ -48,3 +48,5 @@ You can access the TrollFactory web interface under [beta.trollfactory.tk](https
  - [ ] - finish english_us dataset
  - [ ] - setting static properties
  - [x] - cli arguments help
+ - [ ] - add more test scripts
+ - [ ] - improve CC prop
