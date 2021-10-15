@@ -1,3 +1,5 @@
+"""Properties generation scripts used by the TrollFactory cli and library."""
+
 __all__ = [
     'address',
     'bank',

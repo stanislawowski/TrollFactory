@@ -1,3 +1,5 @@
+"""TrollFactory cli functions."""
+
 from argparse import ArgumentParser, Namespace
 from datetime import datetime
 from trollfactory.functions import generate_personality
@@ -7,6 +9,7 @@ DESCRIPTION = 'Fake personality generator for the 21st century!'
 
 
 def parse_arguments() -> Namespace:
+    """Parse command-line arguments."""
     parser = ArgumentParser(description=DESCRIPTION)
 
     parser.add_argument('--amount', dest='amount', type=int, default=1)
@@ -23,6 +26,7 @@ def parse_arguments() -> Namespace:
 
 
 def print_line(text: str, padding: int = 0) -> None:
+    """Print a formatted line."""
     print('[{}]{} {}'.format(
         datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         ' ' * padding,
@@ -31,6 +35,7 @@ def print_line(text: str, padding: int = 0) -> None:
 
 
 def print_properties(properties: dict) -> None:
+    """Print generated properties."""
     for prop in properties:
         print_line('Prop name: ' + prop)
 
@@ -39,6 +44,7 @@ def print_properties(properties: dict) -> None:
 
 
 def main() -> None:
+    """Run the cli."""
     args = parse_arguments()
 
     if args.version:

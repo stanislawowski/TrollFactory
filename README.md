@@ -43,7 +43,7 @@ The `generate_personality()` function returns a dict with generated data.
 You can access the TrollFactory web interface under [beta.trollfactory.tk](https://beta.trollfactory.tk) domain, though it may be unstable/unreliable, as it's still in beta.
 
 ## TODO
- - [ ] - docstrings
+ - [x] - docstrings
  - [ ] - non-binary gender
  - [ ] - finish english_us dataset
  - [ ] - setting static properties

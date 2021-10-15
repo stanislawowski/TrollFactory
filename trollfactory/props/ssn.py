@@ -1,17 +1,23 @@
+"""Social Security number generation prop for TrollFactory."""
+
 from random import randint
 from datetime import datetime
 
 
 class Ssn:
+    """SSN generation prop class."""
+
     dependencies = ['birthdate', 'language']
 
     def generate(properties: dict) -> dict:
+        """Generate the Social Security number."""
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'SSN',
                 'ssn': 'Not available in US yet!',
             }
-        elif properties['language']['language'] == 'polish':
+
+        if properties['language']['language'] == 'polish':
             gender = properties['gender']['gender']
 
             date = list(map(int, str(int(datetime(

@@ -1,3 +1,5 @@
+"""Functions used by the TrollFactory cli and library."""
+
 from sys import modules
 from typing import Optional, List
 from trollfactory import props
@@ -12,6 +14,7 @@ def generate_personality(
         p_dataset: str = 'polish',
         p_gender: str = 'female',
         exclude_props: Optional[List[str]] = None) -> dict:
+    """Generate a fake personality."""
     exclude_props = exclude_props or []
 
     if p_gender not in ['female', 'male']:
@@ -53,7 +56,7 @@ def generate_personality(
                         raise UnmetDependenciesException(
                             'Unmet dependency: ' + dependency,
                         )
-            if (missing_dependencies):
+            if missing_dependencies:
                 continue
 
             prop_attrs = prop_class.generate(properties_static)

@@ -1,11 +1,16 @@
+"""Bank account data generation prop for TrollFactory."""
+
 from random import randint
 from schwifty import IBAN
 
 
 class Bank:
+    """Bank account data generation prop class."""
+
     dependencies = ['birthdate', 'language']
 
     def generate_iban(bank_code: str) -> str:
+        """Generate the IBAN number."""
         return IBAN.generate(
             'PL',
             bank_code=bank_code,
@@ -13,6 +18,7 @@ class Bank:
         ).formatted
 
     def generate(properties: dict) -> dict:
+        """Generate the bank account data."""
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'Bank',

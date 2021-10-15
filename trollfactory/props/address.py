@@ -1,3 +1,5 @@
+"""Address generation prop for TrollFactory."""
+
 from random import choice, randint
 from json import loads
 from pkgutil import get_data
@@ -9,9 +11,12 @@ COUNTRY_CODES = {
 
 
 class Address:
+    """Address generation prop class."""
+
     depedencies = ["language"]
 
     def generate(properties: dict) -> dict:
+        """Generate the address."""
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'Address',
@@ -26,7 +31,7 @@ class Address:
 
         country_state = region['region_name']
 
-        for i in range(10):
+        for _ in range(10):
             city = choice(region['cities'])
             try:
                 city_street = choice(city['streets'])
