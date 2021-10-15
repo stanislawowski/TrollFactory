@@ -27,7 +27,7 @@ AVERAGES = {
 class Measurements:
     dependencies = ["birthdate"]
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         age = properties['birthdate']['age']
 
         if age in range(0, 20):

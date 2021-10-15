@@ -7,7 +7,7 @@ from pkgutil import get_data
 class Phone:
     depedencies = ['address']
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         data = loads(get_data(
             __package__,
             'langs/' + properties['language']['language'] + '/phones.json',

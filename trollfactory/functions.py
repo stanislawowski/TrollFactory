@@ -1,16 +1,18 @@
+from sys import modules
+from typing import Optional, List
 from trollfactory import props
 from trollfactory.props import *
 from trollfactory.props import langs
 from trollfactory.exceptions import UnmetDependenciesException, \
                                     InvalidGenderException, \
                                     UnsupportedDatasetException
-from sys import modules
 
 
 def generate_personality(
-        p_dataset='polish',
-        p_gender='female',
-        exclude_props=[]):
+        p_dataset: str = 'polish',
+        p_gender: str = 'female',
+        exclude_props: Optional[List[str]] = None) -> dict:
+    exclude_props = exclude_props or []
 
     if p_gender not in ['female', 'male']:
         raise InvalidGenderException(

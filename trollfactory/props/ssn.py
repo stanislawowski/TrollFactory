@@ -5,7 +5,7 @@ from datetime import datetime
 class Ssn:
     dependencies = ['birthdate', 'language']
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'SSN',

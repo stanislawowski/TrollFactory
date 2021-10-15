@@ -4,7 +4,7 @@ from datetime import datetime, date
 
 
 class Birthdate:
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         current_year = datetime.now().year
 
         birth_year = randint(current_year - 80, current_year)

@@ -6,7 +6,7 @@ from pkgutil import get_data
 class Car:
     dependencies = ['address', 'birthdate', 'language']
 
-    def generate_plate(properties):
+    def generate_plate(properties: dict) -> str:
         plate_prefixes = loads(
             get_data(
                 __package__,
@@ -82,7 +82,7 @@ class Car:
         plate_number = prefix + ' ' + plate_resource
         return plate_number
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         data = loads(get_data(
             __package__,
             'langs/' + properties['language']['language'] + '/car-list.json',
