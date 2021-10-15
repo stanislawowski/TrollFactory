@@ -12,15 +12,43 @@ def parse_arguments() -> Namespace:
     """Parse command-line arguments."""
     parser = ArgumentParser(description=DESCRIPTION)
 
-    parser.add_argument('--amount', dest='amount', type=int, default=1)
-    parser.add_argument('--gender', dest='gender', type=str, default='female')
+    parser.add_argument(
+        '--amount',
+        dest='amount',
+        type=int,
+        default=1,
+        help='a number of personalities to generate',
+    )
+
+    parser.add_argument(
+        '--gender',
+        dest='gender',
+        type=str,
+        default='female',
+        help='generated personalities\' gender',
+    )
+
     parser.add_argument(
         '--dataset',
         dest='dataset',
         type=str,
-        default='polish')
-    parser.add_argument('--no-stdout', dest='stdout', action='store_false')
-    parser.add_argument('-v', '--version', action='store_true')
+        default='polish',
+        help='the name of the dataset to be used',
+    )
+
+    parser.add_argument(
+        '--no-stdout',
+        dest='stdout',
+        action='store_false',
+        help='don\'t display the generated personalities',
+    )
+
+    parser.add_argument(
+        '-v',
+        '--version',
+        action='store_true',
+        help='show TrollFactory version and exit',
+    )
 
     return parser.parse_args()
 

@@ -47,4 +47,4 @@ You can access the TrollFactory web interface under [beta.trollfactory.tk](https
  - [ ] - non-binary gender
  - [ ] - finish english_us dataset
  - [ ] - setting static properties
- - [ ] - cli arguments help
+ - [x] - cli arguments help
