@@ -21,7 +21,7 @@ class Cc:
             if card_type == 'mastercard':
                 initial, rem = [5, randint(1, 5)], 16 - 2
                 nums = initial + [randint(1, 9) for x in range(rem - 1)]
-            elif card_type == 'visa16':
+            elif card_type == 'visa':
                 initial, rem = [4], 16 - 1
                 nums = initial + [randint(1, 9) for x in range(rem - 1)]
             elif card_type == 'americanexpress':
@@ -44,7 +44,7 @@ class Cc:
         return {
             'prop_title': 'CC',
             'mastercard': generate_card('mastercard'),
-            'visa16': generate_card('visa16'),
+            'visa': generate_card('visa'),
             'americanexpress': generate_card('americanexpress'),
             'cvv': randint(100, 999),
             'date': str(randint(1, 12)).zfill(2) + '/' + str(randint(25, 33)),
