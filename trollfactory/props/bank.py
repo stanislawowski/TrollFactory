@@ -5,14 +5,14 @@ from schwifty import IBAN
 class Bank:
     dependencies = ['birthdate', 'language']
 
-    def generate_iban(bank_code):
+    def generate_iban(bank_code: str) -> str:
         return IBAN.generate(
             'PL',
             bank_code=bank_code,
             account_code='0000' + str(randint(11111111, 99999999)) + '0000',
         ).formatted
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'Bank',

@@ -11,7 +11,7 @@ COUNTRY_CODES = {
 class Address:
     depedencies = ["language"]
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'Address',

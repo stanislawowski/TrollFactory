@@ -4,7 +4,7 @@ from pkgutil import get_data
 
 
 class Name:
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         names = loads(get_data(
             __package__,
             'langs/' + properties['language']['language'] + '/names.json',

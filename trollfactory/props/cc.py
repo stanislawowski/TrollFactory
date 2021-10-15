@@ -4,7 +4,7 @@ from random import randint
 class Cc:
     dependencies = ['birthdate']
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         if properties['birthdate']['age'] < 13:
             return {
                 'prop_title': 'CC',

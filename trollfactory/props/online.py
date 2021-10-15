@@ -26,7 +26,7 @@ TLDS = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
 class Online:
     dependencies = ['name', 'language']
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         if ', ' in properties['name']['name']:
             properties['name']['name'] = choice(
                 properties['name']['name'].split(', ')

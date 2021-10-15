@@ -5,7 +5,7 @@ from datetime import date
 class Document_id:
     dependencies = ['language']
 
-    def generate(properties):
+    def generate(properties: dict) -> dict:
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'Document - ID',
