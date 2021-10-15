@@ -1,10 +1,15 @@
+"""Credit card data generation prop for TrollFactory."""
+
 from random import randint
 
 
 class Cc:
+    """Credit card data generation prop class."""
+
     dependencies = ['birthdate']
 
     def generate(properties: dict) -> dict:
+        """Generate the credit card data."""
         if properties['birthdate']['age'] < 13:
             return {
                 'prop_title': 'CC',
@@ -12,6 +17,7 @@ class Cc:
             }
 
         def generate_card(card_type):
+            """Generate the credit card mumber."""
             if card_type == 'mastercard':
                 initial, rem = [5, randint(1, 5)], 16 - 2
                 nums = initial + [randint(1, 9) for x in range(rem - 1)]
@@ -36,7 +42,7 @@ class Cc:
                     check_sum += n
             final = nums + [10 - (check_sum % 10)]
 
-            return("".join(map(str, final)))
+            return "".join(map(str, final))
 
         return {
             'prop_title': 'CC',

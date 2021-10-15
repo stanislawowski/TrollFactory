@@ -1,3 +1,5 @@
+"""Phone data generation prop for TrollFactory."""
+
 from uuid import uuid4
 from json import loads
 from random import choice, randint
@@ -5,9 +7,12 @@ from pkgutil import get_data
 
 
 class Phone:
+    """Phone data generation prop class."""
+
     depedencies = ['address']
 
     def generate(properties: dict) -> dict:
+        """Generate the phone data."""
         data = loads(get_data(
             __package__,
             'langs/' + properties['language']['language'] + '/phones.json',
@@ -22,10 +27,11 @@ class Phone:
 
             phone_operator, phone_prefixes = choice(list(prefixes.items()))
             phone_number = (
-                '+48' +
-                choice(phone_prefixes) +
-                "".join([str(randint(0, 9)) for i in range(6)])
+                '+48'
+                + choice(phone_prefixes)
+                + "".join([str(randint(0, 9)) for i in range(6)])
             )
+
         elif properties['language']['language'] == 'english_us':
             phone_operator = choice([
                 'AT&T', 'T-Mobile', 'Verizon', 'Mint Mobile',

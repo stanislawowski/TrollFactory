@@ -1,10 +1,15 @@
+"""Name generation prop for TrollFactory."""
+
 from json import loads
 from random import choice, choices
 from pkgutil import get_data
 
 
 class Name:
+    """Name generation prop class."""
+
     def generate(properties: dict) -> dict:
+        """Generate the name."""
         names = loads(get_data(
             __package__,
             'langs/' + properties['language']['language'] + '/names.json',

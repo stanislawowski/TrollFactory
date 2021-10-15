@@ -1,3 +1,5 @@
+"""Setup file for TrollFactory."""
+
 from setuptools import setup
 
 VERSION = '2.0.5'

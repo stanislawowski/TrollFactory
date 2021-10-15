@@ -1,3 +1,5 @@
+"""Online activity data generation prop for TrollFactory."""
+
 from random import choice, randint
 from string import ascii_uppercase, ascii_lowercase, digits
 from pkgutil import get_data
@@ -24,9 +26,12 @@ TLDS = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
 
 
 class Online:
+    """Online activity data generation prop class."""
+
     dependencies = ['name', 'language']
 
     def generate(properties: dict) -> dict:
+        """Generate the online activity data."""
         if ', ' in properties['name']['name']:
             properties['name']['name'] = choice(
                 properties['name']['name'].split(', ')

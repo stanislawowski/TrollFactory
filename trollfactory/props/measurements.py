@@ -1,3 +1,5 @@
+"""Measurements generation prop for TrollFactory."""
+
 from random import randint
 
 AVERAGES = {
@@ -25,9 +27,12 @@ AVERAGES = {
 
 
 class Measurements:
+    """Measurements generation prop class."""
+
     dependencies = ["birthdate"]
 
     def generate(properties: dict) -> dict:
+        """Generate the measurements."""
         age = properties['birthdate']['age']
 
         if age in range(0, 20):

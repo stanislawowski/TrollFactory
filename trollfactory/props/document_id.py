@@ -1,17 +1,23 @@
+"""ID document data generation prop for TrollFactory."""
+
 from random import randint
 from datetime import date
 
 
 class Document_id:
+    """ID document data generation prop class."""
+
     dependencies = ['language']
 
     def generate(properties: dict) -> dict:
+        """Generate the ID document data."""
         if properties['language']['language'] == 'english_us':
             return {
                 'prop_title': 'Document - ID',
                 'document_id': 'N/A',
             }
-        elif properties['language']['language'] == 'polish':
+
+        if properties['language']['language'] == 'polish':
             id_number = []
             while len(id_number) < 3:
                 id_number.append(chr(randint(65, 90)))

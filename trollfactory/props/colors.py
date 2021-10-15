@@ -1,3 +1,5 @@
+"""Colors data generation prop for TrollFactory."""
+
 from random import choice
 
 COLORS = {
@@ -35,7 +37,10 @@ COLORS = {
 
 
 class Colors:
+    """Colors data generation prop class."""
+
     def generate(properties: dict) -> dict:
+        """Generate the colors data."""
         return {
             'prop_title': 'Colors',
             'favourite': choice(COLORS['favourite']),

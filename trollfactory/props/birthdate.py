@@ -1,10 +1,33 @@
+"""Birthdate generation prop for TrollFactory."""
+
 from calendar import monthrange
 from random import choice, randint
 from datetime import datetime, date
 
+ZODIAC_SIGNS = [
+    {'name': 'Aries', 'day_s': 18, 'month_s': 4, 'day_e': 13, 'month_e': 5},
+    {'name': 'Taurus', 'day_s': 13, 'month_s': 5, 'day_e': 21, 'month_e': 6},
+    {'name': 'Gemini', 'day_s': 21, 'month_s': 6, 'day_e': 20, 'month_e': 7},
+    {'name': 'Cancer', 'day_s': 20, 'month_s': 7, 'day_e': 10, 'month_e': 8},
+    {'name': 'Leo', 'day_s': 10, 'month_s': 8, 'day_e': 16, 'month_e': 9},
+    {'name': 'Virgo', 'day_s': 16, 'month_s': 9, 'day_e': 30, 'month_e': 10},
+    {'name': 'Libra', 'day_s': 30, 'month_s': 10, 'day_e': 23, 'month_e': 11},
+    {'name': 'Scorpio', 'day_s': 23, 'month_s': 11, 'day_e': 29,
+        'month_e': 11},
+    {'name': 'Sagittarius', 'day_s': 17, 'month_s': 12, 'day_e': 20,
+        'month_e': 1},
+    {'name': 'Capricorn', 'day_s': 20, 'month_s': 1, 'day_e': 16,
+        'month_e': 2},
+    {'name': 'Aquarius', 'day_s': 16, 'month_s': 2, 'day_e': 11, 'month_e': 3},
+    {'name': 'Pisces', 'day_s': 11, 'month_s': 3, 'day_e': 18, 'month_e': 4},
+]
+
 
 class Birthdate:
+    """Birthdate generation prop class."""
+
     def generate(properties: dict) -> dict:
+        """Generate the birthdate."""
         current_year = datetime.now().year
 
         birth_year = randint(current_year - 80, current_year)
@@ -13,27 +36,12 @@ class Birthdate:
         birth_day = 1 if birth_day == 0 else birth_day
         today = date.today()
 
-        zodiac_signs = [
-            {'name': 'Aries', 'day_s': 18, 'month_s': 4, 'day_e': 13, 'month_e': 5},
-            {'name': 'Taurus', 'day_s': 13, 'month_s': 5, 'day_e': 21, 'month_e': 6},
-            {'name': 'Gemini', 'day_s': 21, 'month_s': 6, 'day_e': 20, 'month_e': 7},
-            {'name': 'Cancer', 'day_s': 20, 'month_s': 7, 'day_e': 10, 'month_e': 8},
-            {'name': 'Leo', 'day_s': 10, 'month_s': 8, 'day_e': 16, 'month_e': 9},
-            {'name': 'Virgo', 'day_s': 16, 'month_s': 9, 'day_e': 30, 'month_e': 10},
-            {'name': 'Libra', 'day_s': 30, 'month_s': 10, 'day_e': 23, 'month_e': 11},
-            {'name': 'Scorpio', 'day_s': 23, 'month_s': 11, 'day_e': 29, 'month_e': 11},
-            {'name': 'Sagittarius', 'day_s': 17, 'month_s': 12, 'day_e': 20, 'month_e': 1},
-            {'name': 'Capricorn', 'day_s': 20, 'month_s': 1, 'day_e': 16, 'month_e': 2},
-            {'name': 'Aquarius', 'day_s': 16, 'month_s': 2, 'day_e': 11, 'month_e': 3},
-            {'name': 'Pisces', 'day_s': 11, 'month_s': 3, 'day_e': 18, 'month_e': 4},
-        ]
-
         zodiac = 'Unknown'
-        for sign in zodiac_signs:
+        for sign in ZODIAC_SIGNS:
             if birth_month == sign['month_s'] and birth_day > sign['day_s']:
                 zodiac = sign['name']
                 break
-            elif birth_month == sign['month_e'] and birth_day < sign['day_e']:
+            if birth_month == sign['month_e'] and birth_day < sign['day_e']:
                 zodiac = sign['name']
                 break
 
