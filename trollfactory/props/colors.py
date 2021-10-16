@@ -11,19 +11,32 @@ COLORS = {
 }
 
 
-class Colors:
-    """Colors data generation prop class."""
+def generate_favourite_color() -> str:
+    return choice(COLORS['favourite'])
 
+
+def generate_hair_color() -> str:
+    return choice(COLORS['hair'])
+
+
+def generate_eyes_color() -> str:
+    return choice(COLORS['eyes'])
+
+
+class Colors:
     def __init__(self, properties: dict) -> None:
-        """Colors data generation prop init function."""
         self.properties = properties
         self.unresolved_dependencies: List[str] = []
 
     def generate(self) -> dict:
-        """Generate the colors data."""
+        # Generate data
+        favourite_color = generate_favourite_color()
+        hair_color = generate_hair_color()
+        eyes_color = generate_eyes_color()
+
         return {
             'prop_title': 'Colors',
-            'favourite': choice(COLORS['favourite']),
-            'hair': choice(COLORS['hair']),
-            'eyes': choice(COLORS['eyes']),
+            'favourite_color': favourite_color,
+            'hair_color': hair_color,
+            'eyes_color': eyes_color,
         }
