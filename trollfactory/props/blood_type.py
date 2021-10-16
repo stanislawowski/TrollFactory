@@ -3,7 +3,7 @@
 from random import choices
 
 
-class Blood_type:
+class BloodType:
     """Blood type generation prop class."""
 
     def generate(properties: dict) -> dict:

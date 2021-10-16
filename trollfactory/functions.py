@@ -19,21 +19,15 @@ def generate_personality(
 
     if p_gender not in ['female', 'male']:
         raise InvalidGenderException(
-            str(p_gender) + ' gender is not supported by TrollFactory yet',
-        )
+            str(p_gender) + ' gender is not supported by TrollFactory yet')
 
     if p_dataset not in langs.__all__:
         raise UnsupportedDatasetException(
-            str(p_dataset) + ' dataset is not supported by TrollFactory yet',
-        )
+            str(p_dataset) + ' dataset is not supported by TrollFactory yet')
 
     properties_static = {
-        'language': {
-            'language': p_dataset
-        },
-        'gender': {
-            'gender': p_gender
-        }
+        'language': {'language': p_dataset},
+        'gender': {'gender': p_gender},
     }
 
     properties = [i for i in props.__all__]
@@ -43,8 +37,9 @@ def generate_personality(
 
     while len(properties) > 0:
         for prop_name in properties:
-            prop = modules['trollfactory.props.' + prop_name]
-            prop_class = getattr(prop, prop_name.capitalize())
+            prop_class = getattr(modules['trollfactory.props.'+prop_name],
+                                 ''.join([i.capitalize()
+                                          for i in prop_name.split('_')]))
 
             missing_dependencies = False
 
@@ -54,8 +49,7 @@ def generate_personality(
                         missing_dependencies = True
                     if dependency not in props.__all__:
                         raise UnmetDependenciesException(
-                            'Unmet dependency: ' + dependency,
-                        )
+                            'Unmet dependency: ' + dependency)
             if missing_dependencies:
                 continue
 

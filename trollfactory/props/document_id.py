@@ -4,7 +4,7 @@ from random import randint
 from datetime import date
 
 
-class Document_id:
+class DocumentId:
     """ID document data generation prop class."""
 
     dependencies = ['language']
