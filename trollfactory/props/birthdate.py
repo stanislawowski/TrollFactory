@@ -1,14 +1,12 @@
 """Birthdate generation prop for TrollFactory."""
 
 from typing import List, TypedDict
-from calendar import monthrange
 from random import choice, randint
-from datetime import datetime, date
+from calendar import monthrange
+from datetime import date
 
 
 class ZodiacSign(TypedDict):
-    """Type hint for zodiac sign data."""
-
     name: str
     day_s: int
     month_s: int
@@ -35,39 +33,54 @@ ZODIAC_SIGNS: List[ZodiacSign] = [
 ]
 
 
-class Birthdate:
-    """Birthdate generation prop class."""
+def generate_birth_year() -> int:
+    current_year = date.today().year
+    return randint(current_year-80, current_year)
 
+
+def generate_birth_month() -> int:
+    return randint(1, 12)
+
+
+def generate_birth_day(birth_year: int, birth_month: int) -> int:
+    birth_day = choice(monthrange(birth_year, birth_month))
+    return birth_day if birth_day != 0 else 1
+
+
+def generate_age(birth_year: int, birth_month: int, birth_day: int) -> int:
+    today = date.today()
+    return today.year - birth_year - ((today.month, today.day)
+                                      < (birth_month, birth_day))
+
+
+def generate_zodiac(birth_month: int, birth_day: int) -> str:
+    zodiac = 'Unknown'
+    for sign in ZODIAC_SIGNS:
+        if (birth_month == sign['month_s'] and birth_day > sign['day_s']) or (
+                birth_month == sign['month_e'] and birth_day < sign['day_e']):
+            zodiac = sign['name']
+            break
+    return zodiac
+
+
+class Birthdate:
     def __init__(self, properties: dict) -> None:
-        """Birthdate generation prop init function."""
         self.properties = properties
         self.unresolved_dependencies: List[str] = []
 
     def generate(self) -> dict:
-        """Generate the birthdate."""
-        current_year = datetime.now().year
-
-        birth_year = randint(current_year - 80, current_year)
-        birth_month = randint(1, 12)
-        birth_day = choice(monthrange(birth_year, birth_month))
-        birth_day = 1 if birth_day == 0 else birth_day
-        today = date.today()
-
-        zodiac = 'Unknown'
-        for sign in ZODIAC_SIGNS:
-            if birth_month == sign['month_s'] and birth_day > sign['day_s']:
-                zodiac = sign['name']
-                break
-            if birth_month == sign['month_e'] and birth_day < sign['day_e']:
-                zodiac = sign['name']
-                break
+        # Generate data
+        birth_year = generate_birth_year()
+        birth_month = generate_birth_month()
+        birth_day = generate_birth_day(birth_year, birth_month)
+        age = generate_age(birth_year, birth_month, birth_day)
+        zodiac = generate_zodiac(birth_month, birth_day)
 
         return {
             'prop_title': 'Birthdate',
             'birth_year': birth_year,
             'birth_month': birth_month,
             'birth_day': birth_day,
-            'age': today.year - birth_year - ((today.month, today.day)
-                                              < (birth_month, birth_day)),
+            'age': age,
             'zodiac': zodiac,
         }

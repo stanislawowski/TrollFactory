@@ -13,29 +13,40 @@ AVERAGES = {0: (5, 10, 50, 90), 1: (5, 10, 50, 90), 2: (10, 16, 80, 95),
             18: (47, 88, 155, 190), 19: (50, 120, 156, 205)}
 
 
-class Measurements:
-    """Measurements generation prop class."""
+def generate_weight(age: int) -> int:
+    if age in range(0, 20):
+        return randint(AVERAGES[age][0], AVERAGES[age][1])
+    return randint(50, 120)
 
+
+def generate_height(age: int) -> int:
+    if age in range(0, 20):
+        return randint(AVERAGES[age][2], AVERAGES[age][3])
+    return randint(156, 205)
+
+
+def generate_bmi(weight: int, height: int) -> str:
+    return '{:.2f}'.format(weight / ((height / 100) * (height / 100)))
+
+
+class Measurements:
     def __init__(self, properties: dict) -> None:
-        """Measurements generation prop init function."""
         self.properties = properties
         self.unresolved_dependencies = ['birthdate'] if 'birthdate' not in \
             properties else []
 
     def generate(self) -> dict:
-        """Generate the measurements."""
+        # Used properties
         age = self.properties['birthdate']['age']
 
-        if age in range(0, 20):
-            weight = randint(AVERAGES[age][0], AVERAGES[age][1])
-            height = randint(AVERAGES[age][2], AVERAGES[age][3])
-        else:
-            weight = randint(50, 120)
-            height = randint(156, 205)
+        # Generate data
+        weight = generate_weight(age)
+        height = generate_height(age)
+        bmi = generate_bmi(weight, height)
 
         return {
             'prop_title': 'Measurements',
             'weight': weight,
             'height': height,
-            'bmi': "{:.2f}".format(weight / ((height / 100) * (height / 100))),
+            'bmi': bmi,
         }

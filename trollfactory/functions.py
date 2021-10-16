@@ -48,7 +48,9 @@ def generate_personality(
                         raise UnmetDependenciesException(
                             'Unmet dependency: '+dependency)
             else:
-                properties_static[prop_name] = prop_class.generate()
+                generated_property = prop_class.generate()
+                if generated_property:
+                    properties_static[prop_name] = generated_property
                 properties.remove(prop_name)
 
     return properties_static
