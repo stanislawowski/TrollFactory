@@ -93,7 +93,6 @@ class Car:
         """Generate the car data."""
         language = self.properties['language']['language']
         age = self.properties['birthdate']['age']
-        country_state = self.properties['address']['country_state']
 
         data = loads(get_data(__package__, 'langs/'+language+'/car-list.json'))
 
@@ -123,6 +122,8 @@ class Car:
         if language == 'english_us':
             plate_number = 'Not available in US yet!'
         else:
+            # it should be moved after finishing the english_us dataset
+            country_state = self.properties['address']['country_state']
             plate_number = generate_plate(language, country_state)
 
         return {
