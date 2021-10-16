@@ -1,13 +1,13 @@
+"""Exceptions used by the TrollFactory cli and library."""
+
+
 class UnmetDependenciesException(Exception):
-    def __init__(self, message):
-        self.message = message
+    """An exception raised when there is an unresolved prop dependency."""
 
 
 class UnsupportedDatasetException(Exception):
-    def __init__(self, message):
-        self.message = message
+    """An exception raised when a requested dataset is not supported."""
 
 
 class InvalidGenderException(Exception):
-    def __init__(self, message):
-        self.message = message
+    """An exception raised when a requested gender is not supported."""
