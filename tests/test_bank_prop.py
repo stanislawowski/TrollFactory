@@ -1,8 +1,8 @@
 from trollfactory.props.bank import Bank
 from schwifty import IBAN
 
-generated_bank_info = Bank.generate({'language': {'language': 'polish'},
-                                     'birthdate': {'age': 15}})
+generated_bank_info = Bank({'language': {'language': 'polish'},
+                            'birthdate': {'age': 15}}).generate()
 
 
 def test_bank_info_generated():
@@ -30,5 +30,5 @@ def test_valid_pko_iban():
 
 
 def test_no_account_under_13():
-    assert Bank.generate({'language': {'language': 'polish'},
-                          'birthdate': {'age': 12}})['iban'] is None
+    assert Bank({'language': {'language': 'polish'}, 'birthdate': {'age': 12}}
+                ).generate()['iban'] is None

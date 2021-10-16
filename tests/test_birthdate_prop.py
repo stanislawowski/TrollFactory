@@ -2,7 +2,7 @@ from datetime import datetime, date
 from calendar import monthrange
 from trollfactory.props.birthdate import Birthdate
 
-generated_birthdate = Birthdate.generate({})
+generated_birthdate = Birthdate({}).generate()
 
 
 def test_birthdate_generated():
