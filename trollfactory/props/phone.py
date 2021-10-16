@@ -9,33 +9,30 @@ from pkgutil import get_data
 class Phone:
     """Phone data generation prop class."""
 
-    depedencies = ['address']
+    def __init__(self, properties: dict) -> None:
+        """Phone data generation prop init function."""
+        self.properties = properties
+        self.unresolved_dependencies = ['address'] if 'address' not in \
+            properties else []
 
-    def generate(properties: dict) -> dict:
+    def generate(self) -> dict:
         """Generate the phone data."""
-        data = loads(get_data(
-            __package__,
-            'langs/' + properties['language']['language'] + '/phones.json',
-        ))
+        language = self.properties['language']['language']
+
+        data = loads(get_data(__package__, 'langs/'+language+'/phones.json'))
         phone = choice(data)
 
-        if properties['language']['language'] == 'polish':
+        if language == 'polish':
             prefixes = loads(get_data(
                 __package__,
-                'langs/polish/phone-prefixes.json',
-            ))
-
+                'langs/polish/phone-prefixes.json'))
             phone_operator, phone_prefixes = choice(list(prefixes.items()))
-            phone_number = (
-                '+48'
-                + choice(phone_prefixes)
-                + "".join([str(randint(0, 9)) for i in range(6)])
-            )
+            phone_number = ('+48' + choice(phone_prefixes)
+                            + "".join([str(randint(0, 9)) for i in range(6)]))
 
-        elif properties['language']['language'] == 'english_us':
+        elif language == 'english_us':
             phone_operator = choice([
-                'AT&T', 'T-Mobile', 'Verizon', 'Mint Mobile',
-            ])
+                'AT&T', 'T-Mobile', 'Verizon', 'Mint Mobile'])
             phone_number = 'Not available in US yet!'
 
         return {
