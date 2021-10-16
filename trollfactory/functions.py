@@ -39,22 +39,16 @@ def generate_personality(
         for prop_name in properties:
             prop_class = getattr(modules['trollfactory.props.'+prop_name],
                                  ''.join([i.capitalize()
-                                          for i in prop_name.split('_')]))
+                                          for i in prop_name.split('_')]))(
+                                          properties_static)
 
-            missing_dependencies = False
-
-            if hasattr(prop_class, 'dependencies'):
-                for dependency in prop_class.dependencies:
-                    if dependency not in properties_static.keys():
-                        missing_dependencies = True
+            if len(prop_class.unresolved_dependencies):
+                for dependency in prop_class.unresolved_dependencies:
                     if dependency not in props.__all__:
                         raise UnmetDependenciesException(
-                            'Unmet dependency: ' + dependency)
-            if missing_dependencies:
-                continue
-
-            prop_attrs = prop_class.generate(properties_static)
-            properties_static[prop_name] = prop_attrs
-            properties.remove(prop_name)
+                            'Unmet dependency: '+dependency)
+            else:
+                properties_static[prop_name] = prop_class.generate()
+                properties.remove(prop_name)
 
     return properties_static

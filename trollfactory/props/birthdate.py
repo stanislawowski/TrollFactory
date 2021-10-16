@@ -1,10 +1,22 @@
 """Birthdate generation prop for TrollFactory."""
 
+from typing import List, TypedDict
 from calendar import monthrange
 from random import choice, randint
 from datetime import datetime, date
 
-ZODIAC_SIGNS = [
+
+class ZodiacSign(TypedDict):
+    """Type hint for zodiac sign data."""
+
+    name: str
+    day_s: int
+    month_s: int
+    day_e: int
+    month_e: int
+
+
+ZODIAC_SIGNS: List[ZodiacSign] = [
     {'name': 'Aries', 'day_s': 18, 'month_s': 4, 'day_e': 13, 'month_e': 5},
     {'name': 'Taurus', 'day_s': 13, 'month_s': 5, 'day_e': 21, 'month_e': 6},
     {'name': 'Gemini', 'day_s': 21, 'month_s': 6, 'day_e': 20, 'month_e': 7},
@@ -26,7 +38,12 @@ ZODIAC_SIGNS = [
 class Birthdate:
     """Birthdate generation prop class."""
 
-    def generate(properties: dict) -> dict:
+    def __init__(self, properties: dict) -> None:
+        """Birthdate generation prop init function."""
+        self.properties = properties
+        self.unresolved_dependencies: List[str] = []
+
+    def generate(self) -> dict:
         """Generate the birthdate."""
         current_year = datetime.now().year
 
@@ -50,6 +67,7 @@ class Birthdate:
             'birth_year': birth_year,
             'birth_month': birth_month,
             'birth_day': birth_day,
-            'age': today.year - birth_year - ((today.month, today.day) < (birth_month, birth_day)),
+            'age': today.year - birth_year - ((today.month, today.day)
+                                              < (birth_month, birth_day)),
             'zodiac': zodiac,
         }

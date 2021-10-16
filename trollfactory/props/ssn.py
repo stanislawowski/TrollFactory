@@ -7,24 +7,29 @@ from datetime import datetime
 class Ssn:
     """SSN generation prop class."""
 
-    dependencies = ['birthdate', 'language']
+    def __init__(self, properties: dict) -> None:
+        """Social Security number generation prop init function."""
+        self.properties = properties
+        self.unresolved_dependencies = []
 
-    def generate(properties: dict) -> dict:
+        for dependency in ['birthdate', 'language']:
+            if dependency not in self.properties:
+                self.unresolved_dependencies.append(dependency)
+
+    def generate(self) -> dict:
         """Generate the Social Security number."""
-        if properties['language']['language'] == 'english_us':
-            return {
-                'prop_title': 'SSN',
-                'ssn': 'Not available in US yet!',
-            }
+        language = self.properties['language']['language']
+        gender = self.properties['gender']['gender']
+        birth_year = self.properties['birthdate']['birth_year']
+        birth_month = self.properties['birthdate']['birth_month']
+        birth_day = self.properties['birthdate']['birth_day']
 
-        if properties['language']['language'] == 'polish':
-            gender = properties['gender']['gender']
+        if language == 'english_us':
+            return {'prop_title': 'SSN', 'ssn': 'Not available in US yet!'}
 
+        if language == 'polish':
             date = list(map(int, str(int(datetime(
-                properties['birthdate']['birth_year'],
-                properties['birthdate']['birth_month'],
-                properties['birthdate']['birth_day'],
-            ).strftime('%Y%m%d')))))
+                birth_year, birth_month, birth_day).strftime('%Y%m%d')))))
 
             date[4] += 2 if int(date[0]) == 2 else 0
 
@@ -36,20 +41,23 @@ class Ssn:
             pesel[9] = 0 if gender == 'female' else 1
 
             # checksum
-            pesel.append((
-                9 * pesel[0] +
-                7 * pesel[1] +
-                3 * pesel[2] +
-                pesel[3] +
-                9 * pesel[4] +
-                7 * pesel[5] +
-                3 * pesel[6] +
-                pesel[7] +
-                9 * pesel[8] +
-                7 * pesel[9]
-            ) % 10)
+            pesel.append((9 * pesel[0]
+                          + 7 * pesel[1]
+                          + 3 * pesel[2]
+                          + pesel[3]
+                          + 9 * pesel[4]
+                          + 7 * pesel[5]
+                          + 3 * pesel[6]
+                          + pesel[7]
+                          + 9 * pesel[8]
+                          + 7 * pesel[9]) % 10)
 
             return {
                 'prop_title': 'SSN',
                 'pesel': ''.join(map(str, pesel)),
             }
+
+        return {
+            'prop_title': 'SSN',
+            'ssn': None,
+        }

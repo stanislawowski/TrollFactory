@@ -4,20 +4,23 @@ from random import choice, randint
 from json import loads
 from pkgutil import get_data
 
-COUNTRY_CODES = {
-    'polish': 'PL',
-    'english_us': 'US',
-}
+COUNTRY_CODES = {'polish': 'PL', 'english_us': 'US'}
 
 
 class Address:
     """Address generation prop class."""
 
-    depedencies = ["language"]
+    def __init__(self, properties: dict) -> None:
+        """Address generation prop init function."""
+        self.properties = properties
+        self.unresolved_dependencies = ['language'] if 'language' not in \
+            properties else []
 
-    def generate(properties: dict) -> dict:
+    def generate(self) -> dict:
         """Generate the address."""
-        if properties['language']['language'] == 'english_us':
+        language = self.properties['language']['language']
+
+        if language == 'english_us':
             return {
                 'prop_title': 'Address',
                 'country_code': 'US',
@@ -26,7 +29,7 @@ class Address:
 
         region = choice(loads(get_data(
             __package__,
-            'langs/' + properties['language']['language'] + '/cities.json',
+            'langs/'+self.properties['language']['language']+'/cities.json',
         )))
 
         country_state = region['region_name']
@@ -41,7 +44,7 @@ class Address:
 
         return {
             'prop_title': 'Address',
-            'country_code': COUNTRY_CODES[properties['language']['language']],
+            'country_code': COUNTRY_CODES[language],
             'country_state': country_state,
             'country_city': city['name'],
             'city_postcode': city['postcode'],
