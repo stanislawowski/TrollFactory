@@ -2,9 +2,9 @@ from trollfactory.props.car import Car
 
 CARS_FOR_TEENAGERS = ['Aixam', 'Ligier', 'Microcar', 'Chatenet']
 
-generated_car = Car.generate({'address': {'country_state': 'Łódzkie'},
-                              'birthdate': {'age': 20},
-                              'language': {'language': 'polish'}})
+generated_car = Car({'address': {'country_state': 'Łódzkie'},
+                     'birthdate': {'age': 20},
+                     'language': {'language': 'polish'}}).generate()
 
 
 def test_car_generated():
@@ -28,13 +28,12 @@ def test_car_generation_generated():
 
 
 def test_car_for_teenager():
-    assert Car.generate({'address': {'country_state': 'Łódzkie'},
-                         'birthdate': {'age': 15},
-                         'language': {'language': 'polish'}}
-                        )['brand'] in CARS_FOR_TEENAGERS
+    assert Car({'address': {'country_state': 'Łódzkie'},
+                'birthdate': {'age': 15}, 'language': {'language': 'polish'}}
+               ).generate()['brand'] in CARS_FOR_TEENAGERS
 
 
 def test_no_car_under_14():
-    assert Car.generate({'address': {'country_state': 'Łódzkie'},
-                         'birthdate': {'age': 13},
-                         'language': {'language': 'polish'}})['car'] is None
+    assert Car({'address': {'country_state': 'Łódzkie'},
+                'birthdate': {'age': 13}, 'language': {'language': 'polish'}}
+               ).generate()['car'] is None

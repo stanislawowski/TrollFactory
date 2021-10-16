@@ -1,7 +1,7 @@
 from re import match
 from trollfactory.props.address import Address
 
-generated_address = Address.generate({'language': {'language': 'polish'}})
+generated_address = Address({'language': {'language': 'polish'}}).generate()
 
 
 def test_address_generated():
