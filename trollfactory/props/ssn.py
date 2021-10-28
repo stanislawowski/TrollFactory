@@ -8,12 +8,12 @@ from datetime import datetime
 def generate_ssn(language: str, gender: str, birth_year: int, birth_month: int,
                  birth_day: int) -> Optional[str]:
     if language == 'polish':
-        date = list(map(int, str(int(datetime(
+        date: list[int] = list(map(int, str(int(datetime(
             birth_year, birth_month, birth_day).strftime('%Y%m%d')))))
 
         date[4] += 2 if int(date[0]) == 2 else 0
 
-        pesel = date[2:]
+        pesel: list[int] = date[2:]
 
         while len(pesel) < 10:
             pesel.append(randint(0, 9))
@@ -32,27 +32,27 @@ def generate_ssn(language: str, gender: str, birth_year: int, birth_month: int,
 class Ssn:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies = []
+        self.unresolved_dependencies: list[str] = []
 
         for dependency in ['birthdate', 'language']:
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> Optional[dict]:
+    def generate(self) -> Optional[dict[str, Optional[str]]]:
         # Used properties
-        language = self.properties['language']['language']
-        gender = self.properties['gender']['gender']
-        birth_year = self.properties['birthdate']['birth_year']
-        birth_month = self.properties['birthdate']['birth_month']
-        birth_day = self.properties['birthdate']['birth_day']
+        language: str = self.properties['language']['language']
+        gender: str = self.properties['gender']['gender']
+        birth_year: int = self.properties['birthdate']['birth_year']
+        birth_month: int = self.properties['birthdate']['birth_month']
+        birth_day: int = self.properties['birthdate']['birth_day']
 
         # TODO: finish the english_us dataset and remove this
         if language == 'english_us':
             return None
 
         # Generate data
-        ssn = generate_ssn(language, gender, birth_year, birth_month,
-                           birth_day)
+        ssn: Optional[str] = generate_ssn(language, gender, birth_year,
+                                          birth_month, birth_day)
 
         return {
             'prop_title': 'SSN',

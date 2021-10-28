@@ -1,13 +1,14 @@
 """Address generation prop for TrollFactory."""
 
 from random import choice, randint
+from typing import Any
 from json import loads
 from pkgutil import get_data
 
-COUNTRY_CODES = {'polish': 'PL', 'english_us': 'US'}
+COUNTRY_CODES: dict[str, str] = {'polish': 'PL', 'english_us': 'US'}
 
 
-def generate_region(language: str) -> dict:
+def generate_region(language: str) -> dict[str, Any]:
     return choice(loads(get_data(
         __package__, 'langs/'+language+'/cities.json')))
 
@@ -16,9 +17,9 @@ def generate_country_state(region: dict) -> str:
     return region['region_name']
 
 
-def generate_city(region: dict) -> dict:
+def generate_city(region: dict) -> dict[str, Any]:
     while True:
-        city = choice(region['cities'])
+        city: dict[str, Any] = choice(region['cities'])
         # check if the city contains any streets
         if 'streets' in city and len(city['streets']):
             return city
@@ -56,28 +57,28 @@ def generate_street_number() -> int:
 class Address:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies = ['language'] if 'language' not in \
-            properties else []
+        self.unresolved_dependencies: list[str] = ['language'] if 'language' \
+            not in properties else []
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, Any]:
         # Used properties
-        language = self.properties['language']['language']
+        language: str = self.properties['language']['language']
 
         # TODO: finish the english_us dataset and remove this
         if language == 'english_us':
             return {'prop_title': 'Address', 'country_code': 'US'}
 
         # Generate data
-        region = generate_region(language)
-        country_state = generate_country_state(region)
-        city = generate_city(region)
-        city_street = generate_city_street(city)
-        country_code = generate_country_code(language)
-        country_city = generate_country_city(city)
-        city_postcode = generate_city_postcode(city)
-        city_latitude = generate_city_latitude(city)
-        city_longitude = generate_city_longitude(city)
-        street_number = generate_street_number()
+        region: dict[str, Any] = generate_region(language)
+        country_state: str = generate_country_state(region)
+        city: dict[str, Any] = generate_city(region)
+        city_street: str = generate_city_street(city)
+        country_code: str = generate_country_code(language)
+        country_city: str = generate_country_city(city)
+        city_postcode: str = generate_city_postcode(city)
+        city_latitude: float = generate_city_latitude(city)
+        city_longitude: float = generate_city_longitude(city)
+        street_number: int = generate_street_number()
 
         return {
             'prop_title': 'Address',
