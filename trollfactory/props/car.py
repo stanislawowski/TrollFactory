@@ -2,17 +2,17 @@
 
 from random import choice, choices, randint
 from pkgutil import get_data
-from typing import Optional
+from typing import Optional, Any
 from json import loads
 
 
 def generate_plate_number(language: str, country_code: str,
                           country_state: str) -> Optional[str]:
-    prefix = choice(loads(get_data(
+    prefix: str = choice(loads(get_data(
         __package__, 'langs/'+language+'/car-plate-prefixes.json',
     ))[country_state])
 
-    letters = 'ACEFGHJKLMNPRSTUWXY'
+    letters: str = 'ACEFGHJKLMNPRSTUWXY'
 
     if len(prefix) == 2:
         resource = randint(1, 5)
@@ -70,7 +70,7 @@ def generate_plate_number(language: str, country_code: str,
     return prefix + ' ' + plate_resource
 
 
-def generate_brand(age: int, dataset: dict) -> Optional[dict]:
+def generate_brand(age: int, dataset: dict) -> Optional[dict[str, Any]]:
     if age in range(14, 17):
         return None
     return choices(dataset, [i['brand_weight'] for i in dataset])[0]
@@ -82,16 +82,16 @@ def generate_brand_name(age: int, brand: Optional[dict]) -> str:
     return brand['brand_name']
 
 
-def generate_model(brand_name: str, dataset: dict) -> dict:
+def generate_model(brand_name: str, dataset: dict) -> dict[str, Any]:
     return choice([i for i in dataset if i['brand_name'] == brand_name
                    ][0]['models'])
 
 
-def generate_model_name(model: dict) -> str:
+def generate_model_name(model: dict[str, Any]) -> str:
     return model['name']
 
 
-def generate_generation_name(age: int, model: dict) -> Optional[str]:
+def generate_generation_name(age: int, model: dict[str, Any]) -> Optional[str]:
     if age in range(14, 17):
         return None
     return None if 'generations' not in model else choices(
@@ -109,7 +109,7 @@ class Car:
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> Optional[dict]:
+    def generate(self) -> Optional[dict[str, Optional[str]]]:
         # Used properties
         language = self.properties['language']['language']
         age = self.properties['birthdate']['age']
@@ -124,16 +124,16 @@ class Car:
             return None
 
         # Load dataset
-        dataset = loads(get_data(__package__, 'langs/'+language+'/car-list.json'))
-
+        dataset: dict = loads(get_data(__package__,
+                                       'langs/'+language+'/car-list.json'))
         # Generate data
-        plate_number = generate_plate_number(language, country_code,
-                                             country_state)
-        brand = generate_brand(age, dataset)
-        brand_name = generate_brand_name(age, brand)
-        model = generate_model(brand_name, dataset)
-        model_name = generate_model_name(model)
-        generation_name = generate_generation_name(age, model)
+        plate_number: Optional[str] = generate_plate_number(
+            language, country_code, country_state)
+        brand: Optional[dict[str, Any]] = generate_brand(age, dataset)
+        brand_name: str = generate_brand_name(age, brand)
+        model: dict[str, Any] = generate_model(brand_name, dataset)
+        model_name: str = generate_model_name(model)
+        generation_name: Optional[str] = generate_generation_name(age, model)
 
         return {
             'prop_title': 'Car',

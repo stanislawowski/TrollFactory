@@ -1,6 +1,6 @@
 """Birthdate generation prop for TrollFactory."""
 
-from typing import List, TypedDict
+from typing import TypedDict, Any
 from random import choice, randint
 from calendar import monthrange
 from datetime import date
@@ -14,7 +14,7 @@ class ZodiacSign(TypedDict):
     month_e: int
 
 
-ZODIAC_SIGNS: List[ZodiacSign] = [
+ZODIAC_SIGNS: list[ZodiacSign] = [
     {'name': 'Aries', 'day_s': 18, 'month_s': 4, 'day_e': 13, 'month_e': 5},
     {'name': 'Taurus', 'day_s': 13, 'month_s': 5, 'day_e': 21, 'month_e': 6},
     {'name': 'Gemini', 'day_s': 21, 'month_s': 6, 'day_e': 20, 'month_e': 7},
@@ -34,7 +34,7 @@ ZODIAC_SIGNS: List[ZodiacSign] = [
 
 
 def generate_birth_year() -> int:
-    current_year = date.today().year
+    current_year: int = date.today().year
     return randint(current_year-80, current_year)
 
 
@@ -43,18 +43,18 @@ def generate_birth_month() -> int:
 
 
 def generate_birth_day(birth_year: int, birth_month: int) -> int:
-    birth_day = choice(monthrange(birth_year, birth_month))
+    birth_day: int = choice(monthrange(birth_year, birth_month))
     return birth_day if birth_day != 0 else 1
 
 
 def generate_age(birth_year: int, birth_month: int, birth_day: int) -> int:
-    today = date.today()
+    today: date = date.today()
     return today.year - birth_year - ((today.month, today.day)
                                       < (birth_month, birth_day))
 
 
 def generate_zodiac(birth_month: int, birth_day: int) -> str:
-    zodiac = 'Unknown'
+    zodiac: str = 'Unknown'
     for sign in ZODIAC_SIGNS:
         if (birth_month == sign['month_s'] and birth_day > sign['day_s']) or (
                 birth_month == sign['month_e'] and birth_day < sign['day_e']):
@@ -66,15 +66,15 @@ def generate_zodiac(birth_month: int, birth_day: int) -> str:
 class Birthdate:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: List[str] = []
+        self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, Any]:
         # Generate data
-        birth_year = generate_birth_year()
-        birth_month = generate_birth_month()
-        birth_day = generate_birth_day(birth_year, birth_month)
-        age = generate_age(birth_year, birth_month, birth_day)
-        zodiac = generate_zodiac(birth_month, birth_day)
+        birth_year: int = generate_birth_year()
+        birth_month: int = generate_birth_month()
+        birth_day: int = generate_birth_day(birth_year, birth_month)
+        age: int = generate_age(birth_year, birth_month, birth_day)
+        zodiac: str = generate_zodiac(birth_month, birth_day)
 
         return {
             'prop_title': 'Birthdate',

@@ -2,11 +2,11 @@
 
 from setuptools import setup
 
-VERSION = '2.1.0'
-DESCRIPTION = 'Fake personality generator for the 21st century!'
+VERSION: str = '2.1.0'
+DESCRIPTION: str = 'Fake personality generator for the 21st century!'
 
 with open('README.md', encoding='utf-8') as file:
-    LONG_DESCRIPTION = file.read()
+    LONG_DESCRIPTION: str = file.read()
 
 setup(
     name='trollfactory',

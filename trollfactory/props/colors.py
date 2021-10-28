@@ -1,9 +1,8 @@
 """Colors data generation prop for TrollFactory."""
 
-from typing import List
 from random import choice
 
-COLORS = {
+COLORS: dict[str, list[str]] = {
     'favourite': ['black', 'white', 'grey', 'red', 'blue', 'navy', 'green',
                   'pink', 'white', 'purple', 'yellow', 'green', 'orange'],
     'hair': ['blonde', 'brown', 'black', 'auburn', 'red'],
@@ -26,13 +25,13 @@ def generate_eyes_color() -> str:
 class Colors:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: List[str] = []
+        self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, str]:
         # Generate data
-        favourite_color = generate_favourite_color()
-        hair_color = generate_hair_color()
-        eyes_color = generate_eyes_color()
+        favourite_color: str = generate_favourite_color()
+        hair_color: str = generate_hair_color()
+        eyes_color: str = generate_eyes_color()
 
         return {
             'prop_title': 'Colors',

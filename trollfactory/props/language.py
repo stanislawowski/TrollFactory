@@ -1,15 +1,13 @@
 """Language generation prop for TrollFactory."""
 
-from typing import List
-
 
 class Language:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: List[str] = []
+        self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, str]:
         # Used properties
-        language = self.properties['language']['language']
+        language: str = self.properties['language']['language']
 
         return {'prop_title': 'Language', 'language': language}

@@ -1,7 +1,7 @@
 """Functions used by the TrollFactory cli and library."""
 
 from sys import modules
-from typing import Optional, List
+from typing import Optional, Any
 from trollfactory import props
 from trollfactory.props import *
 from trollfactory.props import langs
@@ -13,7 +13,7 @@ from trollfactory.exceptions import UnmetDependenciesException, \
 def generate_personality(
         p_dataset: str = 'polish',
         p_gender: str = 'female',
-        exclude_props: Optional[List[str]] = None) -> dict:
+        exclude_props: Optional[list[str]] = None) -> dict:
     """Generate a fake personality."""
     exclude_props = exclude_props or []
 
@@ -25,12 +25,12 @@ def generate_personality(
         raise UnsupportedDatasetException(
             str(p_dataset) + ' dataset is not supported by TrollFactory yet')
 
-    properties_static = {
+    properties_static: dict[str, Any] = {
         'language': {'language': p_dataset},
         'gender': {'gender': p_gender},
     }
 
-    properties = [i for i in props.__all__]
+    properties: list[str] = props.__all__[:]
 
     for prop in exclude_props:
         properties.remove(prop)
