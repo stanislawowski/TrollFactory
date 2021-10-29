@@ -35,9 +35,14 @@ def generate_phone_number(language: str,
         prefix = choice([i for i in list(loads(get_data(
             __package__, 'langs/polish/phone-prefixes.json')).items()
             ) if i[0] == phone_operator][0][1])
-        return '+48'+prefix+''.join([str(randint(0, 9)) for i in range(6)])
+        return '+48'+prefix+''.join([str(randint(0, 9)) for _ in range(6)])
+
     if language == 'english_us':
-        return None  # TODO: finish the english_us dataset and remove this
+        return ('+1' + str(randint(2, 9))
+                + ''.join([str(randint(0, 9)) for _ in range(2)])
+                + str(randint(2, 9))
+                + ''.join([str(randint(0, 9)) for _ in range(6)]))
+
     return None
 
 
