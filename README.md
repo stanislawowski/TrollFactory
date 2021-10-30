@@ -8,7 +8,7 @@
 
 **Fake personality generator for the 21st century!**
 
-## What's this?
+## About
 TrollFactory is a fairly advanced fake personality generator written in Python. It aims to generate as much data about a person as possible. At the moment it only supports Polish personalities, we're finishing US dataset soon.
 
 ## Installation
@@ -19,7 +19,6 @@ TrollFactory is available as a PyPI package: `pip3 install trollfactory`
 ### TrollFactory CLI
 The TrollFactory PyPI package also contains TrollFactory CLI. It's currently the most reliable way of using TrollFactory.<br>
 To use it, simply execute the `trollfactory` binary from your terminal emulator.
-
 
 If executed without any parameters, it will generate a personality with default options (Polish dataset, female gender).
 
@@ -43,10 +42,12 @@ The `generate_personality()` function returns a dict with generated data.
 You can access the TrollFactory web interface under [beta.trollfactory.tk](https://beta.trollfactory.tk) domain, though it may be unstable/unreliable, as it's still in beta.
 
 ## TODO
- - [x] - non-binary gender
- - [ ] - finish english_us dataset
- - [ ] - setting static properties
- - [x] - cli arguments help
- - [ ] - add more test scripts
- - [ ] - improve CC prop
- - [ ] - type hints for generated props
+-   [x] non-binary gender
+-   [ ] finish english_us dataset
+-   [ ] tests for english_us dataset
+-   [ ] setting static properties
+-   [x] cli arguments help
+-   [ ] add more test scripts
+-   [ ] improve CC prop & write test
+-   [ ] type hints for generated props
+-   [ ] docstrings
