@@ -6,14 +6,14 @@ from pkgutil import get_data
 from typing import Optional
 from json import loads
 
-EMAIL_PROVIDERS = {
+EMAIL_PROVIDERS: dict[str, list[str]] = {
     'polish': ['@niepodam.pl'],
     'english_us': ['@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com',
                    '@gustr.com', '@jourrapide.com', '@rhyta.com',
                    '@superrito.com', '@teleworm.us'],
 }
 
-EMAIL_URLS = {
+EMAIL_URLS: dict[str, str] = {
     '@niepodam.pl': 'http://niepodam.pl/users/',
     '@armyspy.com': 'http://www.fakemailgenerator.com/#/armyspy.com/',
     '@cuvox.de': 'http://www.fakemailgenerator.com/#/cuvox.de/',
@@ -26,11 +26,11 @@ EMAIL_URLS = {
     '@teleworm.us': 'http://www.fakemailgenerator.com/#/teleworm.us/',
 }
 
-TLDS = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
+TLDS: list[str] = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
 
 
 def generate_username(name: str, surname: str) -> str:
-    name = name.split(', ')[0] if ', ' in name else name
+    name: str = name.split(', ')[0] if ', ' in name else name
     return name.lower()[0] + '_' + surname.lower()
 
 
@@ -39,7 +39,7 @@ def generate_email(username: str, language: str) -> str:
 
 
 def generate_email_url(email: str, username: str) -> Optional[str]:
-    email_provider = '@' + email.split('@')[1]
+    email_provider: str = '@' + email.split('@')[1]
     if email_provider in EMAIL_URLS:
         return EMAIL_URLS[email_provider] + username
     return None
@@ -87,31 +87,31 @@ def generate_mac() -> str:
 class Online:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies = []
+        self.unresolved_dependencies: list[str] = []
 
         for dependency in ['name', 'language']:
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, Optional[str]]:
         # Used properties
-        name = self.properties['name']['name']
-        surname = self.properties['name']['surname']
-        language = self.properties['language']['language']
+        name: str = self.properties['name']['name']
+        surname: str = self.properties['name']['surname']
+        language: str = self.properties['language']['language']
 
         # Generate data
-        username = generate_username(name, surname)
-        email = generate_email(username, language)
-        domain_name = generate_domain_name(username)
-        password = generate_password()
-        setup = generate_setup(language)
-        operating_system = generate_operating_system(setup)
-        browser = generate_browser(setup)
-        user_agent = generate_user_agent(setup)
-        ipv4 = generate_ipv4()
-        ipv6 = generate_ipv6()
-        mac = generate_mac()
-        email_url = generate_email_url(email, username)
+        username: str = generate_username(name, surname)
+        email: str = generate_email(username, language)
+        domain_name: str = generate_domain_name(username)
+        password: str = generate_password()
+        setup: dict = generate_setup(language)
+        operating_system: str = generate_operating_system(setup)
+        browser: str = generate_browser(setup)
+        user_agent: str = generate_user_agent(setup)
+        ipv4: str = generate_ipv4()
+        ipv6: str = generate_ipv6()
+        mac: str = generate_mac()
+        email_url: Optional[str] = generate_email_url(email, username)
 
         return {
             'prop_title': 'Online',

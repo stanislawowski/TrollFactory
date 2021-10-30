@@ -1,16 +1,17 @@
 """TrollFactory cli functions."""
 
+from typing import Any
 from argparse import ArgumentParser, Namespace
 from datetime import datetime
 from trollfactory.functions import generate_personality
 
-TROLLFACTORY_VERSION = "2.1.0"
-DESCRIPTION = 'Fake personality generator for the 21st century!'
+TROLLFACTORY_VERSION: str = '2.1.1'
+DESCRIPTION: str = 'Fake personality generator for the 21st century!'
 
 
 def parse_arguments() -> Namespace:
     """Parse command-line arguments."""
-    parser = ArgumentParser(description=DESCRIPTION)
+    parser: ArgumentParser = ArgumentParser(description=DESCRIPTION)
 
     parser.add_argument(
         '--amount',
@@ -73,14 +74,15 @@ def print_properties(properties: dict) -> None:
 
 def main() -> None:
     """Run the cli."""
-    args = parse_arguments()
+    args: Namespace = parse_arguments()
 
     if args.version:
         print(TROLLFACTORY_VERSION)
         return
 
     for _ in range(args.amount):
-        personality = generate_personality(args.dataset, args.gender)
+        personality: dict[str, Any] = generate_personality(args.dataset,
+                                                           args.gender)
 
         if args.stdout:
             print_properties(personality)

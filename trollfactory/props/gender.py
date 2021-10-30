@@ -1,15 +1,13 @@
 """Gender generation prop for TrollFactory."""
 
-from typing import List
-
 
 class Gender:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: List[str] = []
+        self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, str]:
         # Used properties
-        gender = self.properties['gender']['gender']
+        gender: str = self.properties['gender']['gender']
 
         return {'prop_title': 'Gender', 'gender': gender}

@@ -1,27 +1,34 @@
 """Name generation prop for TrollFactory."""
 
-from typing import List
+from typing import Any
 from json import loads
 from random import choice, choices
 from pkgutil import get_data
 
 
 def generate_name(language: str, gender: str) -> str:
-    names = loads(get_data(__package__,
-                           'langs/'+language+'/names.json'))[gender]
-    return choices([i[0] for i in names], weights=[i[1] for i in names])[0]
+    names: list[list[Any]] = loads(get_data(__package__,
+                                            'langs/'+language+'/names.json')
+                                   )[gender]
+    name = choices([i[0] for i in names], weights=[i[1] for i in names])[0]
+    return choice(name.split('/'))
 
 
 def generate_surname(language: str, gender: str) -> str:
-    surname = choice(loads(get_data(__package__,
-                                    'langs/'+language+'/surnames.json')))
+    surname: str = choice(loads(get_data(__package__,
+                                         'langs/'+language+'/surnames.json')))
 
     if language == 'polish':
         if gender == 'male':
             if surname[-1] == 'a':
                 surname = surname[:-1] + 'i'
-        elif surname[-1] == 'i':
+        elif gender == 'female' and surname[-1] == 'i':
             surname = surname[:-1] + 'a'
+        elif gender == 'non-binary':
+            if surname[-1] == 'i':
+                surname = surname[:-1] + choice(['ie', 'x'])
+            elif surname.endswith('ka'):
+                surname = surname[:-1] + 'ie'
 
     return surname
 
@@ -29,16 +36,16 @@ def generate_surname(language: str, gender: str) -> str:
 class Name:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: List[str] = []
+        self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, str]:
         # Used properties
-        language = self.properties['language']['language']
-        gender = self.properties['gender']['gender']
+        language: str = self.properties['language']['language']
+        gender: str = self.properties['gender']['gender']
 
         # Generate data
-        name = generate_name(language, gender)
-        surname = generate_surname(language, gender)
+        name: str = generate_name(language, gender)
+        surname: str = generate_surname(language, gender)
 
         return {
             'prop_title': 'Name',

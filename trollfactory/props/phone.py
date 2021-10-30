@@ -35,9 +35,14 @@ def generate_phone_number(language: str,
         prefix = choice([i for i in list(loads(get_data(
             __package__, 'langs/polish/phone-prefixes.json')).items()
             ) if i[0] == phone_operator][0][1])
-        return '+48'+prefix+''.join([str(randint(0, 9)) for i in range(6)])
+        return '+48'+prefix+''.join([str(randint(0, 9)) for _ in range(6)])
+
     if language == 'english_us':
-        return None  # TODO: finish the english_us dataset and remove this
+        return ('+1' + str(randint(2, 9))
+                + ''.join([str(randint(0, 9)) for _ in range(2)])
+                + str(randint(2, 9))
+                + ''.join([str(randint(0, 9)) for _ in range(6)]))
+
     return None
 
 
@@ -64,24 +69,25 @@ def generate_phone_call_url() -> str:
 class Phone:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies = ['address'] if 'address' not in \
-            properties else []
+        self.unresolved_dependencies: list[str] = ['address'] if 'address' \
+            not in properties else []
 
-    def generate(self) -> dict:
+    def generate(self) -> dict[str, Optional[str]]:
         # Used properties
-        language = self.properties['language']['language']
+        language: str = self.properties['language']['language']
 
         # Generate data
-        phone = generate_phone(language)
-        phone_brand = generate_phone_brand(phone)
-        phone_model = generate_phone_model(phone)
-        phone_operator = generate_phone_operator(language)
-        phone_number = generate_phone_number(language, phone_operator)
-        phone_operating_system = generate_phone_operating_system(phone)
-        phone_uuid = generate_phone_uuid()
-        receive_sms_url = generate_receive_sms_url()
-        send_sms_url = generate_send_sms_url()
-        phone_call_url = generate_phone_call_url()
+        phone: dict = generate_phone(language)
+        phone_brand: str = generate_phone_brand(phone)
+        phone_model: str = generate_phone_model(phone)
+        phone_operator: Optional[str] = generate_phone_operator(language)
+        phone_number: Optional[str] = generate_phone_number(language,
+                                                            phone_operator)
+        phone_operating_system: str = generate_phone_operating_system(phone)
+        phone_uuid: str = generate_phone_uuid()
+        receive_sms_url: str = generate_receive_sms_url()
+        send_sms_url: str = generate_send_sms_url()
+        phone_call_url: str = generate_phone_call_url()
 
         return {
             'prop_title': 'Phone',

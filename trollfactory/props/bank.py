@@ -15,16 +15,16 @@ def generate_iban(bank_code: str) -> str:
 class Bank:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies = []
+        self.unresolved_dependencies: list[str] = []
 
         for dependency in ['birthdate', 'language']:
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> Optional[dict]:
+    def generate(self) -> Optional[dict[str, str]]:
         # Used properties
-        language = self.properties['language']['language']
-        age = self.properties['birthdate']['age']
+        language: str = self.properties['language']['language']
+        age: int = self.properties['birthdate']['age']
 
         # TODO: finish the english_us dataset and remove this
         if language == 'english_us':
@@ -35,10 +35,10 @@ class Bank:
             return None
 
         # Generate data
-        iban_pekao = generate_iban('12400001')
-        iban_mbank = generate_iban('11402004')
-        iban_ing = generate_iban('10501012')
-        iban_pko = generate_iban('10205561')
+        iban_pekao: str = generate_iban('12400001')
+        iban_mbank: str = generate_iban('11402004')
+        iban_ing: str = generate_iban('10501012')
+        iban_pko: str = generate_iban('10205561')
 
         return {
             'prop_title': 'Bank',
