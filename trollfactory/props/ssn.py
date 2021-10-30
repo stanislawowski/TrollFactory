@@ -18,7 +18,13 @@ def generate_ssn(language: str, gender: str, birth_year: int, birth_month: int,
         while len(pesel) < 10:
             pesel.append(randint(0, 9))
 
-        pesel[9] = 0 if gender == 'female' else 1
+        if gender == 'female':
+            pesel[9] = 0
+        elif gender == 'male':
+            pesel[9] = 1
+        else:
+            # random for non-binary people
+            pesel[9] = randint(0, 1)
 
         # checksum
         pesel.append((9 * pesel[0] + 7 * pesel[1] + 3 * pesel[2] + pesel[3]
