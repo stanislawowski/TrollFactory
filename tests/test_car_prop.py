@@ -1,3 +1,6 @@
+from sys import path as spath
+from os import path as opath
+spath.append(opath.dirname(opath.dirname(opath.abspath(__file__))))
 from trollfactory.props import car as prop
 
 DATASET = [{
@@ -14,8 +17,7 @@ DATASET = [{
 
 
 def test_generated_plate_number():
-    # TODO
-    assert prop.generate_plate_number('polish', 'PL', 'Podlaskie')[:2] in [
+    assert prop.generate_plate_number('polish', 'Podlaskie')[:2] in [
         'BI', 'BS', 'BA', 'BB', 'BG', 'BH', 'BK', 'BM', 'BW', 'BZ', 'BL']
 
 
@@ -44,14 +46,14 @@ def test_generated_generation_name():
 
 
 def test_generated_prop():
-    # TODO
     assert prop.Car({'language': {'language': 'polish'},
                      'birthdate': {'age': 20},
-                     'address': {'country_state': 'Mazowieckie', 'country_code': 'PL'}}).generate()
+                     'address': {'country_state': 'Mazowieckie'}}
+                    ).generate()
 
 
 def test_no_car_under_14():
-    # TODO
     assert prop.Car({'language': {'language': 'polish'},
                      'birthdate': {'age': 10},
-                     'address': {'country_state': 'Mazowieckie', 'country_code': 'PL'}}).generate() is None
+                     'address': {'country_state': 'Mazowieckie'}}
+                    ).generate() is None

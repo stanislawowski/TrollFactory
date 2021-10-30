@@ -1,3 +1,6 @@
+from sys import path as spath
+from os import path as opath
+spath.append(opath.dirname(opath.dirname(opath.abspath(__file__))))
 from uuid import UUID
 from trollfactory.props import phone as prop
 

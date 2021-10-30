@@ -1,3 +1,6 @@
+from sys import path as spath
+from os import path as opath
+spath.append(opath.dirname(opath.dirname(opath.abspath(__file__))))
 from trollfactory.props import address as prop
 
 region_polish = prop.generate_region('polish')
