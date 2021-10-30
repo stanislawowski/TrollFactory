@@ -6,8 +6,7 @@ from typing import Optional, Any
 from json import loads
 
 
-def generate_plate_number(language: str, country_code: str,
-                          country_state: str) -> Optional[str]:
+def generate_plate_number(language: str, country_state: str) -> Optional[str]:
     prefix: str = choice(loads(get_data(
         __package__, 'langs/'+language+'/car-plate-prefixes.json',
     ))[country_state])
@@ -113,9 +112,8 @@ class Car:
         # Used properties
         language = self.properties['language']['language']
         age = self.properties['birthdate']['age']
-        country_code = self.properties['address']['country_code']
         # TODO: finish the english_us dataset and remove this
-        if country_code == 'US':
+        if language == 'english_us':
             return None
         country_state = self.properties['address']['country_state']
 
@@ -127,8 +125,8 @@ class Car:
         dataset: dict = loads(get_data(__package__,
                                        'langs/'+language+'/car-list.json'))
         # Generate data
-        plate_number: Optional[str] = generate_plate_number(
-            language, country_code, country_state)
+        plate_number: Optional[str] = generate_plate_number(language,
+                                                            country_state)
         brand: Optional[dict[str, Any]] = generate_brand(age, dataset)
         brand_name: str = generate_brand_name(age, brand)
         model: dict[str, Any] = generate_model(brand_name, dataset)
