@@ -5,7 +5,7 @@ from argparse import ArgumentParser, Namespace
 from datetime import datetime
 from trollfactory.functions import generate_personality
 
-TROLLFACTORY_VERSION: str = '2.1.0'
+TROLLFACTORY_VERSION: str = '2.1.1'
 DESCRIPTION: str = 'Fake personality generator for the 21st century!'
 
 
