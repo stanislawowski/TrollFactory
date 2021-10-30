@@ -24,7 +24,7 @@ class Bank:
     def generate(self) -> Optional[dict[str, str]]:
         # Used properties
         language: str = self.properties['language']['language']
-        age: str = self.properties['birthdate']['age']
+        age: int = self.properties['birthdate']['age']
 
         # TODO: finish the english_us dataset and remove this
         if language == 'english_us':

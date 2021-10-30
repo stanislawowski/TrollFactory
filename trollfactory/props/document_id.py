@@ -37,9 +37,6 @@ def generate_id_number(language: str) -> Optional[str]:
 
         return ''.join(map(str, id_number))
 
-    if language == 'english_us':
-        return 'N/A'
-
     return None
 
 
@@ -48,9 +45,6 @@ def generate_expiry_date(language: str) -> Optional[str]:
         today: date = date.today()
         return (today + (date(today.year + randint(1, 9), 1, 1)
                 - date(today.year, 1, 1))).strftime("%d/%m/%Y")
-
-    if language == 'english_us':
-        return 'N/A'
 
     return None
 
@@ -64,6 +58,10 @@ class DocumentId:
     def generate(self) -> dict[str, Optional[str]]:
         # Used properties
         language: str = self.properties['language']['language']
+
+        # N/A for US
+        if language == 'english_us':
+            return None
 
         # Generate data
         id_number: Optional[str] = generate_id_number(language)

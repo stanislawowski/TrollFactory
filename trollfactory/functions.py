@@ -17,7 +17,7 @@ def generate_personality(
     """Generate a fake personality."""
     exclude_props = exclude_props or []
 
-    if p_gender not in ['female', 'male']:
+    if p_gender not in ['female', 'male', 'non-binary']:
         raise InvalidGenderException(
             str(p_gender) + ' gender is not supported by TrollFactory yet')
 

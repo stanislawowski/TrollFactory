@@ -10,7 +10,8 @@ def generate_name(language: str, gender: str) -> str:
     names: list[list[Any]] = loads(get_data(__package__,
                                             'langs/'+language+'/names.json')
                                    )[gender]
-    return choices([i[0] for i in names], weights=[i[1] for i in names])[0]
+    name = choices([i[0] for i in names], weights=[i[1] for i in names])[0]
+    return choice(name.split('/'))
 
 
 def generate_surname(language: str, gender: str) -> str:
@@ -21,8 +22,13 @@ def generate_surname(language: str, gender: str) -> str:
         if gender == 'male':
             if surname[-1] == 'a':
                 surname = surname[:-1] + 'i'
-        elif surname[-1] == 'i':
+        elif gender == 'female' and surname[-1] == 'i':
             surname = surname[:-1] + 'a'
+        elif gender == 'non-binary':
+            if surname[-1] == 'i':
+                surname = surname[:-1] + choice(['ie', 'x'])
+            elif surname.endswith('ka'):
+                surname = surname[:-1] + 'ie'
 
     return surname
 
