@@ -1,27 +1,27 @@
 """ID document data generation prop for TrollFactory."""
 
-from typing import List, Any, Optional
+from typing import Any, Optional
 from random import randint
 from datetime import date
 
 
 def generate_id_number(language: str) -> Optional[str]:
     if language == 'polish':
-        id_number: List[Any] = []
+        id_number: list[Any] = []
 
         while len(id_number) < 3:
             id_number.append(chr(randint(65, 90)))
         while len(id_number) < 9:
             id_number.append(randint(0, 9))
 
-        checksum = ((ord(id_number[0]) - 55) * 7
-                    + (ord(id_number[1]) - 55) * 3
-                    + (ord(id_number[2]) - 55)
-                    + id_number[4] * 7
-                    + id_number[5] * 3
-                    + id_number[6]
-                    + id_number[7] * 7
-                    + id_number[8] * 3)
+        checksum: int = ((ord(id_number[0]) - 55) * 7
+                         + (ord(id_number[1]) - 55) * 3
+                         + (ord(id_number[2]) - 55)
+                         + id_number[4] * 7
+                         + id_number[5] * 3
+                         + id_number[6]
+                         + id_number[7] * 7
+                         + id_number[8] * 3)
 
         id_number[3] = checksum % 10
 
@@ -37,20 +37,14 @@ def generate_id_number(language: str) -> Optional[str]:
 
         return ''.join(map(str, id_number))
 
-    if language == 'english_us':
-        return 'N/A'
-
     return None
 
 
 def generate_expiry_date(language: str) -> Optional[str]:
     if language == 'polish':
-        today = date.today()
+        today: date = date.today()
         return (today + (date(today.year + randint(1, 9), 1, 1)
                 - date(today.year, 1, 1))).strftime("%d/%m/%Y")
-
-    if language == 'english_us':
-        return 'N/A'
 
     return None
 
@@ -58,16 +52,20 @@ def generate_expiry_date(language: str) -> Optional[str]:
 class DocumentId:
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies = ['language'] if 'language' not in \
-            properties else []
+        self.unresolved_dependencies: list[str] = ['language'] if 'language' \
+            not in properties else []
 
-    def generate(self) -> Optional[dict]:
+    def generate(self) -> dict[str, Optional[str]]:
         # Used properties
-        language = self.properties['language']['language']
+        language: str = self.properties['language']['language']
+
+        # N/A for US
+        if language == 'english_us':
+            return None
 
         # Generate data
-        id_number = generate_id_number(language)
-        expiry_date = generate_expiry_date(language)
+        id_number: Optional[str] = generate_id_number(language)
+        expiry_date: Optional[str] = generate_expiry_date(language)
 
         return {
             'prop_title': 'Document - ID',
