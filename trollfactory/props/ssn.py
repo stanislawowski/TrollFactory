@@ -7,6 +7,7 @@ from datetime import datetime
 
 def generate_ssn(language: str, gender: str, birth_year: int, birth_month: int,
                  birth_day: int) -> Optional[str]:
+    """Generate a SSN."""
     if language == 'polish':
         date: list[int] = list(map(int, str(int(datetime(
             birth_year, birth_month, birth_day).strftime('%Y%m%d')))))
@@ -36,6 +37,8 @@ def generate_ssn(language: str, gender: str, birth_year: int, birth_month: int,
 
 
 class Ssn:
+    """Social Security number generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
@@ -45,6 +48,7 @@ class Ssn:
                 self.unresolved_dependencies.append(dependency)
 
     def generate(self) -> Optional[dict[str, Optional[str]]]:
+        """Generate the Social Security number."""
         # Used properties
         language: str = self.properties['language']['language']
         gender: str = self.properties['gender']['gender']

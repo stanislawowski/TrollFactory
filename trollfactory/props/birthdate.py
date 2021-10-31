@@ -7,6 +7,7 @@ from datetime import date
 
 
 class ZodiacSign(TypedDict):
+    """Zodiac sign data type hint."""
     name: str
     day_s: int
     month_s: int
@@ -34,26 +35,31 @@ ZODIAC_SIGNS: list[ZodiacSign] = [
 
 
 def generate_birth_year() -> int:
+    """Generate a birth year."""
     current_year: int = date.today().year
     return randint(current_year-80, current_year)
 
 
 def generate_birth_month() -> int:
+    """Generate a birth month."""
     return randint(1, 12)
 
 
 def generate_birth_day(birth_year: int, birth_month: int) -> int:
+    """Generate a birth day."""
     birth_day: int = choice(monthrange(birth_year, birth_month))
     return birth_day if birth_day != 0 else 1
 
 
 def generate_age(birth_year: int, birth_month: int, birth_day: int) -> int:
+    """Generate an age."""
     today: date = date.today()
     return today.year - birth_year - ((today.month, today.day)
                                       < (birth_month, birth_day))
 
 
 def generate_zodiac(birth_month: int, birth_day: int) -> str:
+    """Generate a zodiac sign."""
     zodiac: str = 'Unknown'
     for sign in ZODIAC_SIGNS:
         if (birth_month == sign['month_s'] and birth_day > sign['day_s']) or (
@@ -64,11 +70,14 @@ def generate_zodiac(birth_month: int, birth_day: int) -> str:
 
 
 class Birthdate:
+    """Birthdate generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
     def generate(self) -> dict[str, Any]:
+        """Generate the birthdate."""
         # Generate data
         birth_year: int = generate_birth_year()
         birth_month: int = generate_birth_month()

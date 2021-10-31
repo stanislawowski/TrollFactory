@@ -5,6 +5,7 @@ from random import randint
 
 
 def generate_card_number(card_type: str) -> str:
+    """Generate a CC number."""
     if card_type == 'mastercard':
         initial, rem = [5, randint(1, 5)], 16 - 2
     elif card_type == 'visa':
@@ -29,20 +30,25 @@ def generate_card_number(card_type: str) -> str:
 
 
 def generate_cvv() -> int:
+    """Generate a CVV number."""
     return randint(100, 999)
 
 
 def generate_expiry_date() -> str:
+    """Generate a CC expiry date."""
     return str(randint(1, 12)).zfill(2) + '/' + str(randint(25, 33))
 
 
 class Cc:
+    """Credit card data generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = ['birthdate'] if 'birthdate'\
             not in properties else []
 
     def generate(self) -> Optional[dict[str, Any]]:
+        """Generate the credit card data."""
         # Used properties
         age: int = self.properties['birthdate']['age']
 
