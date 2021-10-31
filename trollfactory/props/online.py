@@ -30,15 +30,18 @@ TLDS: list[str] = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
 
 
 def generate_username(name: str, surname: str) -> str:
-    name: str = name.split(', ')[0] if ', ' in name else name
+    """Generate a username."""
+    name = name.split(', ')[0] if ', ' in name else name
     return name.lower()[0] + '_' + surname.lower()
 
 
 def generate_email(username: str, language: str) -> str:
+    """Generate an e-mail address."""
     return username + choice(EMAIL_PROVIDERS[language])
 
 
 def generate_email_url(email: str, username: str) -> Optional[str]:
+    """Generate an online e-mail client URL."""
     email_provider: str = '@' + email.split('@')[1]
     if email_provider in EMAIL_URLS:
         return EMAIL_URLS[email_provider] + username
@@ -46,45 +49,56 @@ def generate_email_url(email: str, username: str) -> Optional[str]:
 
 
 def generate_domain_name(username: str) -> str:
+    """Generate a domain name."""
     return username.replace('_', '') + choice(TLDS)
 
 
 def generate_password() -> str:
+    """Generate a password."""
     return ''.join(choice(ascii_uppercase + ascii_lowercase + digits
                           ) for _ in range(16))
 
 
 def generate_setup(language: str) -> dict:
+    """Generate a dict with computer setup data."""
     return choice(loads(get_data(__package__,
                                  'langs/'+language+'/setups.json')))
 
 
 def generate_operating_system(setup: dict) -> str:
+    """Generate an operating system."""
     return setup['os']
 
 
 def generate_browser(setup: dict) -> str:
+    """Generate a web browser."""
     return setup['browser']
 
 
 def generate_user_agent(setup: dict) -> str:
+    """Generate a user-agent string."""
     return ' '.join(setup['user_agent'])
 
 
 def generate_ipv4() -> str:
+    """Generate an IPv4 address."""
     return '.'.join(str(randint(0, 255)) for _ in range(4))
 
 
 def generate_ipv6() -> str:
+    """Generate an IPv6 address."""
     return ':'.join('{:x}'.format(randint(0, 2**16 - 1)) for i in range(8))
 
 
 def generate_mac() -> str:
+    """Generate a MAC address."""
     return ("02:00:00:%02x:%02x:%02x" % (
             randint(0, 255), randint(0, 255), randint(0, 255))).upper()
 
 
 class Online:
+    """Online activity data generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
@@ -94,6 +108,7 @@ class Online:
                 self.unresolved_dependencies.append(dependency)
 
     def generate(self) -> dict[str, Optional[str]]:
+        """Generate the online activity data."""
         # Used properties
         name: str = self.properties['name']['name']
         surname: str = self.properties['name']['surname']

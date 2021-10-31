@@ -8,19 +8,23 @@ from uuid import uuid4
 
 
 def generate_phone(language: str) -> dict:
+    """Generate a dict with phone data."""
     return choice(loads(get_data(__package__,
                                  'langs/'+language+'/phones.json')))
 
 
 def generate_phone_brand(phone: dict) -> str:
+    """Generate a phone brand."""
     return phone['brand']
 
 
 def generate_phone_model(phone: dict) -> str:
+    """Generate a phone model."""
     return phone['model']
 
 
 def generate_phone_operator(language: str) -> Optional[str]:
+    """Generate a phone operator."""
     if language == 'polish':
         return choice(list(loads(get_data(
             __package__, 'langs/polish/phone-prefixes.json')).items()))[0]
@@ -31,6 +35,7 @@ def generate_phone_operator(language: str) -> Optional[str]:
 
 def generate_phone_number(language: str,
                           phone_operator: Optional[str]) -> Optional[str]:
+    """Generate a phone number."""
     if language == 'polish':
         prefix = choice([i for i in list(loads(get_data(
             __package__, 'langs/polish/phone-prefixes.json')).items()
@@ -47,32 +52,40 @@ def generate_phone_number(language: str,
 
 
 def generate_phone_operating_system(phone: dict) -> str:
+    """Generate a phone operating system."""
     return phone['os']
 
 
 def generate_phone_uuid() -> str:
+    """Generate a phone UUID."""
     return str(uuid4())
 
 
 def generate_receive_sms_url() -> str:
+    """Generate a SMS receiving service URL."""
     return 'https://freephonenum.com/receive-sms/random'
 
 
 def generate_send_sms_url() -> str:
+    """Generate a SMS sending service URL."""
     return 'https://sms.priv.pl/'
 
 
 def generate_phone_call_url() -> str:
+    """Generate a phone call service URL."""
     return 'https://freephonenum.com/phone-call'
 
 
 class Phone:
+    """Phone data generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = ['address'] if 'address' \
             not in properties else []
 
     def generate(self) -> dict[str, Optional[str]]:
+        """Generate the phone data."""
         # Used properties
         language: str = self.properties['language']['language']
 

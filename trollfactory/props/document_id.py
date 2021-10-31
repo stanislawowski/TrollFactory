@@ -6,6 +6,7 @@ from datetime import date
 
 
 def generate_id_number(language: str) -> Optional[str]:
+    """Generate an ID document number."""
     if language == 'polish':
         id_number: list[Any] = []
 
@@ -41,6 +42,7 @@ def generate_id_number(language: str) -> Optional[str]:
 
 
 def generate_expiry_date(language: str) -> Optional[str]:
+    """Generate an ID document expiry date."""
     if language == 'polish':
         today: date = date.today()
         return (today + (date(today.year + randint(1, 9), 1, 1)
@@ -50,12 +52,15 @@ def generate_expiry_date(language: str) -> Optional[str]:
 
 
 class DocumentId:
+    """ID document data generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = ['language'] if 'language' \
             not in properties else []
 
-    def generate(self) -> dict[str, Optional[str]]:
+    def generate(self) -> Optional[dict[str, Optional[str]]]:
+        """Generate the ID document data."""
         # Used properties
         language: str = self.properties['language']['language']
 
