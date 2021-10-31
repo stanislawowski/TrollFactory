@@ -18,11 +18,7 @@ def generate_country_state(region: dict) -> str:
 
 
 def generate_city(region: dict) -> dict[str, Any]:
-    while True:
-        city: dict[str, Any] = choice(region['cities'])
-        # check if the city contains any streets
-        if 'streets' in city and len(city['streets']):
-            return city
+    return choice(region['cities'])
 
 
 def generate_country_code(language: str) -> str:
