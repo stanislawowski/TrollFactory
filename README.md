@@ -18,9 +18,9 @@ TrollFactory is available as a PyPI package: `pip3 install trollfactory`
 
 ### TrollFactory CLI
 The TrollFactory PyPI package also contains TrollFactory CLI. It's currently the most reliable way of using TrollFactory.<br>
-To use it, simply execute the `trollfactory` binary from your terminal emulator.
+To use it, run the `trollfactory` binary from your terminal emulator.
 
-If executed without any parameters, it will generate a personality with default options (Polish dataset, female gender).
+If ran without any parameters, it will generate a personality with default options (Polish dataset, female gender).
 
 At the moment, you can specify a custom dataset and gender (support for other static properties is coming soon):<br>
 `trollfactory --gender male --dataset english_us`<br>
@@ -28,7 +28,7 @@ At the moment, you can specify a custom dataset and gender (support for other st
 You can also generate many personalities at once:<br>
 `trollfactory --amount 10`
 
-You can execute `trollfactory --help` to read the full help.
+You can run `trollfactory --help` to read the full help.
 
 ### Python library
 After installing the TrollFactory Python package, you can use it in your scripts.
