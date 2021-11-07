@@ -1,7 +1,18 @@
 """Credit card data generation prop for TrollFactory."""
 
-from typing import Optional, Any
+from typing import Optional, TypedDict
 from random import randint
+
+
+class CcType(TypedDict):
+    """Type hint for the credit card data property."""
+
+    prop_title: str
+    mastercard: str
+    visa: str
+    americanexpress: str
+    cvv: int
+    expiry_date: str
 
 
 def generate_card_number(card_type: str) -> str:
@@ -47,7 +58,7 @@ class Cc:
         self.unresolved_dependencies: list[str] = ['birthdate'] if 'birthdate'\
             not in properties else []
 
-    def generate(self) -> Optional[dict[str, Any]]:
+    def generate(self) -> Optional[CcType]:
         """Generate the credit card data."""
         # Used properties
         age: int = self.properties['birthdate']['age']

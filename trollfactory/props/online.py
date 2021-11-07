@@ -3,7 +3,7 @@
 from string import ascii_uppercase, ascii_lowercase, digits
 from random import choice, randint
 from pkgutil import get_data
-from typing import Optional
+from typing import Optional, TypedDict
 from json import loads
 
 EMAIL_PROVIDERS: dict[str, list[str]] = {
@@ -27,6 +27,23 @@ EMAIL_URLS: dict[str, str] = {
 }
 
 TLDS: list[str] = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
+
+
+class OnlineType(TypedDict):
+    """Type hint for the online activity data property."""
+
+    prop_title: str
+    username: str
+    email: str
+    receive_email: Optional[str]
+    domain_name: str
+    password: str
+    operating_system: str
+    browser: str
+    user_agent: str
+    ipv4: str
+    ipv6: str
+    mac: str
 
 
 def generate_username(name: str, surname: str) -> str:
@@ -107,7 +124,7 @@ class Online:
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> dict[str, Optional[str]]:
+    def generate(self) -> OnlineType:
         """Generate the online activity data."""
         # Used properties
         name: str = self.properties['name']['name']

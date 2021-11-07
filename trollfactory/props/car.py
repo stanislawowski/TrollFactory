@@ -2,8 +2,18 @@
 
 from random import choice, choices, randint
 from pkgutil import get_data
-from typing import Optional, Any
+from typing import Optional, Any, TypedDict
 from json import loads
+
+
+class CarType(TypedDict):
+    """Type hint for a car property."""
+
+    prop_title: str
+    plate_number: Optional[str]
+    brand_name: str
+    model_name: str
+    generation_name: Optional[str]
 
 
 def generate_plate_number(language: str, country_state: str) -> Optional[str]:
@@ -116,7 +126,7 @@ class Car:
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> Optional[dict[str, Optional[str]]]:
+    def generate(self) -> Optional[CarType]:
         """Generate the car data."""
         # Used properties
         language = self.properties['language']['language']

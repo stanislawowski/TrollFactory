@@ -2,9 +2,24 @@
 
 from random import choice, randint
 from pkgutil import get_data
-from typing import Optional
+from typing import Optional, TypedDict
 from json import loads
 from uuid import uuid4
+
+
+class PhoneType(TypedDict):
+    """Type hint for the phone data property."""
+
+    prop_title: str
+    phone_brand: str
+    phone_model: str
+    phone_operator: Optional[str]
+    phone_number: Optional[str]
+    phone_operating_system: str
+    receive_sms: str
+    send_sms: str
+    phone_call: str
+    phone_uuid: str
 
 
 def generate_phone(language: str) -> dict:
@@ -84,7 +99,7 @@ class Phone:
         self.unresolved_dependencies: list[str] = ['address'] if 'address' \
             not in properties else []
 
-    def generate(self) -> dict[str, Optional[str]]:
+    def generate(self) -> PhoneType:
         """Generate the phone data."""
         # Used properties
         language: str = self.properties['language']['language']

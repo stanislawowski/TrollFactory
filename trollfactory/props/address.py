@@ -1,11 +1,26 @@
 """Address generation prop for TrollFactory."""
 
 from random import choice, randint
-from typing import Any
+from typing import Any, TypedDict
 from json import loads
 from pkgutil import get_data
 
 COUNTRY_CODES: dict[str, str] = {'polish': 'PL', 'english_us': 'US'}
+
+
+class AddressType(TypedDict):
+    """Type hint for an address property."""
+
+    prop_title: str
+    country_code: str
+    country_state: str
+    country_city: str
+    city_postcode: str
+    city_street: str
+    city_latitude: float
+    city_longitude: float
+    street_number: int
+
 
 
 def generate_region(language: str) -> dict[str, Any]:
@@ -68,7 +83,7 @@ class Address:
         self.unresolved_dependencies: list[str] = ['language'] if 'language' \
             not in properties else []
 
-    def generate(self) -> dict[str, Any]:
+    def generate(self) -> AddressType:
         """Generate the address data."""
         # Used properties
         language: str = self.properties['language']['language']

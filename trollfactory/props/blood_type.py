@@ -1,6 +1,14 @@
 """Blood type generation prop for TrollFactory."""
 
 from random import choices
+from typing import TypedDict
+
+
+class BloodTypeType(TypedDict):
+    """Type hint for the blood type property."""
+
+    prop_title: str
+    blood_type: str
 
 
 def generate_blood_type() -> str:
@@ -16,7 +24,7 @@ class BloodType:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict[str, str]:
+    def generate(self) -> BloodTypeType:
         """Generate a blood type."""
         # Generate data
         blood_type: str = generate_blood_type()

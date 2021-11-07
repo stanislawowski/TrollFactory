@@ -1,8 +1,16 @@
 """ID document data generation prop for TrollFactory."""
 
-from typing import Any, Optional
+from typing import Any, Optional, TypedDict
 from random import randint
 from datetime import date
+
+
+class DocumentIdType(TypedDict):
+    """Type hint for the ID document data property."""
+
+    prop_title: str
+    id_number: Optional[str]
+    expiry_date: Optional[str]
 
 
 def generate_id_number(language: str) -> Optional[str]:
@@ -59,7 +67,7 @@ class DocumentId:
         self.unresolved_dependencies: list[str] = ['language'] if 'language' \
             not in properties else []
 
-    def generate(self) -> Optional[dict[str, Optional[str]]]:
+    def generate(self) -> Optional[DocumentIdType]:
         """Generate the ID document data."""
         # Used properties
         language: str = self.properties['language']['language']
