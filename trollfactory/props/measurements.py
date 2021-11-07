@@ -1,6 +1,6 @@
 """Measurements generation prop for TrollFactory."""
 
-from typing import Any
+from typing import TypedDict
 from random import randint
 
 AVERAGES: dict[int, tuple[int, int, int, int]] = {
@@ -12,6 +12,15 @@ AVERAGES: dict[int, tuple[int, int, int, int]] = {
     15: (42, 80, 152, 186), 16: (44, 82, 153, 189), 17: (45, 87, 154, 190),
     18: (47, 88, 155, 190), 19: (50, 120, 156, 205),
 }
+
+
+class MeasurementsType(TypedDict):
+    """Type hint for the measurements property."""
+
+    prop_title: str
+    weight: int
+    height: int
+    bmi: str
 
 
 def generate_weight(age: int) -> int:
@@ -41,7 +50,7 @@ class Measurements:
         self.unresolved_dependencies: list[str] = ['birthdate'] if 'birthdate'\
             not in properties else []
 
-    def generate(self) -> dict[str, Any]:
+    def generate(self) -> MeasurementsType:
         """Generate the measurements."""
         # Used properties
         age: int = self.properties['birthdate']['age']

@@ -25,7 +25,7 @@ def generate_personality(
         raise UnsupportedDatasetException(
             str(p_dataset) + ' dataset is not supported by TrollFactory yet')
 
-    properties_static: dict[str, Any] = {
+    properties_static: dict[str, dict[str, Any]] = {
         'language': {'language': p_dataset},
         'gender': {'gender': p_gender},
     }

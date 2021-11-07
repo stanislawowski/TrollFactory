@@ -1,6 +1,7 @@
 """Colors data generation prop for TrollFactory."""
 
 from random import choice
+from typing import TypedDict
 
 COLORS: dict[str, list[str]] = {
     'favourite': ['black', 'white', 'grey', 'red', 'blue', 'navy', 'green',
@@ -8,6 +9,15 @@ COLORS: dict[str, list[str]] = {
     'hair': ['blonde', 'brown', 'black', 'auburn', 'red'],
     'eyes': ['amber', 'blue', 'brown', 'gray', 'green', 'hazel'],
 }
+
+
+class ColorsType(TypedDict):
+    """Type hint for the colors data property."""
+
+    prop_title: str
+    favourite_color: str
+    hair_color: str
+    eyes_color: str
 
 
 def generate_favourite_color() -> str:
@@ -32,7 +42,7 @@ class Colors:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict[str, str]:
+    def generate(self) -> ColorsType:
         """Generate the colors data."""
         # Generate data
         favourite_color: str = generate_favourite_color()

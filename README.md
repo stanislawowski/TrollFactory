@@ -46,5 +46,5 @@ The `generate_personality()` function returns a dict with generated data.
 -   [x] cli arguments help
 -   [x] add more test scripts
 -   [ ] improve CC prop & write test
--   [ ] type hints for generated props
+-   [x] type hints for generated props
 -   [x] docstrings

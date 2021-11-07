@@ -1,6 +1,6 @@
 """Birthdate generation prop for TrollFactory."""
 
-from typing import TypedDict, Any
+from typing import TypedDict
 from random import choice, randint
 from calendar import monthrange
 from datetime import date
@@ -32,6 +32,17 @@ ZODIAC_SIGNS: list[ZodiacSign] = [
     {'name': 'Aquarius', 'day_s': 16, 'month_s': 2, 'day_e': 11, 'month_e': 3},
     {'name': 'Pisces', 'day_s': 11, 'month_s': 3, 'day_e': 18, 'month_e': 4},
 ]
+
+
+class BirthdateType(TypedDict):
+    """Type hint for the birthdate property."""
+
+    prop_title: str
+    birth_year: int
+    birth_month: int
+    birth_day: int
+    age: int
+    zodiac: str
 
 
 def generate_birth_year() -> int:
@@ -76,7 +87,7 @@ class Birthdate:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
-    def generate(self) -> dict[str, Any]:
+    def generate(self) -> BirthdateType:
         """Generate the birthdate."""
         # Generate data
         birth_year: int = generate_birth_year()
