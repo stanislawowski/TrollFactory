@@ -48,3 +48,4 @@ The `generate_personality()` function returns a dict with generated data.
 -   [ ] improve CC prop & write test
 -   [x] type hints for generated props
 -   [x] docstrings
+-   [ ] split datasets into separate modules
