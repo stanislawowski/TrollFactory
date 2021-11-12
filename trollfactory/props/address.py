@@ -22,7 +22,6 @@ class AddressType(TypedDict):
     street_number: int
 
 
-
 def generate_region(language: str) -> dict[str, Any]:
     """Generate a dict with region data."""
     return choice(loads(get_data(
