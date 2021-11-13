@@ -3,11 +3,11 @@
 from random import choice
 from typing import TypedDict
 
-COLORS: dict[str, list[str]] = {
-    'favourite': ['black', 'white', 'grey', 'red', 'blue', 'navy', 'green',
-                  'pink', 'white', 'purple', 'yellow', 'green', 'orange'],
-    'hair': ['blonde', 'brown', 'black', 'auburn', 'red'],
-    'eyes': ['amber', 'blue', 'brown', 'gray', 'green', 'hazel'],
+COLORS: dict[str, tuple[str]] = {
+    'favourite': ('black', 'white', 'grey', 'red', 'blue', 'navy', 'green',
+                  'pink', 'white', 'purple', 'yellow', 'green', 'orange'),
+    'hair': ('blonde', 'brown', 'black', 'auburn', 'red'),
+    'eyes': ('amber', 'blue', 'brown', 'gray', 'green', 'hazel'),
 }
 
 
@@ -40,7 +40,7 @@ class Colors:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: list[str] = []
+        self.unresolved_dependencies: tuple[str] = ()
 
     def generate(self) -> ColorsType:
         """Generate the colors data."""

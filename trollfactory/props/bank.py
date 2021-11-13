@@ -30,7 +30,7 @@ class Bank:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
-        for dependency in ['birthdate', 'language']:
+        for dependency in ('birthdate', 'language'):
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 

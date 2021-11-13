@@ -13,8 +13,8 @@ class BloodTypeType(TypedDict):
 
 def generate_blood_type() -> str:
     """Generate a blood type."""
-    return choices(['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'],
-                   weights=[35, 13, 30, 8, 8, 2, 2, 1])[0]
+    return choices(('O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'),
+                   weights=(35, 13, 30, 8, 8, 2, 2, 1))[0]
 
 
 class BloodType:
@@ -22,7 +22,7 @@ class BloodType:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: list[str] = []
+        self.unresolved_dependencies: tuple[str] = ()
 
     def generate(self) -> BloodTypeType:
         """Generate a blood type."""

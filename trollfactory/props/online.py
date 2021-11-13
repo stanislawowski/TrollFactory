@@ -6,11 +6,11 @@ from pkgutil import get_data
 from typing import Optional, TypedDict
 from json import loads
 
-EMAIL_PROVIDERS: dict[str, list[str]] = {
-    'polish': ['@niepodam.pl'],
-    'english_us': ['@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com',
+EMAIL_PROVIDERS: dict[str, tuple[str]] = {
+    'polish': ('@niepodam.pl',),
+    'english_us': ('@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com',
                    '@gustr.com', '@jourrapide.com', '@rhyta.com',
-                   '@superrito.com', '@teleworm.us'],
+                   '@superrito.com', '@teleworm.us'),
 }
 
 EMAIL_URLS: dict[str, str] = {
@@ -26,7 +26,7 @@ EMAIL_URLS: dict[str, str] = {
     '@teleworm.us': 'http://www.fakemailgenerator.com/#/teleworm.us/',
 }
 
-TLDS: list[str] = ['.pl', '.com', '.com.pl', '.net', '.biz', '.me']
+TLDS: tuple[str] = ('.pl', '.com', '.com.pl', '.net', '.biz', '.me')
 
 
 class OnlineType(TypedDict):
@@ -120,7 +120,7 @@ class Online:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
-        for dependency in ['name', 'language']:
+        for dependency in ('name', 'language'):
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
