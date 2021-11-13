@@ -90,7 +90,7 @@ def generate_brand(age: int, dataset: dict) -> Optional[dict[str, Any]]:
 def generate_brand_name(age: int, brand: Optional[dict]) -> str:
     """Generate a car brand."""
     if age in range(14, 17):
-        return choice(['Aixam', 'Ligier', 'Microcar', 'Chatenet'])
+        return choice(('Aixam', 'Ligier', 'Microcar', 'Chatenet'))
     return brand['brand_name']
 
 
@@ -120,9 +120,9 @@ class Car:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies = []
+        self.unresolved_dependencies: list[str] = []
 
-        for dependency in ['address', 'birthdate', 'language']:
+        for dependency in ('address', 'birthdate', 'language'):
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 

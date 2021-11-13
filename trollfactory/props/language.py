@@ -15,7 +15,7 @@ class Language:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: list[str] = []
+        self.unresolved_dependencies: tuple[str] = ()
 
     def generate(self) -> LanguageType:
         """Generate the language."""

@@ -55,8 +55,8 @@ class Cc:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: list[str] = ['birthdate'] if 'birthdate'\
-            not in properties else []
+        self.unresolved_dependencies: tuple[str] = ('birthdate',) if \
+            'birthdate' not in properties else ()
 
     def generate(self) -> Optional[CcType]:
         """Generate the credit card data."""

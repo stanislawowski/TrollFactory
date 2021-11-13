@@ -64,8 +64,8 @@ class DocumentId:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: list[str] = ['language'] if 'language' \
-            not in properties else []
+        self.unresolved_dependencies: tuple[str] = ('language',) if \
+            'language' not in properties else ()
 
     def generate(self) -> Optional[DocumentIdType]:
         """Generate the ID document data."""

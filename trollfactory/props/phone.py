@@ -96,8 +96,8 @@ class Phone:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: list[str] = ['address'] if 'address' \
-            not in properties else []
+        self.unresolved_dependencies: tuple[str] = ('address',) if 'address' \
+            not in properties else ()
 
     def generate(self) -> PhoneType:
         """Generate the phone data."""
