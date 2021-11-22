@@ -1,12 +1,20 @@
 """Social Security number generation prop for TrollFactory."""
 
 from random import randint
-from typing import Optional
+from typing import Optional, TypedDict
 from datetime import datetime
+
+
+class SsnType(TypedDict):
+    """Type hint for the Social Security number property."""
+
+    prop_title: str
+    ssn: Optional[str]
 
 
 def generate_ssn(language: str, gender: str, birth_year: int, birth_month: int,
                  birth_day: int) -> Optional[str]:
+    """Generate a SSN."""
     if language == 'polish':
         date: list[int] = list(map(int, str(int(datetime(
             birth_year, birth_month, birth_day).strftime('%Y%m%d')))))
@@ -36,15 +44,18 @@ def generate_ssn(language: str, gender: str, birth_year: int, birth_month: int,
 
 
 class Ssn:
+    """Social Security number generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
-        for dependency in ['birthdate', 'language']:
+        for dependency in ('birthdate', 'language'):
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> Optional[dict[str, Optional[str]]]:
+    def generate(self) -> Optional[SsnType]:
+        """Generate the Social Security number."""
         # Used properties
         language: str = self.properties['language']['language']
         gender: str = self.properties['gender']['gender']

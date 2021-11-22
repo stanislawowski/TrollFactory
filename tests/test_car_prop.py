@@ -7,12 +7,12 @@ DATASET = [{
     'brand_name': 'Abarth',
     'brand_weight': 0.022473447133658384,
     'models': [
-        {'name': '124', 'products': 1, 'weight': 0.000488553198557791},
-        {'name': '500', 'products': 9, 'weight': 0.0043969787870201185},
-        {'name': '595', 'products': 32, 'weight': 0.01563370235384931},
-        {'name': '695', 'products': 1, 'weight': 0.000488553198557791},
-        {'name': 'Grande Punto', 'products': 2, 'weight': 0.00097710639711558},
-        {'name': 'Inny', 'products': 1, 'weight': 0.000488553198557791}],
+        {'name': '124', 'weight': 0.000488553198557791},
+        {'name': '500', 'weight': 0.0043969787870201185},
+        {'name': '595', 'weight': 0.01563370235384931},
+        {'name': '695', 'weight': 0.000488553198557791},
+        {'name': 'Grande Punto', 'weight': 0.00097710639711558},
+        {'name': 'Inny', 'weight': 0.000488553198557791}],
 }]
 
 

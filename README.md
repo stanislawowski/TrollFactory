@@ -18,9 +18,9 @@ TrollFactory is available as a PyPI package: `pip3 install trollfactory`
 
 ### TrollFactory CLI
 The TrollFactory PyPI package also contains TrollFactory CLI. It's currently the most reliable way of using TrollFactory.<br>
-To use it, simply execute the `trollfactory` binary from your terminal emulator.
+To use it, run the `trollfactory` binary from your terminal emulator.
 
-If executed without any parameters, it will generate a personality with default options (Polish dataset, female gender).
+If ran without any parameters, it will generate a personality with default options (Polish dataset, female gender).
 
 At the moment, you can specify a custom dataset and gender (support for other static properties is coming soon):<br>
 `trollfactory --gender male --dataset english_us`<br>
@@ -28,7 +28,7 @@ At the moment, you can specify a custom dataset and gender (support for other st
 You can also generate many personalities at once:<br>
 `trollfactory --amount 10`
 
-You can execute `trollfactory --help` to read the full help.
+You can run `trollfactory --help` to read the full help.
 
 ### Python library
 After installing the TrollFactory Python package, you can use it in your scripts.
@@ -38,16 +38,14 @@ tf.generate_personality('polish', 'male')
 ```
 The `generate_personality()` function returns a dict with generated data.
 
-### Web interface (beta)
-You can access the TrollFactory web interface under [beta.trollfactory.tk](https://beta.trollfactory.tk) domain, though it may be unstable/unreliable, as it's still in beta.
-
 ## TODO
 -   [x] non-binary gender
 -   [ ] finish english_us dataset
 -   [ ] tests for english_us dataset
 -   [ ] setting static properties
 -   [x] cli arguments help
--   [ ] add more test scripts
--   [ ] improve CC prop & write test
--   [ ] type hints for generated props
--   [ ] docstrings
+-   [x] add more test scripts
+-   [x] improve CC prop & write test
+-   [x] type hints for generated props
+-   [x] docstrings
+-   [ ] split datasets into separate modules
