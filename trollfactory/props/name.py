@@ -1,12 +1,21 @@
 """Name generation prop for TrollFactory."""
 
-from typing import Any
+from typing import Any, TypedDict
 from json import loads
 from random import choice, choices
 from pkgutil import get_data
 
 
+class NameType(TypedDict):
+    """Type hint for a name property."""
+
+    prop_title: str
+    name: str
+    surname: str
+
+
 def generate_name(language: str, gender: str) -> str:
+    """Generate a name."""
     names: list[list[Any]] = loads(get_data(__package__,
                                             'langs/'+language+'/names.json')
                                    )[gender]
@@ -15,6 +24,7 @@ def generate_name(language: str, gender: str) -> str:
 
 
 def generate_surname(language: str, gender: str) -> str:
+    """Generate a surname."""
     surname: str = choice(loads(get_data(__package__,
                                          'langs/'+language+'/surnames.json')))
 
@@ -34,11 +44,14 @@ def generate_surname(language: str, gender: str) -> str:
 
 
 class Name:
+    """Name generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: list[str] = []
+        self.unresolved_dependencies: tuple[str] = ()
 
-    def generate(self) -> dict[str, str]:
+    def generate(self) -> NameType:
+        """Generate the name."""
         # Used properties
         language: str = self.properties['language']['language']
         gender: str = self.properties['gender']['gender']

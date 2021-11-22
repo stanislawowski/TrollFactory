@@ -1,11 +1,22 @@
 """Bank account data generation prop for TrollFactory."""
 
-from typing import Optional
+from typing import Optional, TypedDict
 from random import randint
 from schwifty import IBAN
 
 
+class BankType(TypedDict):
+    """Type hint for the bank account data property."""
+
+    prop_title: str
+    iban_pekao: str
+    iban_mbank: str
+    iban_ing: str
+    iban_pko: str
+
+
 def generate_iban(bank_code: str) -> str:
+    """Generate an IBAN code."""
     return IBAN.generate(
         'PL', bank_code=bank_code,
         account_code='0000' + str(randint(11111111, 99999999)) + '0000',
@@ -13,15 +24,18 @@ def generate_iban(bank_code: str) -> str:
 
 
 class Bank:
+    """Bank account data generation prop for TrollFactory."""
+
     def __init__(self, properties: dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 
-        for dependency in ['birthdate', 'language']:
+        for dependency in ('birthdate', 'language'):
             if dependency not in self.properties:
                 self.unresolved_dependencies.append(dependency)
 
-    def generate(self) -> Optional[dict[str, str]]:
+    def generate(self) -> Optional[BankType]:
+        """Generate the bank account data."""
         # Used properties
         language: str = self.properties['language']['language']
         age: int = self.properties['birthdate']['age']
