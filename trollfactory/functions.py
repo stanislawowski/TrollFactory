@@ -2,10 +2,10 @@
 
 from sys import modules
 from typing import Optional, Any
-from trollfactory import props
-from trollfactory.props import *
-from trollfactory.props import langs
-from trollfactory.exceptions import UnmetDependenciesException, \
+import props
+from props import *
+from props import langs
+from exceptions import UnmetDependenciesException, \
                                     InvalidGenderException, \
                                     UnsupportedDatasetException
 
@@ -37,7 +37,7 @@ def generate_personality(
 
     while len(properties) > 0:
         for prop_name in properties:
-            prop_class = getattr(modules['trollfactory.props.'+prop_name],
+            prop_class = getattr(modules['props.'+prop_name],
                                  ''.join([i.capitalize()
                                           for i in prop_name.split('_')]))(
                                           properties_static)
