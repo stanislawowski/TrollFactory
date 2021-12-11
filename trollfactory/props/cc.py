@@ -15,19 +15,29 @@ CARD_TYPES: dict[str, tuple[tuple[str], int]] = {
 }
 
 
+class CcDataType(TypedDict):
+    """Type hint for the credit card data."""
+
+    number: int
+    cvv3: int
+    cvv4: int
+    expiry_date: str
+    service_code: int
+    pvv: int
+    track1: str
+    track2: str
+
+
 class CcType(TypedDict):
     """Type hint for the credit card data property."""
 
     prop_title: str
-    americanexpress: int
-    diners: int
-    discover: int
-    jcb: int
-    mastercard: int
-    visa: int
-    cvv3: int
-    cvv4: int
-    expiry_date: str
+    americanexpress: CcDataType
+    diners: CcDataType
+    discover: CcDataType
+    jcb: CcDataType
+    mastercard: CcDataType
+    visa: CcDataType
 
 
 def generate_card_number(card_type: str) -> int:
@@ -82,7 +92,7 @@ def generate_track1(card_type, card_number, card_name, card_expiry_date,
 def generate_track2(card_type, card_number, card_expiry_date, service_code,
                     pvv, card_cvv) -> str:
     """Generate track 2 string of the magnetic stripe."""
-    track2 = ''
+    track2: str = ''
 
     if card_type == 'mastercard':
         track2 += ';'
@@ -122,12 +132,12 @@ class Cc:
         if age < 18:
             return None
 
-        data = {
+        data: CcType = {
             'prop_title': 'CC',
         }
 
         for card_type in CARD_TYPES:
-            data[card_type] = {
+            data[card_type]: CcDataType = {
                 'number': generate_card_number(card_type),
                 'cvv3': generate_cvv3(),
                 'cvv4': generate_cvv4(),
@@ -136,11 +146,11 @@ class Cc:
                 'pvv': generate_pvv(),
             }
 
-            data[card_type]['track1'] = generate_track1(
+            data[card_type]['track1']: str = generate_track1(
                     card_type, data[card_type]['number'],
                     '/'.join([name, surname]), data[card_type]['expiry_date'],
                     data[card_type]['service_code'], data[card_type]['cvv3'])
-            data[card_type]['track2'] = generate_track2(
+            data[card_type]['track2']: str = generate_track2(
                     card_type, data[card_type]['number'],
                     data[card_type]['expiry_date'],
                     data[card_type]['service_code'],
