@@ -15,19 +15,29 @@ CARD_TYPES: dict[str, tuple[tuple[str], int]] = {
 }
 
 
+class CcDataType(TypedDict):
+    """Type hint for the credit card data."""
+
+    number: int
+    cvv3: int
+    cvv4: int
+    expiry_date: str
+    service_code: int
+    pvv: int
+    track1: str
+    track2: str
+
+
 class CcType(TypedDict):
     """Type hint for the credit card data property."""
 
     prop_title: str
-    americanexpress: int
-    diners: int
-    discover: int
-    jcb: int
-    mastercard: int
-    visa: int
-    cvv3: int
-    cvv4: int
-    expiry_date: str
+    americanexpress: CcDataType
+    diners: CcDataType
+    discover: CcDataType
+    jcb: CcDataType
+    mastercard: CcDataType
+    visa: CcDataType
 
 
 def generate_card_number(card_type: str) -> int:
@@ -60,42 +70,90 @@ def generate_expiry_date() -> str:
     return str(randint(1, 12)).zfill(2) + '/' + str(randint(25, 33))
 
 
+def generate_service_code() -> int:
+    """Generate CC service code."""
+    # 221 is the typical value, it means international interchange,
+    # IC, contact issuer via online means, no restrictions
+    return 221
+
+
+def generate_pvv() -> int:
+    """Generate Pin Verification Value."""
+    return randint(1000, 9999)
+
+
+def generate_track1(card_type, card_number, card_name, card_expiry_date,
+                    service_code, card_cvv) -> str:
+    """Generate track 1 string of the magnetic stripe."""
+    return ('B' + str(card_number) + '^' + card_name + '^'
+            + card_expiry_date.replace('/', '') + str(service_code))
+
+
+def generate_track2(card_type, card_number, card_expiry_date, service_code,
+                    pvv, card_cvv) -> str:
+    """Generate track 2 string of the magnetic stripe."""
+    track2: str = ''
+
+    if card_type == 'mastercard':
+        track2 += ';'
+
+    track2 += (str(card_number) + '=' + card_expiry_date.replace('/', '')
+               + str(service_code))
+
+    if card_type == 'mastercard':
+        track2 += '000000000'  # discretionary data
+    else:
+        track2 += str(pvv)
+
+    track2 += str(card_cvv)
+    track2 += '?' if card_type == 'mastercard' else '0'
+
+    return track2
+
+
 class Cc:
     """Credit card data generation prop for TrollFactory."""
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: tuple[str] = ('birthdate',) if \
-            'birthdate' not in properties else ()
+        self.unresolved_dependencies: list[str] = []
+
+        for dependency in ('name', 'birthdate'):
+            if dependency not in self.properties:
+                self.unresolved_dependencies.append(dependency)
 
     def generate(self) -> Optional[CcType]:
         """Generate the credit card data."""
         # Used properties
         age: int = self.properties['birthdate']['age']
+        name: str = self.properties['name']['name']
+        surname: str = self.properties['name']['surname']
 
         if age < 18:
             return None
 
-        # Generate data
-        americanexpress: int = generate_card_number('americanexpress')
-        diners: int = generate_card_number('diners')
-        discover: int = generate_card_number('discover')
-        jcb: int = generate_card_number('jcb')
-        mastercard: int = generate_card_number('mastercard')
-        visa: int = generate_card_number('visa')
-        cvv3: int = generate_cvv3()
-        cvv4: int = generate_cvv4()
-        expiry_date: str = generate_expiry_date()
-
-        return {
+        data: CcType = {
             'prop_title': 'CC',
-            'americanexpress': americanexpress,
-            'diners': diners,
-            'discover': discover,
-            'jcb': jcb,
-            'mastercard': mastercard,
-            'visa': visa,
-            'cvv3': cvv3,
-            'cvv4': cvv4,
-            'expiry_date': expiry_date,
         }
+
+        for card_type in CARD_TYPES:
+            data[card_type]: CcDataType = {
+                'number': generate_card_number(card_type),
+                'cvv3': generate_cvv3(),
+                'cvv4': generate_cvv4(),
+                'expiry_date': generate_expiry_date(),
+                'service_code': generate_service_code(),
+                'pvv': generate_pvv(),
+            }
+
+            data[card_type]['track1']: str = generate_track1(
+                    card_type, data[card_type]['number'],
+                    '/'.join([name, surname]), data[card_type]['expiry_date'],
+                    data[card_type]['service_code'], data[card_type]['cvv3'])
+            data[card_type]['track2']: str = generate_track2(
+                    card_type, data[card_type]['number'],
+                    data[card_type]['expiry_date'],
+                    data[card_type]['service_code'],
+                    data[card_type]['pvv'], data[card_type]['cvv3'])
+
+        return data

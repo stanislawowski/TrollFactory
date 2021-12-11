@@ -2,9 +2,9 @@
 
 from sys import modules
 from typing import Optional, Any
+
 from trollfactory import props
 from trollfactory.props import *
-from trollfactory.props import langs
 from trollfactory.exceptions import UnmetDependenciesException, \
                                     InvalidGenderException, \
                                     UnsupportedDatasetException
@@ -30,7 +30,7 @@ def generate_personality(
         'gender': {'gender': p_gender},
     }
 
-    properties: list[str] = props.__all__[:]
+    properties: list[str] = props.__props__[:]
 
     for prop in exclude_props:
         properties.remove(prop)
@@ -44,7 +44,7 @@ def generate_personality(
 
             if len(prop_class.unresolved_dependencies):
                 for dependency in prop_class.unresolved_dependencies:
-                    if dependency not in props.__all__:
+                    if dependency not in props.__props__:
                         raise UnmetDependenciesException(
                             'Unmet dependency: '+dependency)
             else:
