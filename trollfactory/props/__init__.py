@@ -1,6 +1,6 @@
 """Properties generation scripts used by the TrollFactory cli and library."""
 
-__all__: list[str] = [
+__props__: list[str] = [
     'address',
     'bank',
     'birthdate',
@@ -17,3 +17,5 @@ __all__: list[str] = [
     'ssn',
     'phone',
 ]
+
+__all__: list[str] = __props__ + ['langs']
