@@ -66,15 +66,15 @@ def print_line(text: str, padding: int = 0) -> None:
 def print_properties(properties: dict) -> None:
     """Print generated properties."""
     for prop in properties:
-        print_line('Prop name: ' + prop)
+        print_line('Prop name: '+prop)
 
         for key in properties[prop]:
-            if (isinstance(properties[prop][key], dict)):
-                print_line(key + ':', 4)
+            if isinstance(properties[prop][key], dict):
+                print_line(key+':', 4)
                 for key1 in properties[prop][key]:
-                  print_line(key1 + ': ' + str(properties[prop][key][key1]), 8)  
+                    print_line(key1+': '+str(properties[prop][key][key1]), 8)
             else:
-                print_line(key + ': ' + str(properties[prop][key]), 4)
+                print_line(key+': '+str(properties[prop][key]), 4)
 
 
 def main() -> None:
