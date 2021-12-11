@@ -48,8 +48,10 @@ def test_generated_expiry_date():
 
 
 def test_generated_prop():
-    assert prop.Cc({'birthdate': {'age': 20}}).generate()
+    assert prop.Cc({'birthdate': {'age': 20}, 'name': {
+        'name': 'Marcin', 'surname': 'Kowal'}}).generate()
 
 
 def test_no_cc_under_18():
-    assert prop.Cc({'birthdate': {'age': 10}}).generate() is None
+    assert prop.Cc({'birthdate': {'age': 10}, 'name': {
+        'name': 'Marcin', 'surname': 'Kowal'}}).generate() is None
