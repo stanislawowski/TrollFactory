@@ -2,16 +2,16 @@
 
 from sys import modules
 from typing import Optional, Any
+from importlib import import_module
 
 from trollfactory import props
-from trollfactory.props import *
 from trollfactory.exceptions import UnmetDependenciesException, \
                                     InvalidGenderException, \
                                     UnsupportedDatasetException
 
 
 def generate_personality(
-        p_dataset: str = 'polish',
+        p_dataset: str = 'pl_PL',
         p_gender: str = 'female',
         exclude_props: Optional[list[str]] = None) -> dict:
     """Generate a fake personality."""
@@ -21,9 +21,13 @@ def generate_personality(
         raise InvalidGenderException(
             str(p_gender) + ' gender is not supported by TrollFactory yet')
 
-    if p_dataset not in langs.__all__:
+    assert len(p_dataset.split('_')) == 2, 'Invalid dataset name format!'
+
+    try:
+        import_module('TrollFactory-'+p_dataset)
+    except ModuleNotFoundError as error:
         raise UnsupportedDatasetException(
-            str(p_dataset) + ' dataset is not supported by TrollFactory yet')
+            str(p_dataset)+' dataset not found!') from error
 
     properties_static: dict[str, dict[str, Any]] = {
         'language': {'language': p_dataset},
