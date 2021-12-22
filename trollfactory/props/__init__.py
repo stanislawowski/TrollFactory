@@ -1,5 +1,12 @@
 """Properties generation scripts used by the TrollFactory cli and library."""
 
-__props__: list[str] = []
+from importlib import import_module
+
+__props__: list[str] = [
+    'gender',
+]
 
 __all__ = __props__
+
+for prop in __props__:
+    import_module('trollfactory.props.'+prop)
