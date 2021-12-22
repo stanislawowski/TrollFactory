@@ -40,9 +40,6 @@ The `generate_personality()` function returns a dict with generated data.
 
 ## TODO
 -   [x] non-binary gender
--   [ ] finish english_us dataset
--   [ ] tests for english_us dataset
--   [ ] setting static properties
 -   [x] cli arguments help
 -   [x] add more test scripts
 -   [x] improve CC prop & write test
