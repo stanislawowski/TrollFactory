@@ -20,12 +20,18 @@ def import_dataset(dataset: str) -> ModuleType:
             str(dataset)+' dataset not found!') from error
 
 
-def generate_personality(dataset: str = 'pl_PL', exclude: tuple = ()) -> dict:
+def generate_personality(dataset: str = 'pl_PL', exclude: tuple = (),
+                         static: dict = {}) -> dict:
     """Generate a fake personality."""
     assert len(dataset.split('_')) == 2, 'Invalid dataset name format!'
     generator = getattr(import_dataset(dataset), 'generate_property')
 
-    properties_static: dict = {'language': {'dataset': dataset}}
+    if 'language' not in static:
+        static['language'] = {}
+
+    if 'dataset' not in static['language']:
+        static['language']['dataset'] = dataset
+
     properties: list[str] = [i for i in props.__props__ if i not in exclude]
 
     while len(properties) > 0:
@@ -33,7 +39,7 @@ def generate_personality(dataset: str = 'pl_PL', exclude: tuple = ()) -> dict:
             prop_class = getattr(modules['trollfactory.props.'+prop_name],
                                  ''.join([i.capitalize()
                                           for i in prop_name.split('_')]))(
-                                          properties_static, generator)
+                                          static, generator)
 
             if len(prop_class.unresolved_dependencies):
                 for dependency in prop_class.unresolved_dependencies:
@@ -43,7 +49,7 @@ def generate_personality(dataset: str = 'pl_PL', exclude: tuple = ()) -> dict:
             else:
                 generated_property = prop_class.generate()
                 if generated_property:
-                    properties_static[prop_name] = generated_property
+                    static[prop_name] = generated_property
                 properties.remove(prop_name)
 
-    return properties_static
+    return static

@@ -4,6 +4,8 @@ from importlib import import_module
 
 __props__: list[str] = [
     'gender',
+    'language',
+    'name',
 ]
 
 __all__ = __props__

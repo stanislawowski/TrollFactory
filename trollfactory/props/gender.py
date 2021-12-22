@@ -1,7 +1,6 @@
 """Gender generation prop for TrollFactory."""
 
 from typing import TypedDict, Callable
-from random import choice
 
 
 class GenderType(TypedDict):
