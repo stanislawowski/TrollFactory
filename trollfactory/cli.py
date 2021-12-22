@@ -4,10 +4,8 @@ from typing import Any
 from argparse import ArgumentParser, Namespace
 from datetime import datetime
 
+from trollfactory import TROLLFACTORY_VERSION, DESCRIPTION
 from trollfactory.functions import generate_personality
-
-TROLLFACTORY_VERSION: str = '2.1.3'
-DESCRIPTION: str = 'Fake personality generator for the 21st century!'
 
 
 def parse_arguments() -> Namespace:
