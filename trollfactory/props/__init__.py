@@ -3,6 +3,7 @@
 from importlib import import_module
 
 __props__: list[str] = [
+    'birthdate',
     'gender',
     'language',
     'name',
