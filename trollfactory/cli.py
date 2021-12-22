@@ -55,11 +55,8 @@ def parse_arguments() -> Namespace:
 
 def print_line(text: str, padding: int = 0) -> None:
     """Print a formatted line."""
-    print('[{}]{} {}'.format(
-        datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        ' ' * padding,
-        text,
-    ))
+    print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}]{" "*padding}',
+          f'{text}')
 
 
 def print_properties(properties: dict) -> None:
