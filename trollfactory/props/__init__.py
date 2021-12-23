@@ -7,6 +7,7 @@ __props__: list[str] = [
     'gender',
     'language',
     'name',
+    'online',
 ]
 
 __all__ = __props__
