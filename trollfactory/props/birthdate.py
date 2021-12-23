@@ -1,6 +1,6 @@
 """Birthdate generation prop for TrollFactory."""
 
-from typing import TypedDict, Callable
+from typing import TypedDict, Callable, cast
 from calendar import monthrange
 from datetime import date
 from random import randint
@@ -78,12 +78,13 @@ def generate_birth_day(age: int, year: int, month: int, static: dict) -> int:
 
     return birth_day
 
+
 class Birthdate:
     """Birthdate generation prop for TrollFactory."""
 
     def __init__(self, properties: dict, generator: Callable) -> None:
         self.properties = properties
-        self.generator = generator
+        self.generator: Callable = generator
         self.unresolved_dependencies: tuple = ()
 
     def generate(self) -> BirthdateType:
@@ -100,4 +101,4 @@ class Birthdate:
             data['age'], data['birth_year'], data['birth_month'],
             self.properties)
 
-        return data
+        return cast(BirthdateType, data)

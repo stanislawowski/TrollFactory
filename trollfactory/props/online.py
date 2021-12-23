@@ -2,7 +2,7 @@
 
 from string import ascii_uppercase, ascii_lowercase, digits
 from random import choice, randint
-from typing import TypedDict, Callable
+from typing import TypedDict, Callable, cast
 
 
 class OnlineType(TypedDict):
@@ -39,7 +39,7 @@ class Online:
 
     def __init__(self, properties: dict, generator: Callable) -> None:
         self.properties = properties
-        self.generator = generator
+        self.generator: Callable = generator
         self.unresolved_dependencies: list[str] = []
 
         for dependency in ('name', 'language'):
@@ -48,7 +48,7 @@ class Online:
 
     def generate(self) -> OnlineType:
         """Generate the online activity data."""
-        data: dict = {
+        data: dict[str, str] = {
             'prop_title': 'Online',
             'username': self.generator('username', self.properties),
             'email': self.generator('email', self.properties),
@@ -66,4 +66,4 @@ class Online:
         data['receive_email'] = self.generator(
             'receive_email', dict(self.properties, **{'online': data}))
 
-        return data
+        return cast(OnlineType, data)

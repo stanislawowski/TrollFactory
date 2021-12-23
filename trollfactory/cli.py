@@ -21,18 +21,10 @@ def parse_arguments() -> Namespace:
     )
 
     parser.add_argument(
-        '--gender',
-        dest='gender',
-        type=str,
-        default='female',
-        help='generated personalities\' gender',
-    )
-
-    parser.add_argument(
         '--dataset',
         dest='dataset',
         type=str,
-        default='polish',
+        default='pl_PL',
         help='the name of the dataset to be used',
     )
 
@@ -56,7 +48,7 @@ def parse_arguments() -> Namespace:
 def print_line(text: str, padding: int = 0) -> None:
     """Print a formatted line."""
     print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}]{" "*padding}',
-          f'{text}')
+          text)
 
 
 def print_properties(properties: dict) -> None:
@@ -82,8 +74,7 @@ def main() -> None:
         return
 
     for _ in range(args.amount):
-        personality: dict[str, Any] = generate_personality(args.dataset,
-                                                           args.gender)
+        personality: dict[str, Any] = generate_personality(args.dataset)
 
         if args.stdout:
             print_properties(personality)

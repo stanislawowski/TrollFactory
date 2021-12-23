@@ -16,13 +16,13 @@ class Language:
 
     def __init__(self, properties: dict, generator: Callable) -> None:
         self.properties = properties
-        self.generator = generator
+        self.generator: Callable = generator
         self.unresolved_dependencies: tuple = ()
 
     def generate(self) -> LanguageType:
         """Generate the language."""
-        return {
+        return LanguageType({
             'prop_title': 'Language',
             'language': self.generator('language', self.properties),
             'dataset': self.properties['language']['dataset'],
-        }
+        })

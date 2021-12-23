@@ -15,12 +15,12 @@ class Gender:
 
     def __init__(self, properties: dict, generator: Callable) -> None:
         self.properties = properties
-        self.generator = generator
+        self.generator: Callable = generator
         self.unresolved_dependencies: tuple = ()
 
     def generate(self) -> GenderType:
         """Generate the gender."""
-        return {
+        return GenderType({
             'prop_title': 'Gender',
             'gender': self.generator('gender', self.properties),
-        }
+        })
