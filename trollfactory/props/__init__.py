@@ -8,6 +8,7 @@ __props__: list[str] = [
     'language',
     'name',
     'online',
+    'address',
 ]
 
 __all__ = __props__
