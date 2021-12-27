@@ -26,11 +26,13 @@ def generate_personality(dataset: str = 'pl_PL', exclude: tuple = (),
     assert len(dataset.split('_')) == 2, 'Invalid dataset name format!'
     generator = getattr(import_dataset(dataset), 'generate_property')
 
-    if 'language' not in static:
-        static['language'] = {}
+    generated = dict(static)
 
-    if 'dataset' not in static['language']:
-        static['language']['dataset'] = dataset
+    if 'language' not in generated:
+        generated['language'] = {}
+
+    if 'dataset' not in generated['language']:
+        generated['language']['dataset'] = dataset
 
     properties: list[str] = [i for i in props.__props__ if i not in exclude]
 
@@ -39,7 +41,7 @@ def generate_personality(dataset: str = 'pl_PL', exclude: tuple = (),
             prop_class = getattr(modules['trollfactory.props.'+prop_name],
                                  ''.join([i.capitalize()
                                           for i in prop_name.split('_')]))(
-                                          static, generator)
+                                          generated, generator)
 
             if len(prop_class.unresolved_dependencies):
                 for dependency in prop_class.unresolved_dependencies:
@@ -49,7 +51,7 @@ def generate_personality(dataset: str = 'pl_PL', exclude: tuple = (),
             else:
                 generated_property = prop_class.generate()
                 if generated_property:
-                    static[prop_name] = generated_property
+                    generated[prop_name] = generated_property
                 properties.remove(prop_name)
 
-    return static
+    return generated
