@@ -17,7 +17,8 @@ class Name:
     def __init__(self, properties: dict, generator: Callable) -> None:
         self.properties = properties
         self.generator: Callable = generator
-        self.unresolved_dependencies: tuple = ()
+        self.unresolved_dependencies: tuple = (
+            'gender',) if 'gender' not in properties else ()
 
     def generate(self) -> NameType:
         """Generate the name."""
