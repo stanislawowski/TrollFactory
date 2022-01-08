@@ -1,46 +1,47 @@
 """Functions used by the TrollFactory cli and library."""
 
 from sys import modules
-from typing import Optional, Any
+from importlib import import_module
+from types import ModuleType
 
 from trollfactory import props
-from trollfactory.props import *
-from trollfactory.exceptions import UnmetDependenciesException, \
-                                    InvalidGenderException, \
-                                    UnsupportedDatasetException
+from trollfactory.exceptions import (
+    UnmetDependenciesException,
+    UnsupportedDatasetException,
+)
 
 
-def generate_personality(
-        p_dataset: str = 'polish',
-        p_gender: str = 'female',
-        exclude_props: Optional[list[str]] = None) -> dict:
-    """Generate a fake personality."""
-    exclude_props = exclude_props or []
-
-    if p_gender not in ['female', 'male', 'non-binary']:
-        raise InvalidGenderException(
-            str(p_gender) + ' gender is not supported by TrollFactory yet')
-
-    if p_dataset not in langs.__all__:
+def import_dataset(dataset: str) -> ModuleType:
+    """Import dataset module."""
+    try:
+        return import_module('trollfactory_'+dataset)
+    except ModuleNotFoundError as error:
         raise UnsupportedDatasetException(
-            str(p_dataset) + ' dataset is not supported by TrollFactory yet')
+            str(dataset)+' dataset not found!') from error
 
-    properties_static: dict[str, dict[str, Any]] = {
-        'language': {'language': p_dataset},
-        'gender': {'gender': p_gender},
-    }
 
-    properties: list[str] = props.__props__[:]
+def generate_personality(dataset: str = 'pl_PL', exclude: tuple = (),
+                         static: dict = {}) -> dict:
+    """Generate a fake personality."""
+    assert len(dataset.split('_')) == 2, 'Invalid dataset name format!'
+    generator = getattr(import_dataset(dataset), 'generate_property')
 
-    for prop in exclude_props:
-        properties.remove(prop)
+    generated = dict(static)
+
+    if 'language' not in generated:
+        generated['language'] = {}
+
+    if 'dataset' not in generated['language']:
+        generated['language']['dataset'] = dataset
+
+    properties: list[str] = [i for i in props.__props__ if i not in exclude]
 
     while len(properties) > 0:
         for prop_name in properties:
             prop_class = getattr(modules['trollfactory.props.'+prop_name],
                                  ''.join([i.capitalize()
                                           for i in prop_name.split('_')]))(
-                                          properties_static)
+                                          generated, generator)
 
             if len(prop_class.unresolved_dependencies):
                 for dependency in prop_class.unresolved_dependencies:
@@ -50,7 +51,7 @@ def generate_personality(
             else:
                 generated_property = prop_class.generate()
                 if generated_property:
-                    properties_static[prop_name] = generated_property
+                    generated[prop_name] = generated_property
                 properties.remove(prop_name)
 
-    return properties_static
+    return generated

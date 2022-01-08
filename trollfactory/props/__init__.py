@@ -1,21 +1,23 @@
 """Properties generation scripts used by the TrollFactory cli and library."""
 
+from importlib import import_module
+
 __props__: list[str] = [
-    'address',
-    'bank',
     'birthdate',
-    'blood_type',
-    'car',
-    'cc',
-    'colors',
-    'document_id',
     'gender',
     'language',
-    'measurements',
     'name',
     'online',
-    'ssn',
-    'phone',
+    'address',
 ]
 
-__all__: list[str] = __props__ + ['langs']
+__all__ = __props__
+
+__attribs__: list[str] = []
+
+for prop in __props__:
+    prop_module = import_module('trollfactory.props.'+prop)
+    for attrib in getattr(prop_module, prop.capitalize()+'Type'
+                          ).__annotations__.keys():
+        if attrib != 'prop_title':
+            __attribs__.append(attrib)

@@ -1,6 +1,6 @@
 """Gender generation prop for TrollFactory."""
 
-from typing import TypedDict
+from typing import TypedDict, Callable
 
 
 class GenderType(TypedDict):
@@ -13,16 +13,14 @@ class GenderType(TypedDict):
 class Gender:
     """Gender generation prop for TrollFactory."""
 
-    def __init__(self, properties: dict) -> None:
+    def __init__(self, properties: dict, generator: Callable) -> None:
         self.properties = properties
-        self.unresolved_dependencies: tuple[str] = ()
+        self.generator: Callable = generator
+        self.unresolved_dependencies: tuple = ()
 
     def generate(self) -> GenderType:
         """Generate the gender."""
-        # Used properties
-        gender: str = self.properties['gender']['gender']
-
-        return {
+        return GenderType({
             'prop_title': 'Gender',
-            'gender': gender,
-        }
+            'gender': self.generator('gender', self.properties),
+        })

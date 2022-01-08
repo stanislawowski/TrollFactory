@@ -2,15 +2,14 @@
 
 from setuptools import setup
 
-VERSION: str = '2.1.4'
-DESCRIPTION: str = 'An amazingly accurate fake personality generator.'
+from trollfactory import TROLLFACTORY_VERSION, DESCRIPTION
 
 with open('README.md', encoding='utf-8') as file:
     LONG_DESCRIPTION: str = file.read()
 
 setup(
     name='TrollFactory',
-    version=VERSION,
+    version=TROLLFACTORY_VERSION,
     author='Stanisławowski Research & Development',
     author_email='<office@stanislawowski.pl>',
     description=DESCRIPTION,

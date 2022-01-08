@@ -1,25 +1,11 @@
 """Birthdate generation prop for TrollFactory."""
 
-from typing import TypedDict
-from random import choice, randint
+from typing import TypedDict, Callable, cast
 from calendar import monthrange
 from datetime import date
+from random import randint
 
-
-ZODIAC_SIGNS: tuple[tuple[str, int, int, int]] = (
-    ('Aries', 18, 4, 13, 5),
-    ('Taurus', 13, 5, 21, 6),
-    ('Gemini', 21, 6, 20, 7),
-    ('Cancer', 20, 7, 10, 8),
-    ('Leo', 10, 8, 16, 9),
-    ('Virgo', 16, 9, 30, 10),
-    ('Libra', 30, 10, 23, 11),
-    ('Scorpio', 23, 11, 29, 11),
-    ('Sagittarius', 17, 12, 20, 1),
-    ('Capricorn', 20, 1, 16, 2),
-    ('Aquarius', 16, 2, 11, 3),
-    ('Pisces', 11, 3, 18, 4),
-)
+now = date.today()
 
 
 class BirthdateType(TypedDict):
@@ -30,65 +16,89 @@ class BirthdateType(TypedDict):
     birth_month: int
     birth_day: int
     age: int
-    zodiac: str
 
 
-def generate_birth_year() -> int:
-    """Generate a birth year."""
-    current_year: int = date.today().year
-    return randint(current_year-80, current_year)
-
-
-def generate_birth_month() -> int:
-    """Generate a birth month."""
-    return randint(1, 12)
-
-
-def generate_birth_day(birth_year: int, birth_month: int) -> int:
-    """Generate a birth day."""
-    birth_day: int = choice(monthrange(birth_year, birth_month))
-    return birth_day if birth_day != 0 else 1
-
-
-def generate_age(birth_year: int, birth_month: int, birth_day: int) -> int:
+def generate_age(static: dict) -> int:
     """Generate an age."""
-    today: date = date.today()
-    return today.year - birth_year - ((today.month, today.day)
-                                      < (birth_month, birth_day))
+    if 'birthdate' in static and 'age' in static['birthdate']:
+        age = static['birthdate']['age']
+
+        # https://en.wikipedia.org/wiki/List_of_the_verified_oldest_people
+        assert int(age) in range(1, 123), 'Invalid age!'
+    else:
+        age = randint(1, 122)
+
+    return age
 
 
-def generate_zodiac(birth_month: int, birth_day: int) -> str:
-    """Generate a zodiac sign."""
-    zodiac: str = 'Unknown'
-    for sign in ZODIAC_SIGNS:
-        if (birth_month == sign[2] and birth_day > sign[1]) or (
-                birth_month == sign[4] and birth_day < sign[3]):
-            zodiac = sign[0]
-            break
-    return zodiac
+def generate_birth_year(age: int, static: dict) -> int:
+    """Generate a birth year."""
+    if 'birthdate' in static and 'birth_year' in static['birthdate']:
+        birth_year = int(static['birthdate']['birth_year'])
+        assert birth_year in (now.year-age, now.year-age-1), 'Invalid year!'
+    else:
+        birth_year = now.year - age
+
+    return birth_year
+
+
+def generate_birth_month(age: int, year: int, static: dict) -> int:
+    """Generate a birth month."""
+    if 'birthdate' in static and 'birth_month' in static['birthdate']:
+        birth_month = int(static['birthdate']['birth_month'])
+        assert birth_month in range(1, 13), 'Invalid month!'
+
+        if year == now.year-age-1:
+            assert birth_month not in range(1, now.month), 'Invalid month!'
+    else:
+        if year == now.year-age-1:
+            birth_month = randint(now.month, 12)
+        else:
+            birth_month = randint(1, 12)
+
+    return birth_month
+
+
+def generate_birth_day(age: int, year: int, month: int, static: dict) -> int:
+    """Generate a birth day."""
+    if 'birthdate' in static and 'birth_day' in static['birthdate']:
+        birth_day = int(static['birthdate']['birth_day'])
+        assert birth_day in range(1, monthrange(year, month)[1]+1), \
+            'Invalid day!'
+
+        if year == now.year-age-1 and month == now.month:
+            assert birth_day > now.day, 'Invalid day!'
+    else:
+        if year == now.year-age-1 and month == now.month:
+            birth_day = randint(now.day+1, monthrange(year, month)[1])
+        else:
+            birth_day = randint(1, monthrange(year, month)[1])
+            if birth_day == 0:
+                birth_day = 1
+
+    return birth_day
 
 
 class Birthdate:
     """Birthdate generation prop for TrollFactory."""
 
-    def __init__(self, properties: dict) -> None:
+    def __init__(self, properties: dict, generator: Callable) -> None:
         self.properties = properties
-        self.unresolved_dependencies: tuple[str] = ()
+        self.generator: Callable = generator
+        self.unresolved_dependencies: tuple = ()
 
     def generate(self) -> BirthdateType:
         """Generate the birthdate."""
-        # Generate data
-        birth_year: int = generate_birth_year()
-        birth_month: int = generate_birth_month()
-        birth_day: int = generate_birth_day(birth_year, birth_month)
-        age: int = generate_age(birth_year, birth_month, birth_day)
-        zodiac: str = generate_zodiac(birth_month, birth_day)
-
-        return {
+        data: dict = {
             'prop_title': 'Birthdate',
-            'birth_year': birth_year,
-            'birth_month': birth_month,
-            'birth_day': birth_day,
-            'age': age,
-            'zodiac': zodiac,
+            'age': generate_age(self.properties),
         }
+
+        data['birth_year'] = generate_birth_year(data['age'], self.properties)
+        data['birth_month'] = generate_birth_month(
+            data['age'], data['birth_year'], self.properties)
+        data['birth_day'] = generate_birth_day(
+            data['age'], data['birth_year'], data['birth_month'],
+            self.properties)
+
+        return cast(BirthdateType, data)

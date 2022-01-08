@@ -4,10 +4,8 @@ from typing import Any
 from argparse import ArgumentParser, Namespace
 from datetime import datetime
 
+from trollfactory import TROLLFACTORY_VERSION, DESCRIPTION
 from trollfactory.functions import generate_personality
-
-TROLLFACTORY_VERSION: str = '2.1.4'
-DESCRIPTION: str = 'Fake personality generator for the 21st century!'
 
 
 def parse_arguments() -> Namespace:
@@ -23,18 +21,10 @@ def parse_arguments() -> Namespace:
     )
 
     parser.add_argument(
-        '--gender',
-        dest='gender',
-        type=str,
-        default='female',
-        help='generated personalities\' gender',
-    )
-
-    parser.add_argument(
         '--dataset',
         dest='dataset',
         type=str,
-        default='polish',
+        default='pl_PL',
         help='the name of the dataset to be used',
     )
 
@@ -57,11 +47,8 @@ def parse_arguments() -> Namespace:
 
 def print_line(text: str, padding: int = 0) -> None:
     """Print a formatted line."""
-    print('[{}]{} {}'.format(
-        datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        ' ' * padding,
-        text,
-    ))
+    print(f'[{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}]{" "*padding}',
+          text)
 
 
 def print_properties(properties: dict) -> None:
@@ -87,8 +74,7 @@ def main() -> None:
         return
 
     for _ in range(args.amount):
-        personality: dict[str, Any] = generate_personality(args.dataset,
-                                                           args.gender)
+        personality: dict[str, Any] = generate_personality(args.dataset)
 
         if args.stdout:
             print_properties(personality)
