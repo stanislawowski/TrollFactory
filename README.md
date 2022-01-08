@@ -4,15 +4,15 @@
 [![License](https://img.shields.io/github/license/stanislawowski/TrollFactory.svg)](https://github.com/stanislawowski/TrollFactory)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/stanislawowski/TrollFactory)
 ![GitHub last commit](https://img.shields.io/github/last-commit/stanislawowski/TrollFactory)
-[![PyPI version](https://badge.fury.io/py/trollfactory.svg)](https://badge.fury.io/py/trollfactory)
+[![PyPI version](https://badge.fury.io/py/TrollFactory.svg)](https://badge.fury.io/py/TrollFactory)
 
-**Fake personality generator for the 21st century!**
+**An amazingly accurate fake personality generator.**
 
 ## About
 TrollFactory is a fairly advanced fake personality generator written in Python. It aims to generate as much data about a person as possible. At the moment it only supports Polish personalities, we're finishing US dataset soon.
 
 ## Installation
-TrollFactory is available as a PyPI package: `pip3 install trollfactory`
+TrollFactory is available as a PyPI package: `pip3 install TrollFactory`
 
 ## Usage
 
