@@ -3,17 +3,17 @@
 from string import ascii_uppercase, ascii_lowercase, digits
 from random import choice, randint
 from pkgutil import get_data
-from typing import Optional, TypedDict
+from typing import Optional, TypedDict, Dict, Tuple
 from json import loads
 
-EMAIL_PROVIDERS: dict[str, tuple[str]] = {
+EMAIL_PROVIDERS: Dict[str, Tuple[str]] = {
     'polish': ('@niepodam.pl',),
     'english_us': ('@armyspy.com', '@cuvox.de', '@dayrep.com', '@einrot.com',
                    '@gustr.com', '@jourrapide.com', '@rhyta.com',
                    '@superrito.com', '@teleworm.us'),
 }
 
-EMAIL_URLS: dict[str, str] = {
+EMAIL_URLS: Dict[str, str] = {
     '@niepodam.pl': 'http://niepodam.pl/users/',
     '@armyspy.com': 'http://www.fakemailgenerator.com/#/armyspy.com/',
     '@cuvox.de': 'http://www.fakemailgenerator.com/#/cuvox.de/',
@@ -26,7 +26,7 @@ EMAIL_URLS: dict[str, str] = {
     '@teleworm.us': 'http://www.fakemailgenerator.com/#/teleworm.us/',
 }
 
-TLDS: tuple[str] = ('.pl', '.com', '.com.pl', '.net', '.biz', '.me')
+TLDS: Tuple[str] = ('.pl', '.com', '.com.pl', '.net', '.biz', '.me')
 
 
 class OnlineType(TypedDict):

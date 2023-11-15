@@ -1,7 +1,7 @@
 """Functions used by the TrollFactory cli and library."""
 
 from sys import modules
-from typing import Optional, Any
+from typing import Optional, Any, List
 
 from trollfactory import props
 from trollfactory.props import *
@@ -13,7 +13,7 @@ from trollfactory.exceptions import UnmetDependenciesException, \
 def generate_personality(
         p_dataset: str = 'polish',
         p_gender: str = 'female',
-        exclude_props: Optional[list[str]] = None) -> dict:
+        exclude_props: Optional[List[str]] = None) -> dict:
     """Generate a fake personality."""
     exclude_props = exclude_props or []
 

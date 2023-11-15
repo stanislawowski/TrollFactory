@@ -1,12 +1,12 @@
 """Birthdate generation prop for TrollFactory."""
 
-from typing import TypedDict
+from typing import TypedDict, Tuple
 from random import choice, randint
 from calendar import monthrange
 from datetime import date
 
 
-ZODIAC_SIGNS: tuple[tuple[str, int, int, int]] = (
+ZODIAC_SIGNS: Tuple[Tuple[str, int, int, int]] = (
     ('Aries', 18, 4, 13, 5),
     ('Taurus', 13, 5, 21, 6),
     ('Gemini', 21, 6, 20, 7),

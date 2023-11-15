@@ -1,11 +1,11 @@
 """Address generation prop for TrollFactory."""
 
 from random import choice, randint
-from typing import Any, TypedDict
+from typing import Any, TypedDict, Dict
 from json import loads
 from pkgutil import get_data
 
-COUNTRY_CODES: dict[str, str] = {'polish': 'PL', 'english_us': 'US'}
+COUNTRY_CODES: Dict[str, str] = {'polish': 'PL', 'english_us': 'US'}
 
 
 class AddressType(TypedDict):
@@ -22,18 +22,18 @@ class AddressType(TypedDict):
     street_number: int
 
 
-def generate_region(language: str) -> dict[str, Any]:
+def generate_region(language: str) -> Dict[str, Any]:
     """Generate a dict with region data."""
     return choice(loads(get_data(
         __package__, 'langs/'+language+'/cities.json')))
 
 
-def generate_country_state(region: dict) -> str:
+def generate_country_state(region: Dict) -> str:
     """Generate a region name."""
     return region['region_name']
 
 
-def generate_city(region: dict) -> dict[str, Any]:
+def generate_city(region: dict) -> Dict[str, Any]:
     """Generate a dict with city data."""
     return choice(region['cities'])
 
@@ -43,27 +43,27 @@ def generate_country_code(language: str) -> str:
     return COUNTRY_CODES[language]
 
 
-def generate_country_city(city: dict) -> str:
+def generate_country_city(city: Dict) -> str:
     """Generate a city name."""
     return city['name']
 
 
-def generate_city_postcode(city: dict) -> str:
+def generate_city_postcode(city: Dict) -> str:
     """Generate a postcode."""
     return city['postcode']
 
 
-def generate_city_street(city: dict) -> str:
+def generate_city_street(city: Dict) -> str:
     """Generate a street name."""
     return choice(city['streets'])
 
 
-def generate_city_latitude(city: dict) -> float:
+def generate_city_latitude(city: Dict) -> float:
     """Generate a latitude."""
     return city['lat']
 
 
-def generate_city_longitude(city: dict) -> float:
+def generate_city_longitude(city: Dict) -> float:
     """Generate a longitude."""
     return city['lon']
 
@@ -77,7 +77,7 @@ def generate_street_number() -> int:
 class Address:
     """Address generation prop for TrollFactory."""
 
-    def __init__(self, properties: dict) -> None:
+    def __init__(self, properties: Dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: tuple[str] = ('language',) if \
             'language' not in properties else ()
@@ -92,9 +92,9 @@ class Address:
             return {'prop_title': 'Address', 'country_code': 'US'}
 
         # Generate data
-        region: dict[str, Any] = generate_region(language)
+        region: Dict[str, Any] = generate_region(language)
         country_state: str = generate_country_state(region)
-        city: dict[str, Any] = generate_city(region)
+        city: Dict[str, Any] = generate_city(region)
         city_street: str = generate_city_street(city)
         country_code: str = generate_country_code(language)
         country_city: str = generate_country_city(city)

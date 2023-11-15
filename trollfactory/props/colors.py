@@ -1,9 +1,9 @@
 """Colors data generation prop for TrollFactory."""
 
 from random import choice
-from typing import TypedDict
+from typing import TypedDict, Dict, Tuple
 
-COLORS: dict[str, tuple[str]] = {
+COLORS: Dict[str, Tuple[str]] = {
     'favourite': ('black', 'white', 'grey', 'red', 'blue', 'navy', 'green',
                   'pink', 'white', 'purple', 'yellow', 'green', 'orange'),
     'hair': ('blonde', 'brown', 'black', 'auburn', 'red'),
@@ -40,7 +40,7 @@ class Colors:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: tuple[str] = ()
+        self.unresolved_dependencies: Tuple[str] = ()
 
     def generate(self) -> ColorsType:
         """Generate the colors data."""

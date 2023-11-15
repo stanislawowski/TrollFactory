@@ -1,10 +1,10 @@
 """Credit card data generation prop for TrollFactory."""
 
-from typing import Optional, TypedDict
+from typing import Optional, TypedDict, Dict, Tuple
 from random import randint, choice
 
 
-CARD_TYPES: dict[str, tuple[tuple[str], int]] = {
+CARD_TYPES: Dict[str, Tuple[Tuple[str], int]] = {
     'americanexpress': (('34', '37'), 15),
     'diners': (('300', '301', '302', '303', '304', '305', '36', '38', '39'),
                14),

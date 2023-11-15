@@ -2,7 +2,7 @@
 
 from random import choice, choices, randint
 from pkgutil import get_data
-from typing import Optional, Any, TypedDict
+from typing import Optional, Any, TypedDict, Dict
 from json import loads
 
 
@@ -80,32 +80,32 @@ def generate_plate_number(language: str, country_state: str) -> Optional[str]:
     return prefix + ' ' + plate_resource
 
 
-def generate_brand(age: int, dataset: dict) -> Optional[dict[str, Any]]:
+def generate_brand(age: int, dataset: dict) -> Optional[Dict[str, Any]]:
     """Generate a dict with car brand data."""
     if age in range(14, 17):
         return None
     return choices(dataset, [i['brand_weight'] for i in dataset])[0]
 
 
-def generate_brand_name(age: int, brand: Optional[dict]) -> str:
+def generate_brand_name(age: int, brand: Optional[Dict]) -> str:
     """Generate a car brand."""
     if age in range(14, 17):
         return choice(('Aixam', 'Ligier', 'Microcar', 'Chatenet'))
     return brand['brand_name']
 
 
-def generate_model(brand_name: str, dataset: dict) -> dict[str, Any]:
+def generate_model(brand_name: str, dataset: dict) -> Dict[str, Any]:
     """Generate a dict with car model data."""
     return choice([i for i in dataset if i['brand_name'] == brand_name
                    ][0]['models'])
 
 
-def generate_model_name(model: dict[str, Any]) -> str:
+def generate_model_name(model: Dict[str, Any]) -> str:
     """Generate a car model name."""
     return model['name']
 
 
-def generate_generation_name(age: int, model: dict[str, Any]) -> Optional[str]:
+def generate_generation_name(age: int, model: Dict[str, Any]) -> Optional[str]:
     """Generate a car generation name."""
     if age in range(14, 17):
         return None
@@ -118,7 +118,7 @@ def generate_generation_name(age: int, model: dict[str, Any]) -> Optional[str]:
 class Car:
     """Car data generation prop for TrollFactory."""
 
-    def __init__(self, properties: dict) -> None:
+    def __init__(self, properties: Dict) -> None:
         self.properties = properties
         self.unresolved_dependencies: list[str] = []
 

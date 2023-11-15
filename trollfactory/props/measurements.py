@@ -1,9 +1,9 @@
 """Measurements generation prop for TrollFactory."""
 
-from typing import TypedDict
+from typing import TypedDict, Dict, Tuple
 from random import randint
 
-AVERAGES: dict[int, tuple[int, int, int, int]] = {
+AVERAGES: Dict[int, Tuple[int, int, int, int]] = {
     0: (5, 10, 50, 90), 1: (5, 10, 50, 90), 2: (10, 16, 80, 95),
     3: (12, 20, 89, 102), 4: (13, 22, 90, 113), 5: (15, 25, 102, 120),
     6: (16, 29, 107, 129), 7: (18, 34, 113, 135), 8: (20, 41, 119, 141),
@@ -47,7 +47,7 @@ class Measurements:
 
     def __init__(self, properties: dict) -> None:
         self.properties = properties
-        self.unresolved_dependencies: tuple[str] = ('birthdate',) if \
+        self.unresolved_dependencies: Tuple[str] = ('birthdate',) if \
             'birthdate' not in properties else ()
 
     def generate(self) -> MeasurementsType:
